@@ -1,0 +1,1206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>itsharness — open-source visual builder for AI agent harnesses</title>
+<meta name="description" content="Open-source visual builder for production AI agent harnesses. One canvas, one runtime-neutral FlowSpec, adapters for LangGraph, CrewAI, Mastra, and Microsoft Agent Framework — plus A2A. Apache 2.0, in design stage.">
+<meta name="keywords" content="AI agents, agent orchestration, LangGraph, CrewAI, Mastra, Microsoft Agent Framework, MS Agent Framework, Semantic Kernel, A2A protocol, MCP, visual workflow builder, agent harness, FlowSpec, open source, Apache 2.0, agentic AI, LLM workflow, AutoGen">
+<meta name="author" content="itsharness contributors">
+<meta name="theme-color" content="#4F46E5">
+<meta name="color-scheme" content="light">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://itsharness.github.io/itsharness/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="itsharness">
+<meta property="og:url" content="https://itsharness.github.io/itsharness/">
+<meta property="og:title" content="itsharness — open-source visual builder for AI agent harnesses">
+<meta property="og:description" content="One canvas, one runtime-neutral FlowSpec. Adapters for LangGraph, CrewAI, Mastra, and Microsoft Agent Framework — plus A2A. In design stage. Come help shape it.">
+<meta property="og:image" content="https://itsharness.github.io/itsharness/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="itsharness: visual AI agent harness builder. One canvas. One neutral spec. Four runtimes plus A2A.">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="itsharness — visual AI agent harness builder">
+<meta name="twitter:description" content="One canvas, one neutral FlowSpec. Four runtime adapters plus A2A. Apache 2.0, in design stage. Come help shape it.">
+<meta name="twitter:image" content="https://itsharness.github.io/itsharness/og-image.png">
+
+<!-- Favicons -->
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<!-- LLM-readable index -->
+<link rel="alternate" type="text/markdown" title="itsharness summary for LLMs" href="llms.txt">
+
+<!-- Structured data: SoftwareApplication -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "itsharness",
+  "applicationCategory": "DeveloperApplication",
+  "applicationSubCategory": "AI Agent Orchestration",
+  "operatingSystem": "Web, macOS, Linux, Windows",
+  "description": "Open-source visual builder for production AI agent harnesses. Authors a runtime-neutral FlowSpec that compiles to LangGraph, CrewAI, Mastra, and Microsoft Agent Framework \u2014 plus the A2A protocol for invocation of any framework-agnostic agent.",
+  "url": "https://itsharness.github.io/itsharness/",
+  "license": "https://www.apache.org/licenses/LICENSE-2.0",
+  "softwareVersion": "0.1.0",
+  "softwareHelp": "https://itsharness.github.io/itsharness/#spec",
+  "developmentStatus": "Design stage",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "itsharness contributors",
+    "url": "https://github.com/itsharness/itsharness"
+  },
+  "keywords": "AI agents, agent orchestration, LangGraph, CrewAI, Mastra, Microsoft Agent Framework, A2A protocol, MCP, visual workflow, FlowSpec, agentic AI"
+}
+</script>
+
+<!-- Structured data: FAQPage — surfaces in LLM/search answers -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is itsharness?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "itsharness is an open-source visual builder for production AI agent harnesses. You author flows visually on a canvas; itsharness compiles them into a runtime-neutral FlowSpec, then runtime adapters translate the spec into LangGraph, CrewAI, Mastra, or Microsoft Agent Framework code. The A2A protocol layer lets you invoke any A2A-compatible framework (Google ADK, OpenAI Agents SDK, Claude Agent SDK) without writing a custom adapter."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which AI agent frameworks does itsharness support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Four first-class runtime adapters: LangGraph (Python/JS), CrewAI (Python), Mastra (TypeScript), and Microsoft Agent Framework (C#/Python, covering both Semantic Kernel and AutoGen users). The A2A protocol covers framework-agnostic invocation of any A2A-compatible agent."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the FlowSpec?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "FlowSpec is the neutral intermediate representation that decouples the canvas from any runtime. Version 0.1.0 has 14 node types (input, output, llm_call, tool_invoke, agent_role, agent_debate, condition, parallel_fork, parallel_join, hitl_breakpoint, memory_read, memory_write, subgraph, transform), a discriminated edge union, and three optional config sections (checkpoint, streaming, telemetry)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What stage is the project at?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "itsharness is in the design stage (Phase 0 of 5). The FlowSpec v0.1.0 is frozen and a 36-question public design log is open. Phase 1 (canvas plus LangGraph adapter) starts after the public RFC. Public release is targeted for week 20."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How can I contribute?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Three lanes: argue with the FlowSpec on GitHub Discussions, claim a scoped module (adapter, node pack, validator, diff viewer) from the good-first-issues list, or subscribe for the alpha. The highest-leverage contributions today are design conversations and counter-proposals."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the license?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Apache 2.0."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- Structured data: BreadcrumbList for site root -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "itsharness",
+  "alternateName": "itsharness — visual AI agent harness builder",
+  "url": "https://itsharness.github.io/itsharness/",
+  "inLanguage": "en"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: oklch(0.972 0.008 270);
+    --bg-2: oklch(0.948 0.012 270);
+    --paper: oklch(0.985 0.008 270);
+    --ink: oklch(0.19 0.024 270);
+    --ink-2: oklch(0.37 0.020 270);
+    --ink-3: oklch(0.55 0.018 270);
+    --line: oklch(0.84 0.014 270);
+    --line-2: oklch(0.74 0.016 270);
+    --grid: oklch(0.86 0.016 270);
+    --grid-strong: oklch(0.78 0.020 270);
+    --accent: oklch(0.46 0.16 268);
+    --accent-ink: oklch(0.36 0.16 270);
+    --accent-soft: oklch(0.46 0.16 268 / 0.10);
+    --accent-tint: oklch(0.93 0.030 270);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg) !important; color: var(--ink); }
+  body {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 48px; }
+
+  /* mono caps utility */
+  .mono {
+    font-family: "IBM Plex Mono", monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+
+  /* header — like a drawing sheet title bar */
+  header.site {
+    border-bottom: 1px solid var(--line);
+    background: var(--paper);
+  }
+  .site-inner {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    align-items: center;
+    gap: 24px;
+    padding: 18px 0;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); }
+  .brand .mark { width: 28px; height: 28px; }
+  .brand .name {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .sheet-meta {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    display: flex;
+    gap: 22px;
+    padding-left: 24px;
+    border-left: 1px solid var(--line);
+  }
+  .sheet-meta b { color: var(--ink-2); font-weight: 500; }
+  .nav {
+    display: flex; align-items: center; gap: 22px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12.5px;
+  }
+  .nav a {
+    color: var(--ink-2); text-decoration: none;
+    border-bottom: 1px solid transparent; padding-bottom: 1px;
+  }
+  .nav a:hover { color: var(--ink); border-bottom-color: var(--ink-3); }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 14px; border-radius: 6px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px; font-weight: 500;
+    text-decoration: none;
+    border: 1px solid var(--ink);
+    background: var(--ink); color: var(--paper);
+    transition: transform .12s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn.ghost { background: transparent; color: var(--ink); border-color: var(--line-2); }
+  .btn.ghost:hover { border-color: var(--ink); }
+  .btn svg { width: 14px; height: 14px; }
+  .btn .count {
+    padding-left: 10px; margin-left: 4px;
+    border-left: 1px solid oklch(1 0 0 / 0.22);
+    color: oklch(1 0 0 / 0.65);
+    font-size: 12px;
+  }
+  .btn.ghost .count { border-left-color: var(--line); color: var(--ink-3); }
+
+  /* hero */
+  .hero { padding: 64px 0 80px; position: relative; }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent-ink);
+    margin-bottom: 26px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .eyebrow .bar { width: 28px; height: 1px; background: var(--accent-ink); opacity: 0.6; }
+
+  h1 {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 300;
+    font-size: 58px;
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    margin: 0 0 28px;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  h1 em {
+    font-family: "Instrument Serif", serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent-ink);
+  }
+  .lede {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    margin: 0 0 32px;
+    max-width: 520px;
+    text-wrap: pretty;
+  }
+  .lede strong { color: var(--ink); font-weight: 500; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .cta-note {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11.5px;
+    color: var(--ink-3);
+    margin-left: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* blueprint canvas */
+  .blueprint {
+    position: relative;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    height: 500px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .bp-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+      linear-gradient(var(--grid-strong) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-strong) 1px, transparent 1px);
+    background-size: 20px 20px, 20px 20px, 100px 100px, 100px 100px;
+    background-position: 0 0;
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  .bp-title {
+    position: absolute;
+    top: 14px; left: 16px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ink-3);
+    z-index: 4;
+    pointer-events: none;
+  }
+  .bp-title b { color: var(--ink); font-weight: 500; }
+  .bp-rev {
+    position: absolute;
+    bottom: 14px; right: 16px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--ink-3);
+    z-index: 4;
+    pointer-events: none;
+  }
+  .bp-rev b { color: var(--ink-2); font-weight: 500; }
+
+  .bp-stage {
+    position: absolute;
+    top: 14px; right: 16px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px;
+    color: var(--ink-3);
+    z-index: 4;
+    pointer-events: none;
+    display: inline-flex; align-items: center; gap: 7px;
+  }
+  .bp-stage .blip {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+    animation: blip 2s ease-in-out infinite;
+  }
+  @keyframes blip { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+  .graph-svg { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+  .graph-node {
+    position: absolute;
+    z-index: 3;
+    background: var(--paper);
+    border: 1px solid var(--line-2);
+    border-radius: 2px;
+    padding: 7px 11px 8px;
+    cursor: grab;
+    user-select: none;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    color: var(--ink);
+    transition: border-color .12s ease, box-shadow .12s ease;
+    min-width: 100px;
+    box-shadow: 0 1px 0 oklch(0 0 0 / 0.02);
+  }
+  .graph-node:hover { border-color: var(--ink-3); }
+  .graph-node.dragging { cursor: grabbing; border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 6px 18px -8px var(--accent); z-index: 6; }
+  .graph-node .kind {
+    display: block;
+    font-size: 9px;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 1px;
+  }
+  .graph-node .name { color: var(--ink); font-weight: 500; }
+  .graph-node.accent { border-color: var(--accent); }
+  .graph-node.accent .kind { color: var(--accent-ink); }
+
+  /* leader labels */
+  .bp-leader {
+    position: absolute;
+    z-index: 5;
+    pointer-events: none;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 9.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--accent-ink);
+  }
+
+  /* spec section */
+  .spec {
+    padding: 64px 0 56px;
+    border-top: 1px solid var(--line);
+    background: var(--paper);
+  }
+  .spec-head { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 32px; }
+  .spec-head p { margin: 0; color: var(--ink-2); font-size: 15.5px; line-height: 1.6; text-wrap: pretty; }
+  .spec-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: 20px; }
+  .code-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .code-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-2);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-3);
+  }
+  .code-bar b { color: var(--ink-2); font-weight: 500; letter-spacing: 0.08em; }
+  .code-bar .dots { display: flex; gap: 5px; }
+  .code-bar .dots span { width: 8px; height: 8px; border-radius: 50%; background: var(--line); border: 1px solid var(--line-2); }
+  .code-bar .dots span:first-child { background: var(--accent); border-color: var(--accent); }
+  pre.code {
+    margin: 0;
+    padding: 16px 18px 18px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11.5px;
+    line-height: 1.65;
+    color: oklch(0.28 0.020 250);
+    overflow-x: auto;
+    background: var(--paper);
+    flex: 1;
+  }
+  .code .kw { color: oklch(0.36 0.16 270); }
+  .code .str { color: oklch(0.42 0.10 60); }
+  .code .num { color: oklch(0.42 0.12 145); }
+  .code .p { color: oklch(0.50 0.020 270); }
+  .taxonomy {
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 20px 20px;
+    background: var(--paper);
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .tax-title {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--ink-3);
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 10px;
+  }
+  .tax-title b { color: var(--ink-2); font-weight: 500; }
+  .tax-title .right { color: var(--accent-ink); font-weight: 500; }
+  .tax-group { display: flex; flex-direction: column; gap: 6px; }
+  .tax-group .label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--ink-3);
+  }
+  .tax-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 9px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: var(--bg);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    color: var(--ink);
+  }
+  .chip .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+
+  /* runtime matrix */
+  .matrix {
+    padding: 56px 0 56px;
+    border-top: 1px solid var(--line);
+    background: var(--bg);
+  }
+
+  /* roadmap strip */
+  .roadmap {
+    padding: 56px 0 56px;
+    border-top: 1px solid var(--line);
+    background: var(--paper);
+  }
+  .roadmap h2 { max-width: 760px; }
+  .roadmap-lede {
+    font-size: 15.5px;
+    color: var(--ink-2);
+    max-width: 620px;
+    margin: 0 0 32px;
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+  .phase-strip {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--paper);
+  }
+  .phase {
+    padding: 22px 20px 22px;
+    border-right: 1px solid var(--line);
+    position: relative;
+    display: flex; flex-direction: column; gap: 8px;
+    background: var(--paper);
+  }
+  .phase:last-child { border-right: none; }
+  .phase.is-now {
+    background: var(--accent-tint);
+  }
+  .phase.is-now::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .phase-marker {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--ink-3);
+  }
+  .phase-marker .num {
+    color: var(--accent-ink);
+    font-weight: 500;
+    font-size: 11px;
+  }
+  .phase.is-now .phase-marker .num { color: var(--accent-ink); }
+  .phase-name {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .phase-desc { font-size: 12.5px; line-height: 1.55; color: var(--ink-2); margin: 0; }
+  .phase-status {
+    margin-top: auto;
+    padding-top: 6px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-3);
+  }
+  .phase.is-now .phase-status { color: var(--accent-ink); font-weight: 500; }
+
+  /* design log band */
+  .design-log {
+    padding: 48px 0 48px;
+    border-top: 1px solid var(--line);
+    background: var(--bg);
+  }
+  .dlog-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .dlog-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .stat {
+    padding: 20px 22px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: var(--paper);
+  }
+  .stat:nth-child(2n) { border-right: none; }
+  .stat:nth-last-child(-n+2) { border-bottom: none; }
+  .stat .n {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 300;
+    font-size: 42px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--accent-ink);
+  }
+  .stat .lbl {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px;
+    color: var(--ink-2);
+    margin-top: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+  .stat .det {
+    font-size: 12.5px;
+    color: var(--ink-3);
+    margin-top: 4px;
+    line-height: 1.5;
+  }
+  .featured-q {
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 22px 24px 22px;
+    background: var(--paper);
+    border-left: 3px solid var(--accent);
+  }
+  .featured-q .label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--accent-ink);
+    margin-bottom: 10px;
+  }
+  .featured-q .qtitle {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    margin: 0 0 10px;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  .featured-q .qbody {
+    font-size: 14.5px;
+    color: var(--ink-2);
+    margin: 0 0 16px;
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+  .featured-q .qmeta {
+    display: flex; gap: 14px; align-items: center;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    color: var(--ink-3);
+    flex-wrap: wrap;
+  }
+  .featured-q .qmeta b { color: var(--accent-ink); font-weight: 500; }
+  .featured-q a {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12.5px;
+    color: var(--accent-ink);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 1px;
+    margin-left: auto;
+  }
+  .featured-q a:hover { color: var(--ink); }
+  .mx-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--paper);
+    margin-top: 28px;
+  }
+  .mx-table th, .mx-table td {
+    padding: 13px 18px;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    font-size: 14px;
+    vertical-align: middle;
+  }
+  .mx-table th {
+    background: var(--bg-2);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--ink-3);
+    font-weight: 500;
+  }
+  .mx-table th.runtime { color: var(--accent-ink); }
+  .mx-table tbody tr:last-child td { border-bottom: none; }
+  .mx-table td .feat { font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--ink); font-weight: 500; }
+  .mx-table td .desc { font-size: 13px; color: var(--ink-2); margin-top: 2px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 9px; border-radius: 2px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px; font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .b-full { background: oklch(0.92 0.040 155); color: oklch(0.32 0.10 155); }
+  .b-part { background: oklch(0.93 0.045 75); color: oklch(0.36 0.10 75); }
+  .b-miss { background: oklch(0.93 0.030 30); color: oklch(0.40 0.13 30); }
+
+  /* body section */
+  .body-section {
+    padding: 64px 0 56px;
+    border-top: 1px solid var(--line);
+    background: var(--paper);
+  }
+  .section-eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--ink-3);
+    margin-bottom: 14px;
+  }
+  h2 {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 1.18;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin: 0 0 14px;
+    max-width: 760px;
+    text-wrap: balance;
+  }
+  h2 em { font-family: "Instrument Serif", serif; font-style: italic; color: var(--accent-ink); }
+  .section-lede {
+    font-size: 16px;
+    color: var(--ink-2);
+    max-width: 640px;
+    margin: 0 0 36px;
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+  .lanes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+  .lane {
+    padding: 26px 24px 24px;
+    background: var(--paper);
+    display: flex; flex-direction: column; gap: 12px;
+    border-right: 1px solid var(--line);
+    position: relative;
+  }
+  .lane:last-child { border-right: none; }
+  .lane .num {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+  }
+  .lane .num b { color: var(--accent-ink); font-weight: 500; }
+  .lane h3 {
+    margin: 0;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 500;
+    font-size: 19px;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .lane p {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+  .lane a {
+    margin-top: auto;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12.5px;
+    color: var(--accent-ink);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    align-self: flex-start;
+    padding-bottom: 1px;
+  }
+  .lane a:hover { color: var(--ink); }
+
+  /* footer */
+  footer.site {
+    padding: 28px 0 32px;
+    border-top: 1px solid var(--line);
+    background: var(--bg);
+  }
+  .foot {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 24px;
+    align-items: baseline;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11.5px;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+  .foot a { color: var(--ink-2); text-decoration: none; margin-right: 18px; }
+  .foot a:hover { color: var(--ink); }
+  .foot .center { text-align: center; font-family: "Instrument Serif", serif; font-style: italic; font-size: 14.5px; color: var(--ink-3); text-transform: none; letter-spacing: 0; }
+
+  /* ---------- responsive (mobile + tablet) ---------- */
+  @media (max-width: 980px) {
+    .wrap { padding: 0 24px; }
+    .site-inner { grid-template-columns: auto auto; gap: 14px; }
+    .sheet-meta { display: none; }
+    .nav { display: none; }
+    .hero { padding: 44px 0 56px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+    h1 { font-size: clamp(36px, 8vw, 52px); }
+    .blueprint { height: 380px; }
+    .spec-grid { grid-template-columns: 1fr; gap: 18px; }
+    .spec-head { grid-template-columns: 1fr; gap: 14px; }
+    .matrix { overflow-x: auto; }
+    .mx-table { min-width: 760px; }
+    .phase-strip { grid-template-columns: 1fr; }
+    .phase { border-right: none; border-bottom: 1px solid var(--line); }
+    .phase:last-child { border-bottom: none; }
+    .dlog-grid { grid-template-columns: 1fr; gap: 24px; }
+    .lanes { grid-template-columns: 1fr; }
+    .lane { border-right: none; border-bottom: 1px solid var(--line); }
+    .lane:last-child { border-bottom: none; }
+    .foot { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+    .foot a { margin-right: 14px; }
+    h2 { font-size: 26px; }
+    .featured-q .qmeta a { margin-left: 0; }
+  }
+  @media (max-width: 520px) {
+    .wrap { padding: 0 18px; }
+    .cta-row { flex-direction: column; align-items: stretch; gap: 10px; }
+    .cta-row .btn { justify-content: center; }
+    .cta-note { margin-left: 0; text-align: center; }
+    .dlog-stats { grid-template-columns: 1fr; }
+    .stat { border-right: none; }
+    .featured-q .qmeta { flex-direction: column; align-items: flex-start; gap: 6px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .blip { animation: none !important; }
+    * { transition-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap site-inner">
+    <a class="brand" href="#">
+      <svg class="mark" viewBox="0 0 32 32" fill="none">
+        <line x1="8" y1="10" x2="22" y2="10" stroke="oklch(0.36 0.16 270)" stroke-width="1.4"/>
+        <line x1="8" y1="10" x2="16" y2="24" stroke="oklch(0.36 0.16 270)" stroke-width="1.4"/>
+        <line x1="22" y1="10" x2="16" y2="24" stroke="oklch(0.36 0.16 270)" stroke-width="1.4"/>
+        <circle cx="8" cy="10" r="3" fill="oklch(0.46 0.16 268)"/>
+        <circle cx="22" cy="10" r="3" fill="oklch(0.46 0.16 268)"/>
+        <circle cx="16" cy="24" r="3" fill="oklch(0.19 0.024 270)"/>
+      </svg>
+      <span class="name">itsharness</span>
+    </a>
+    <div class="sheet-meta">
+      <span>sheet · <b>00 / overview</b></span>
+      <span>rev · <b>0.1 design</b></span>
+    </div>
+    <div class="nav">
+      <a href="#involved">Get involved</a>
+      <a href="#">Discussions</a>
+      <a href="#">RFC</a>
+    </div>
+    <a class="btn" href="#">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.78 0c2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.84 1.18 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+      Star<span class="count">★ 142</span>
+    </a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow"><span class="bar"></span>Open source · design stage</div>
+      <h1>It's all about the <em>harness</em>.<br>It's <em>AI's</em> harness.</h1>
+      <p class="lede">
+        <strong>itsharness</strong> is an open-source visual builder for production AI harnesses:
+        canvas, neutral spec, safety rails, run loop. One graph editor, one runtime-neutral IR,
+        adapters for <strong>LangGraph</strong>, <strong>CrewAI</strong>, <strong>Mastra</strong>, and
+        <strong>Microsoft Agent Framework</strong> &mdash; plus <strong>A2A</strong>, the protocol layer
+        that makes itsharness the orchestrator of orchestrators.
+      </p>
+      <div class="cta-row">
+        <a class="btn" href="#">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.78 0c2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.84 1.18 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+          Star on GitHub<span class="count">★ 142</span>
+        </a>
+        <a class="btn ghost" href="#">Read the RFC</a>
+        <span class="cta-note">Apache 2.0 · 0.1 ·  read-only</span>
+      </div>
+    </div>
+
+    <div class="blueprint" id="hgraphB">
+      <div class="bp-grid"></div>
+      <div class="bp-title">DWG · <b>FIG-01 / target topology</b></div>
+      <div class="bp-stage"><span class="blip"></span>illustrative</div>
+      <div class="bp-rev">SCALE · NTS · DRAG ANY NODE</div>
+      <svg class="graph-svg" id="hgraphB-svg"></svg>
+    </div>
+  </div>
+</section>
+
+<section class="spec" id="spec">
+  <div class="wrap">
+    <div class="spec-head">
+      <div>
+        <div class="section-eyebrow">§ 02 · specification</div>
+        <h2>FlowSpec <em>v0.1.0</em>. The IR is real. The shape is settled.</h2>
+      </div>
+      <p>Two required fields, twelve node types, a discriminated edge union, three optional config sections. Adapters consume it. The canvas authors it. Humans review it. Below — a real flow, in real JSON.</p>
+    </div>
+
+    <div class="spec-grid">
+      <div class="code-card">
+        <div class="code-bar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <b>flows/support-triage.flow.json</b>
+          <span>v0.1.0</span>
+        </div>
+<pre class="code"><span class="p">{</span>
+  <span class="kw">"spec_version"</span><span class="p">:</span> <span class="str">"0.1.0"</span><span class="p">,</span>
+  <span class="kw">"id"</span><span class="p">:</span> <span class="str">"support-triage"</span><span class="p">,</span>
+  <span class="kw">"name"</span><span class="p">:</span> <span class="str">"Support triage"</span><span class="p">,</span>
+  <span class="kw">"state_schema"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="kw">"type"</span><span class="p">:</span> <span class="str">"object"</span><span class="p">,</span>
+    <span class="kw">"properties"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="kw">"query"</span><span class="p">:</span> <span class="p">{</span> <span class="kw">"type"</span><span class="p">:</span> <span class="str">"string"</span> <span class="p">},</span>
+      <span class="kw">"severity"</span><span class="p">:</span> <span class="p">{</span> <span class="kw">"type"</span><span class="p">:</span> <span class="str">"string"</span><span class="p">,</span> <span class="kw">"default"</span><span class="p">:</span> <span class="str">"low"</span> <span class="p">},</span>
+      <span class="kw">"messages"</span><span class="p">:</span> <span class="p">{</span> <span class="kw">"type"</span><span class="p">:</span> <span class="str">"array"</span><span class="p">,</span> <span class="kw">"reducer"</span><span class="p">:</span> <span class="str">"append"</span> <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="kw">"nodes"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="kw">"type"</span><span class="p">:</span> <span class="str">"input"</span><span class="p">,</span>           <span class="kw">"id"</span><span class="p">:</span> <span class="str">"in"</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="kw">"type"</span><span class="p">:</span> <span class="str">"llm_call"</span><span class="p">,</span>        <span class="kw">"id"</span><span class="p">:</span> <span class="str">"classify"</span><span class="p">,</span>
+      <span class="kw">"prompt_template"</span><span class="p">:</span> <span class="str">"Classify severity: {{query}}"</span><span class="p">,</span>
+      <span class="kw">"structured_output"</span><span class="p">:</span> <span class="p">{</span> <span class="kw">"schema_ref"</span><span class="p">:</span> <span class="str">"Severity"</span> <span class="p">}</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="kw">"type"</span><span class="p">:</span> <span class="str">"condition"</span><span class="p">,</span>       <span class="kw">"id"</span><span class="p">:</span> <span class="str">"route"</span><span class="p">,</span>
+      <span class="kw">"branches"</span><span class="p">:</span> <span class="p">[{</span>
+        <span class="kw">"condition"</span><span class="p">:</span> <span class="p">{</span> <span class="kw">"type"</span><span class="p">:</span> <span class="str">"expr"</span><span class="p">,</span>
+          <span class="kw">"expr"</span><span class="p">:</span> <span class="str">"$.state.severity == 'high'"</span> <span class="p">},</span>
+        <span class="kw">"target"</span><span class="p">:</span> <span class="str">"escalate"</span> <span class="p">}],</span>
+      <span class="kw">"default_target"</span><span class="p">:</span> <span class="str">"answer"</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="kw">"type"</span><span class="p">:</span> <span class="str">"hitl_breakpoint"</span><span class="p">,</span> <span class="kw">"id"</span><span class="p">:</span> <span class="str">"escalate"</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="kw">"type"</span><span class="p">:</span> <span class="str">"llm_call"</span><span class="p">,</span>        <span class="kw">"id"</span><span class="p">:</span> <span class="str">"answer"</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="kw">"type"</span><span class="p">:</span> <span class="str">"output"</span><span class="p">,</span>          <span class="kw">"id"</span><span class="p">:</span> <span class="str">"out"</span> <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="kw">"flow_config"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="kw">"checkpoint"</span><span class="p">:</span> <span class="p">{</span> <span class="kw">"enabled"</span><span class="p">:</span> <span class="kw">true</span> <span class="p">},</span>
+    <span class="kw">"streaming"</span><span class="p">:</span>  <span class="p">{</span> <span class="kw">"enabled"</span><span class="p">:</span> <span class="kw">true</span><span class="p">,</span> <span class="kw">"mode"</span><span class="p">:</span> <span class="str">"tokens"</span> <span class="p">},</span>
+    <span class="kw">"telemetry"</span><span class="p">:</span>  <span class="p">{</span> <span class="kw">"enabled"</span><span class="p">:</span> <span class="kw">true</span><span class="p">,</span> <span class="kw">"provider"</span><span class="p">:</span> <span class="str">"langfuse"</span> <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span></pre>
+      </div>
+
+      <div class="taxonomy">
+        <div class="tax-title"><b>node taxonomy</b><span class="right">14 types</span></div>
+        <div class="tax-group"><span class="label">i/o</span><div class="tax-chips"><span class="chip"><span class="dot"></span>input</span><span class="chip"><span class="dot"></span>output</span></div></div>
+        <div class="tax-group"><span class="label">llm</span><div class="tax-chips"><span class="chip"><span class="dot"></span>llm_call</span></div></div>
+        <div class="tax-group"><span class="label">tools</span><div class="tax-chips"><span class="chip"><span class="dot"></span>tool_invoke</span></div></div>
+        <div class="tax-group"><span class="label">agents</span><div class="tax-chips"><span class="chip"><span class="dot"></span>agent_role</span><span class="chip"><span class="dot"></span>agent_debate</span></div></div>
+        <div class="tax-group"><span class="label">flow control</span><div class="tax-chips"><span class="chip"><span class="dot"></span>condition</span><span class="chip"><span class="dot"></span>parallel_fork</span><span class="chip"><span class="dot"></span>parallel_join</span></div></div>
+        <div class="tax-group"><span class="label">human</span><div class="tax-chips"><span class="chip"><span class="dot"></span>hitl_breakpoint</span></div></div>
+        <div class="tax-group"><span class="label">memory</span><div class="tax-chips"><span class="chip"><span class="dot"></span>memory_read</span><span class="chip"><span class="dot"></span>memory_write</span></div></div>
+        <div class="tax-group"><span class="label">composition</span><div class="tax-chips"><span class="chip"><span class="dot"></span>subgraph</span><span class="chip"><span class="dot"></span>transform</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="matrix" id="matrix">
+  <div class="wrap">
+    <div class="section-eyebrow">§ 03 · runtime conformance</div>
+    <h2 style="max-width:760px">Every node type, <em>mapped</em> across four runtimes.</h2>
+    <table class="mx-table">
+      <thead><tr><th style="width:30%">Feature</th><th class="runtime" style="width:17.5%">LangGraph</th><th class="runtime" style="width:17.5%">CrewAI</th><th class="runtime" style="width:17.5%">Mastra</th><th class="runtime" style="width:17.5%">MS Agent Framework</th></tr></thead>
+      <tbody>
+        <tr><td><div class="feat">llm_call · structured output</div><div class="desc">Prompt templates, model overrides, validators.</div></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td></tr>
+        <tr><td><div class="feat">agent_role · agent_debate</div><div class="desc">Named personas, multi-agent loops, selection.</div></td><td><span class="badge b-part">via subgraph</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td></tr>
+        <tr><td><div class="feat">condition · parallel_fork / join</div><div class="desc">Branching, fan-out, configurable join reducers.</div></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td></tr>
+        <tr><td><div class="feat">hitl_breakpoint</div><div class="desc">Pause, inspect, edit state, resume.</div></td><td><span class="badge b-full">full</span></td><td><span class="badge b-part">partial</span></td><td><span class="badge b-part">partial</span></td><td><span class="badge b-part">partial</span></td></tr>
+        <tr><td><div class="feat">memory · semantic (vector)</div><div class="desc">Embeddings, top-k, similarity threshold.</div></td><td><span class="badge b-part">via plugin</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td></tr>
+        <tr><td><div class="feat">streaming · tokens / updates</div><div class="desc">Token streaming and graph-update events.</div></td><td><span class="badge b-full">full</span></td><td><span class="badge b-part">partial</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-part">via adapter</span></td></tr>
+        <tr><td><div class="feat">checkpoint · Postgres / Redis</div><div class="desc">Durable execution, resume from any node.</div></td><td><span class="badge b-full">full</span></td><td><span class="badge b-part">via plugin</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-part">via Dapr / Orleans</span></td></tr>
+        <tr><td><div class="feat">A2A protocol · expose &amp; invoke</div><div class="desc">AgentCard generation, cross-framework invocation.</div></td><td colspan="4" style="text-align:center"><span class="badge b-full">framework-agnostic · covers Google ADK, OpenAI &amp; Claude Agent SDKs, HF</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="roadmap" id="roadmap">
+  <div class="wrap">
+    <div class="section-eyebrow">§ 04 · roadmap</div>
+    <h2>Five phases. <em>One</em> already done.</h2>
+    <p class="roadmap-lede">Design lands first; code follows. The neutral spec is the only artefact you can review before the canvas exists. Each phase is independently deployable. Public release at week 20.</p>
+    <div class="phase-strip">
+      <div class="phase is-now">
+        <div class="phase-marker"><span class="num">phase 00</span><span>W1–3</span></div>
+        <div class="phase-name">Spec design</div>
+        <p class="phase-desc">Neutral IR, 14 node types, 4 runtime maps + A2A, 5 example flows, public RFC.</p>
+        <div class="phase-status">● in progress</div>
+      </div>
+      <div class="phase">
+        <div class="phase-marker"><span class="num">phase 01</span><span>W4–11</span></div>
+        <div class="phase-name">Canvas + LangGraph</div>
+        <p class="phase-desc">XYFlow canvas, 12 core nodes, LangGraph adapter. Draw a flow, run it. First alpha.</p>
+        <div class="phase-status">next</div>
+      </div>
+      <div class="phase">
+        <div class="phase-marker"><span class="num">phase 02</span><span>W12–20</span></div>
+        <div class="phase-name">Observability + A2A</div>
+        <p class="phase-desc">Langfuse traces, HITL UI, LiteLLM, REST + MCP + A2A deploy. 🚀 public release.</p>
+        <div class="phase-status">public v0.1</div>
+      </div>
+      <div class="phase">
+        <div class="phase-marker"><span class="num">phase 03</span><span>W21–32</span></div>
+        <div class="phase-name">Teams + CrewAI + Mastra</div>
+        <p class="phase-desc">CrewAI adapter, Mastra adapter, RBAC, version diff, evals, marketplace. 🎯 v1.0.</p>
+        <div class="phase-status">v1.0</div>
+      </div>
+      <div class="phase">
+        <div class="phase-marker"><span class="num">phase 04</span><span>W33+</span></div>
+        <div class="phase-name">Enterprise + Microsoft</div>
+        <p class="phase-desc">Real-time collab (Yjs), MS Agent Framework adapter, SSO, on-prem Helm, embeddable canvas.</p>
+        <div class="phase-status">enterprise</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="design-log" id="log">
+  <div class="wrap">
+    <div class="section-eyebrow">§ 05 · design log</div>
+    <h2 style="max-width:760px">36 questions tracked. <em>Most</em> are still negotiable.</h2>
+    <p class="section-lede" style="max-width:620px;margin:14px 0 32px">Phase 0 ran a structured review of every shape decision the IR needs. Decisions, parks, deferrals — all in the open log. We surface the ones still worth arguing about.</p>
+
+    <div class="dlog-grid">
+      <div class="dlog-stats">
+        <div class="stat"><div class="n">36</div><div class="lbl">questions</div><div class="det">Filed across spec, control flow, agents, tools, memory, output.</div></div>
+        <div class="stat"><div class="n">18</div><div class="lbl">decided</div><div class="det">Recorded in the IR — still open to challenge on the discussion thread.</div></div>
+        <div class="stat"><div class="n">8</div><div class="lbl">parked</div><div class="det">Adapter-level concerns. Revisit when each adapter is built.</div></div>
+        <div class="stat"><div class="n">2</div><div class="lbl">deferred v2</div><div class="det">Scope chosen out of v0.1. Compose them from primitives for now.</div></div>
+      </div>
+
+      <div class="featured-q">
+        <div class="label">featured open thread</div>
+        <div class="qtitle">Q35 · multi_agent_chat — should LG/MA approximate Microsoft's AgentGroupChat, or refuse to compile?</div>
+        <p class="qbody">MS AF's group chat is fundamentally conversational. LangGraph and Mastra use hierarchical graph nesting — structurally different execution models. Approximate with a warning, or refuse to compile and break the "write once, run anywhere" promise? Working assumption: approximate with warning. Real-world voices wanted before we lock it in.</p>
+        <div class="qmeta">
+          <span>priority · <b>high</b></span>
+          <span>category · agents · v2</span>
+          <span>status · parked</span>
+          <a href="#">Argue in Discussions →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="body-section" id="involved">
+  <div class="wrap">
+    <div class="section-eyebrow">§ 06 · getting involved</div>
+    <h2>The design is <em>open</em>. The decisions are still cheap.</h2>
+    <p class="section-lede">
+      We're deliberately slow before we're fast. The IR, the node taxonomy, and the adapter
+      contract land first — code follows. Three lanes, three weeks-of-effort, pick whichever fits.
+    </p>
+
+    <div class="lanes">
+      <div class="lane">
+        <div class="num">track <b>A</b> · shape</div>
+        <h3>Argue with the spec</h3>
+        <p>The neutral IR is the lingua franca between canvas and four adapters. Every shape decision ripples through all of them. Read the v0.1 spec, push back, propose alternatives.</p>
+        <a href="#">Open the RFC →</a>
+      </div>
+      <div class="lane">
+        <div class="num">track <b>B</b> · build</div>
+        <h3>Claim a module</h3>
+        <p>Adapters, node packs, the IR validator, the diff viewer. Issues are scoped tight enough that a weekend can land something whole and useful.</p>
+        <a href="#">Good first issues →</a>
+      </div>
+      <div class="lane">
+        <div class="num">track <b>C</b> · try</div>
+        <h3>Run the alpha</h3>
+        <p>The first runnable canvas is stitching together now. Subscribe to get the build the moment it's stable enough to point at a real flow of yours.</p>
+        <a href="#">Get the alpha →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap foot">
+    <div>
+      <a href="#">GitHub</a>
+      <a href="#">Discussions</a>
+      <a href="#">RFC</a>
+      <a href="#">License · Apache 2.0</a>
+    </div>
+    <div class="center">it's all about the harness, after all.</div>
+    <div>© 2026 itsharness contributors</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const frame = document.getElementById('hgraphB');
+  const svg = document.getElementById('hgraphB-svg');
+
+  const nodes = [
+    { id: 'in',   x: 60,  y: 220, label: 'Input',    kind: '00 entry'  },
+    { id: 'llm',  x: 220, y: 130, label: 'Planner',  kind: '01 llm', accent: true },
+    { id: 'tool', x: 220, y: 300, label: 'Tools',    kind: '02 tool'   },
+    { id: 'hitl', x: 380, y: 130, label: 'Review',   kind: '03 hitl'   },
+    { id: 'mem',  x: 380, y: 300, label: 'Memory',   kind: '04 memory' },
+    { id: 'gate', x: 540, y: 215, label: 'Guardrail',kind: '05 guard'  },
+    { id: 'out',  x: 680, y: 215, label: 'Output',   kind: '06 exit'   },
+  ];
+  const edges = [
+    ['in','llm'], ['in','tool'],
+    ['llm','hitl'], ['tool','mem'],
+    ['hitl','gate'], ['mem','gate'],
+    ['gate','out'],
+    ['llm','tool']
+  ];
+
+  function renderNodes(){
+    nodes.forEach(n => {
+      const el = document.createElement('div');
+      el.className = 'graph-node' + (n.accent ? ' accent' : '');
+      el.dataset.id = n.id;
+      el.innerHTML = '<span class="kind">' + n.kind + '</span><span class="name">' + n.label + '</span>';
+      frame.appendChild(el);
+      n.el = el;
+      positionNode(n);
+      attachDrag(n);
+    });
+  }
+  function positionNode(n){
+    n.el.style.left = (n.x - n.el.offsetWidth/2) + 'px';
+    n.el.style.top  = (n.y - n.el.offsetHeight/2) + 'px';
+  }
+  function drawEdges(){
+    const ns = 'http://www.w3.org/2000/svg';
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    const defs = document.createElementNS(ns, 'defs');
+    defs.innerHTML = '<marker id="arrB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="oklch(0.55 0.018 270)"/></marker>';
+    svg.appendChild(defs);
+    edges.forEach(([a,b]) => {
+      const A = nodes.find(n=>n.id===a), B = nodes.find(n=>n.id===b);
+      const path = document.createElementNS(ns, 'path');
+      const mx = (A.x + B.x) / 2;
+      const d = `M ${A.x} ${A.y} C ${mx} ${A.y}, ${mx} ${B.y}, ${B.x} ${B.y}`;
+      path.setAttribute('d', d);
+      path.setAttribute('stroke', 'oklch(0.55 0.018 270)');
+      path.setAttribute('stroke-width', '1');
+      path.setAttribute('fill', 'none');
+      path.setAttribute('stroke-dasharray', '0');
+      path.setAttribute('marker-end', 'url(#arrB)');
+      svg.appendChild(path);
+    });
+  }
+  function attachDrag(n){
+    let sx, sy, ox, oy;
+    n.el.addEventListener('pointerdown', e => {
+      e.preventDefault();
+      n.el.classList.add('dragging');
+      n.el.setPointerCapture(e.pointerId);
+      sx = e.clientX; sy = e.clientY; ox = n.x; oy = n.y;
+    });
+    n.el.addEventListener('pointermove', e => {
+      if (!n.el.classList.contains('dragging')) return;
+      const fw = frame.clientWidth, fh = frame.clientHeight;
+      n.x = Math.max(50, Math.min(fw - 50, ox + (e.clientX - sx)));
+      n.y = Math.max(28, Math.min(fh - 28, oy + (e.clientY - sy)));
+      positionNode(n);
+      drawEdges();
+    });
+    n.el.addEventListener('pointerup', () => n.el.classList.remove('dragging'));
+    n.el.addEventListener('pointercancel', () => n.el.classList.remove('dragging'));
+  }
+
+  renderNodes();
+  requestAnimationFrame(() => {
+    nodes.forEach(positionNode);
+    drawEdges();
+  });
+})();
+</script>
+
+</body>
+</html>

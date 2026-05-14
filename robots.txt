@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://itsharness.github.io/itsharness/sitemap.xml

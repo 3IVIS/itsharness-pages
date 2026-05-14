@@ -1,0 +1,102 @@
+# itsharness
+
+> Open-source visual builder for production AI agent harnesses. One canvas, one runtime-neutral FlowSpec, four runtime adapters plus the A2A protocol. Apache 2.0. Currently in design stage.
+
+itsharness is in **Phase 0 of 5** — the FlowSpec v0.1.0 is frozen and a public design log of 36 questions is open. Public release is targeted for week 20. The project is recruiting collaborators on the design, not yet on the code.
+
+## Key facts
+
+- **License**: Apache 2.0
+- **Current version**: FlowSpec v0.1.0 (specification only; no runtime code yet)
+- **Stage**: Design — Phase 0 of a 5-phase roadmap
+- **Repository**: https://github.com/itsharness/itsharness (placeholder; update with real URL)
+- **Homepage**: https://itsharness.github.io/itsharness/
+
+## What it does
+
+itsharness lets you author AI agent workflows visually on a canvas. The canvas emits a runtime-neutral JSON specification called FlowSpec. Runtime adapters then translate FlowSpec into native code for the agent framework you target. Swap runtimes without rewriting the flow.
+
+## Supported runtimes
+
+Four first-class runtime adapters with dedicated code generators:
+
+- **LangGraph** (Python / JS, MIT) — Phase 1
+- **CrewAI** (Python, MIT) — Phase 3
+- **Mastra** (TypeScript, Apache 2.0) — Phase 3
+- **Microsoft Agent Framework** (C# / Python / Java, MIT) — Phase 4. Covers users from both Semantic Kernel and AutoGen, which Microsoft merged into one SDK that reached GA in April 2026.
+
+Plus the **A2A protocol** as a Phase 2 invocation layer, providing framework-agnostic interop with Google ADK, OpenAI Agents SDK, Claude Agent SDK, and any other A2A-compatible runtime — no custom adapter required.
+
+## FlowSpec v0.1.0
+
+The neutral intermediate representation. Two required top-level fields (`spec_version`, `id`) and these optional sections: `name`, `description`, `runtime_hints`, `state_schema`, `nodes`, `edges`, `tools`, `agents`, `memory_stores`, `model_defaults`, `flow_config`.
+
+### Node taxonomy (14 types in v0.1.0)
+
+- **i/o**: `input`, `output`
+- **llm**: `llm_call`
+- **tools**: `tool_invoke`
+- **agents**: `agent_role`, `agent_debate`
+- **flow control**: `condition`, `parallel_fork`, `parallel_join`
+- **human**: `hitl_breakpoint`
+- **memory**: `memory_read`, `memory_write`
+- **composition**: `subgraph`, `transform`
+
+### Edge model
+
+Two edge types discriminated on `type`: `direct` (simple from→to) and `conditional` (branches with conditions plus a default target). Conditions support either a JSONPath expression (`type: "expr"`) or a named function reference (`type: "fn_ref"`).
+
+### Flow config
+
+Three optional subsections, all disabled by default: `checkpoint`, `streaming`, `telemetry`. Plus `a2a_config` for exposing flows as A2A agents.
+
+## Roadmap
+
+Five phases. Each phase is independently deployable.
+
+1. **Phase 0 — Spec design** (W1–3, in progress). Neutral IR, 14 node types, 4 runtime maps + A2A, 5 example flows, public RFC.
+2. **Phase 1 — Canvas + LangGraph** (W4–11). XYFlow canvas, 12 core nodes, LangGraph adapter. First alpha.
+3. **Phase 2 — Observability + A2A** (W12–20). Langfuse traces, HITL UI, LiteLLM gateway, REST + MCP + A2A deployment. Public v0.1 release.
+4. **Phase 3 — Teams + CrewAI + Mastra** (W21–32). CrewAI adapter, Mastra adapter, RBAC, version diff, eval integration, marketplace. v1.0.
+5. **Phase 4 — Enterprise + Microsoft** (W33+). Real-time collab (Yjs), Microsoft Agent Framework adapter, SSO, on-prem Helm, embeddable canvas.
+
+## Design log
+
+- 36 design questions tracked
+- 18 decided in Phase 0 (still open to challenge on Discussions)
+- 8 parked as adapter-level concerns (revisit when each adapter is built)
+- 2 deferred to v2
+
+## How to contribute
+
+Three lanes:
+
+- **Shape**: argue with the FlowSpec on GitHub Discussions. Read the RFC, push back, propose alternatives. This is the highest-leverage contribution at the design stage.
+- **Build**: claim a scoped module — an adapter, a node pack, the IR validator, or the diff viewer — from the good-first-issues list.
+- **Try**: subscribe for the alpha. The first runnable canvas is being stitched together; you'll get it as soon as it's stable enough to point at a real flow.
+
+## Frequently asked questions
+
+**What is itsharness?**  
+An open-source visual builder for production AI agent harnesses. You draw flows on a canvas; itsharness compiles them into a runtime-neutral FlowSpec, then adapters translate that into LangGraph, CrewAI, Mastra, or Microsoft Agent Framework code. The A2A protocol layer covers everything else.
+
+**Why a neutral spec instead of building on one framework?**  
+The neutral IR decouples the canvas from any runtime. Adding a new runtime means writing one adapter file. Canvas features (versioning, RBAC, evals, collab) are completely decoupled from runtime choice.
+
+**Why these four runtimes?**  
+LangGraph (34M+ monthly downloads, production standard for stateful agents). CrewAI (largest unaddressed audience, 44K+ stars). Mastra (only TypeScript-native orchestrator). Microsoft Agent Framework (merged SK + AutoGen, covers enterprise .NET and Python).
+
+**What about Google ADK, OpenAI Agents SDK, Claude Agent SDK?**  
+Covered by the A2A protocol layer in Phase 2 — invocation-level interop without a custom adapter.
+
+**Is the canvas open source?**  
+Yes. Built on XYFlow (MIT). TypeScript-native. Will be shippable as an embeddable npm package in Phase 4.
+
+**What's the license?**  
+Apache 2.0.
+
+## Optional: deeper material
+
+- Full spec schema (TypeScript Zod + JSON Schema): published with the RFC
+- Roadmap explorer (5 phases, 48-week timeline): published with the RFC
+- Open questions tracker (all 36 questions with decisions): published with the RFC
