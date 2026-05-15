@@ -51,7 +51,7 @@
   "description": "Open-source visual builder for production AI agent harnesses. Authors a runtime-neutral FlowSpec that compiles to LangGraph, CrewAI, Mastra, and Microsoft Agent Framework \u2014 plus the A2A protocol for invocation of any framework-agnostic agent.",
   "url": "https://itsharness.com/",
   "license": "https://www.apache.org/licenses/LICENSE-2.0",
-  "softwareVersion": "0.1.0",
+  "softwareVersion": "0.2.0",
   "softwareHelp": "https://itsharness.com/#spec",
   "developmentStatus": "Design stage",
   "isAccessibleForFree": true,
@@ -294,112 +294,169 @@
     letter-spacing: 0.1em;
   }
 
-  /* blueprint canvas */
+  /* blueprint canvas — mirrors the actual dark XYFlow canvas */
   .blueprint {
     position: relative;
-    background: var(--paper);
+    background: #0d0d12;
     border: 1px solid var(--line);
     height: 500px;
     border-radius: 4px;
     overflow: hidden;
+    color: #e2e2ec;
   }
   .bp-grid {
     position: absolute; inset: 0;
     background-image:
-      linear-gradient(var(--grid) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid) 1px, transparent 1px),
-      linear-gradient(var(--grid-strong) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid-strong) 1px, transparent 1px);
-    background-size: 20px 20px, 20px 20px, 100px 100px, 100px 100px;
+      radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1.5px);
+    background-size: 22px 22px;
     background-position: 0 0;
-    opacity: 0.55;
     pointer-events: none;
   }
   .bp-title {
     position: absolute;
-    top: 14px; left: 16px;
+    top: 12px; left: 14px;
     font-family: "IBM Plex Mono", monospace;
-    font-size: 10.5px;
+    font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.18em;
-    color: var(--ink-3);
+    color: rgba(226,226,236,0.42);
     z-index: 4;
     pointer-events: none;
   }
-  .bp-title b { color: var(--ink); font-weight: 500; }
+  .bp-title b { color: rgba(226,226,236,0.82); font-weight: 500; }
   .bp-rev {
     position: absolute;
-    bottom: 14px; right: 16px;
+    bottom: 10px; right: 14px;
     font-family: "IBM Plex Mono", monospace;
-    font-size: 10.5px;
+    font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.16em;
-    color: var(--ink-3);
+    color: rgba(226,226,236,0.42);
     z-index: 4;
     pointer-events: none;
   }
-  .bp-rev b { color: var(--ink-2); font-weight: 500; }
+  .bp-rev b { color: rgba(226,226,236,0.7); font-weight: 500; }
 
   .bp-stage {
     position: absolute;
-    top: 14px; right: 16px;
+    top: 12px; right: 14px;
     font-family: "IBM Plex Mono", monospace;
-    font-size: 10.5px;
-    color: var(--ink-3);
+    font-size: 10px;
+    color: rgba(226,226,236,0.42);
     z-index: 4;
     pointer-events: none;
     display: inline-flex; align-items: center; gap: 7px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
   }
   .bp-stage .blip {
     width: 6px; height: 6px; border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 0 3px var(--accent-soft);
+    background: #6366f1;
+    box-shadow: 0 0 8px rgba(99,102,241,0.7);
     animation: blip 2s ease-in-out infinite;
   }
   @keyframes blip { 0%,100%{opacity:1} 50%{opacity:.4} }
 
-  .graph-svg { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
-  .graph-node {
+  .graph-svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; overflow: visible; }
+  .graph-svg path.edge {
+    stroke: #a0a0c8;
+    stroke-width: 2;
+    fill: none;
+  }
+
+  /* node cards — mirror the actual canvas .cf-node */
+  .cv-node {
     position: absolute;
     z-index: 3;
-    background: var(--paper);
-    border: 1px solid var(--line-2);
-    border-radius: 2px;
-    padding: 7px 11px 8px;
+    width: 150px;
+    background: #16161f;
+    border: 0.5px solid #2d2d42;
+    border-left: 3px solid var(--node-accent, #6366f1);
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5), 0 1px 2px rgba(0,0,0,0.3);
     cursor: grab;
     user-select: none;
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "IBM Plex Sans", sans-serif;
+    color: #e2e2ec;
+    transition: box-shadow .14s ease, border-color .14s ease;
+  }
+  .cv-node:hover {
+    border-color: #484866;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.6), 0 2px 4px rgba(0,0,0,0.4);
+  }
+  .cv-node.dragging {
+    cursor: grabbing;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 1px #6366f1, 0 10px 28px -6px rgba(99,102,241,0.4);
+    z-index: 7;
+  }
+  .cv-node__head {
+    display: flex; align-items: center; gap: 6px;
+    padding: 6px 8px;
+    background: var(--node-tint, rgba(99,102,241,0.08));
+    border-bottom: 0.5px solid #1f1f2e;
+    border-top-right-radius: 5px;
+  }
+  .cv-node__icon {
+    display: inline-flex;
+    color: var(--node-accent, #6366f1);
+    flex-shrink: 0;
+  }
+  .cv-node__icon svg {
+    width: 12px; height: 12px;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .cv-node__label {
+    flex: 1;
     font-size: 11px;
-    color: var(--ink);
-    transition: border-color .12s ease, box-shadow .12s ease;
-    min-width: 100px;
-    box-shadow: 0 1px 0 oklch(0 0 0 / 0.02);
+    font-weight: 500;
+    color: #e2e2ec;
+    letter-spacing: -0.01em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
   }
-  .graph-node:hover { border-color: var(--ink-3); }
-  .graph-node.dragging { cursor: grabbing; border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 6px 18px -8px var(--accent); z-index: 6; }
-  .graph-node .kind {
-    display: block;
-    font-size: 9px;
-    color: var(--ink-3);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    margin-bottom: 1px;
-  }
-  .graph-node .name { color: var(--ink); font-weight: 500; }
-  .graph-node.accent { border-color: var(--accent); }
-  .graph-node.accent .kind { color: var(--accent-ink); }
-
-  /* leader labels */
-  .bp-leader {
-    position: absolute;
-    z-index: 5;
-    pointer-events: none;
+  .cv-node__type {
     font-family: "IBM Plex Mono", monospace;
-    font-size: 9.5px;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--accent-ink);
+    font-size: 8.5px;
+    color: #6e6e92;
+    letter-spacing: 0.06em;
+    flex-shrink: 0;
   }
+  .cv-node__compat {
+    display: flex; gap: 3px;
+    padding: 4px 6px 5px;
+  }
+  .cv-node__compat .rt {
+    flex: 1;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 8px;
+    font-weight: 600;
+    text-align: center;
+    padding: 2.5px 0;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+  }
+  .rt.full { background: rgba(34,197,94,0.16);  color: #4ade80; }
+  .rt.part { background: rgba(245,158,11,0.18); color: #fbbf24; }
+  .rt.miss { background: rgba(239,68,68,0.18);  color: #f87171; }
+  .cv-handle {
+    position: absolute;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #1d1d28;
+    border: 1.5px solid var(--node-accent, #6366f1);
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 4;
+  }
+  .cv-handle.l { left: -4px; }
+  .cv-handle.r { right: -4px; }
 
   /* spec section */
   .spec {
@@ -869,7 +926,7 @@
     </a>
     <div class="sheet-meta">
       <span>sheet · <b>00 / overview</b></span>
-      <span>rev · <b>0.1 design</b></span>
+      <span>rev · <b>0.2 phase 1</b></span>
     </div>
     <div class="nav">
       <a href="#involved">Get involved</a>
@@ -886,7 +943,7 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <div class="eyebrow"><span class="bar"></span>Open source · design stage</div>
+      <div class="eyebrow"><span class="bar"></span>Open source · phase 1 · canvas live</div>
       <h1>It's all about the <em>harness</em>.<br>It's <em>AI's</em> harness.</h1>
       <p class="lede">
         <strong>itsharness</strong> is an open-source visual builder for production AI harnesses:
@@ -901,15 +958,15 @@
           Star on GitHub<span class="count" data-gh-stars>★ 0</span>
         </a>
         <a class="btn ghost" href="https://github.com/3IVIS/itsharness/discussions" target="_blank" rel="noopener">Read the RFC</a>
-        <span class="cta-note">Apache 2.0 · 0.1 ·  read-only</span>
+        <span class="cta-note">Apache 2.0 · spec 0.2 · canvas live</span>
       </div>
     </div>
 
     <div class="blueprint" id="hgraphB">
       <div class="bp-grid"></div>
-      <div class="bp-title">DWG · <b>FIG-01 / target topology</b></div>
-      <div class="bp-stage"><span class="blip"></span>illustrative</div>
-      <div class="bp-rev">SCALE · NTS · DRAG ANY NODE</div>
+      <div class="bp-title">DWG · <b>FIG-01 / triage flow</b></div>
+      <div class="bp-stage"><span class="blip"></span>phase 1 · canvas</div>
+      <div class="bp-rev">SPEC · <b>v0.2</b> · DRAG ANY NODE</div>
       <svg class="graph-svg" id="hgraphB-svg"></svg>
     </div>
   </div>
@@ -920,9 +977,9 @@
     <div class="spec-head">
       <div>
         <div class="section-eyebrow">§ 02 · specification</div>
-        <h2>FlowSpec <em>v0.1.0</em>. The IR is real. The shape is settled.</h2>
+        <h2>FlowSpec <em>v0.2.0</em>. The IR is live. The canvas authors it.</h2>
       </div>
-      <p>Two required fields, twelve node types, a discriminated edge union, three optional config sections. Adapters consume it. The canvas authors it. Humans review it. Below — a real flow, in real JSON.</p>
+      <p>Two required fields, fourteen node types, a discriminated edge union, three optional config sections. The canvas emits this on every change. Adapters consume it. Below — a real flow, in real JSON.</p>
     </div>
 
     <div class="spec-grid">
@@ -933,7 +990,7 @@
           <span>v0.1.0</span>
         </div>
 <pre class="code"><span class="p">{</span>
-  <span class="kw">"spec_version"</span><span class="p">:</span> <span class="str">"0.1.0"</span><span class="p">,</span>
+  <span class="kw">"spec_version"</span><span class="p">:</span> <span class="str">"0.2.0"</span><span class="p">,</span>
   <span class="kw">"id"</span><span class="p">:</span> <span class="str">"support-triage"</span><span class="p">,</span>
   <span class="kw">"name"</span><span class="p">:</span> <span class="str">"Support triage"</span><span class="p">,</span>
   <span class="kw">"state_schema"</span><span class="p">:</span> <span class="p">{</span>
@@ -1005,20 +1062,20 @@
 <section class="roadmap" id="roadmap">
   <div class="wrap">
     <div class="section-eyebrow">§ 04 · roadmap</div>
-    <h2>Five phases. <em>One</em> already done.</h2>
-    <p class="roadmap-lede">Design lands first; code follows. The neutral spec is the only artefact you can review before the canvas exists. Each phase is independently deployable. Public release at week 20.</p>
+    <h2>Five phases. <em>One</em> done, <em>one</em> underway.</h2>
+    <p class="roadmap-lede">Phase 0 closed with the spec locked at v0.2. Phase 1 is mid-build — canvas live, adapter codegen gated on the RFC. Each phase is independently deployable. Public release at week 20.</p>
     <div class="phase-strip">
-      <div class="phase is-now">
+      <div class="phase">
         <div class="phase-marker"><span class="num">phase 00</span><span>W1–3</span></div>
         <div class="phase-name">Spec design</div>
-        <p class="phase-desc">Neutral IR, 14 node types, 4 runtime maps + A2A, 5 example flows, public RFC.</p>
-        <div class="phase-status">● in progress</div>
+        <p class="phase-desc">Neutral IR v0.2, 14 node types, 4 runtime maps + A2A, 5 example flows, public RFC.</p>
+        <div class="phase-status">✓ complete</div>
       </div>
-      <div class="phase">
+      <div class="phase is-now">
         <div class="phase-marker"><span class="num">phase 01</span><span>W4–11</span></div>
         <div class="phase-name">Canvas + LangGraph</div>
-        <p class="phase-desc">XYFlow canvas, 12 core nodes, LangGraph adapter. Draw a flow, run it. First alpha.</p>
-        <div class="phase-status">next</div>
+        <p class="phase-desc">Canvas live: 14 nodes, validation, library, export. Adapter stub deployed; codegen awaiting RFC.</p>
+        <div class="phase-status">● in progress</div>
       </div>
       <div class="phase">
         <div class="phase-marker"><span class="num">phase 02</span><span>W12–20</span></div>
@@ -1044,26 +1101,26 @@
 
 <section class="design-log" id="log">
   <div class="wrap">
-    <div class="section-eyebrow">§ 05 · design log</div>
-    <h2 style="max-width:760px">36 questions tracked. <em>Most</em> are still negotiable.</h2>
-    <p class="section-lede" style="max-width:620px;margin:14px 0 32px">Phase 0 ran a structured review of every shape decision the IR needs. Decisions, parks, deferrals — all in the open log. We surface the ones still worth arguing about.</p>
+    <div class="section-eyebrow">§ 05 · phase 1 status</div>
+    <h2 style="max-width:760px">Canvas live. <em>Adapter</em> next.</h2>
+    <p class="section-lede" style="max-width:620px;margin:14px 0 32px">All 14 node types are drawable, configurable, validated, exportable. Five reference flows ship today. The LangGraph adapter is stubbed; codegen unlocks when the RFC closes.</p>
 
     <div class="dlog-grid">
       <div class="dlog-stats">
-        <div class="stat"><div class="n">36</div><div class="lbl">questions</div><div class="det">Filed across spec, control flow, agents, tools, memory, output.</div></div>
-        <div class="stat"><div class="n">18</div><div class="lbl">decided</div><div class="det">Recorded in the IR — still open to challenge on the discussion thread.</div></div>
-        <div class="stat"><div class="n">8</div><div class="lbl">parked</div><div class="det">Adapter-level concerns. Revisit when each adapter is built.</div></div>
-        <div class="stat"><div class="n">2</div><div class="lbl">deferred v2</div><div class="det">Scope chosen out of v0.1. Compose them from primitives for now.</div></div>
+        <div class="stat"><div class="n">14</div><div class="lbl">node types</div><div class="det">Per-type config panels. Every spec field directly editable on the canvas.</div></div>
+        <div class="stat"><div class="n">5</div><div class="lbl">example flows</div><div class="det">RAG, HITL, parallel, crew, debate — each valid against the schema.</div></div>
+        <div class="stat"><div class="n">17</div><div class="lbl">tests passing</div><div class="det">Vitest suite covers all five flows plus cross-reference error cases.</div></div>
+        <div class="stat"><div class="n">1</div><div class="lbl">adapter stub</div><div class="det">FastAPI sidecar at <code style="font-size:11px">/compile</code>. Real codegen on RFC close.</div></div>
       </div>
 
       <div class="featured-q">
-        <div class="label">featured open thread</div>
-        <div class="qtitle">Q35 · multi_agent_chat — should LG/MA approximate Microsoft's AgentGroupChat, or refuse to compile?</div>
-        <p class="qbody">MS AF's group chat is fundamentally conversational. LangGraph and Mastra use hierarchical graph nesting — structurally different execution models. Approximate with a warning, or refuse to compile and break the "write once, run anywhere" promise? Working assumption: approximate with warning. Real-world voices wanted before we lock it in.</p>
+        <div class="label">RFC · last call before adapter codegen</div>
+        <div class="qtitle">context_from on edges — CrewAI semantics, or generalised to every runtime?</div>
+        <p class="qbody">The spec borrows CrewAI's <code>Task.context</code> to thread context across nodes. LangGraph, Mastra and MS Agent Framework would need a shim to honour it. Generalise the semantics in v0.2.1 and let every adapter consume them, or leave it CrewAI-flavoured and have the other adapters translate? Working assumption: generalise. Real-world voices wanted before we hardcode it into the adapter.</p>
         <div class="qmeta">
           <span>priority · <b>high</b></span>
-          <span>category · agents · v2</span>
-          <span>status · parked</span>
+          <span>category · edges · spec v0.2</span>
+          <span>status · RFC open</span>
           <a href="https://github.com/3IVIS/itsharness/discussions" target="_blank" rel="noopener">Argue in Discussions →</a>
         </div>
       </div>
@@ -1119,62 +1176,146 @@
 <script>
 (function(){
   const frame = document.getElementById('hgraphB');
-  const svg = document.getElementById('hgraphB-svg');
+  const svg   = document.getElementById('hgraphB-svg');
+  if (!frame || !svg) return;
 
+  const W = 150, H = 50;
+
+  /* Lucide-style 24×24 stroke icons — match the real canvas */
+  const ICONS = {
+    input:
+      '<path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>' +
+      '<polyline points="10 17 15 12 10 7"/>' +
+      '<line x1="15" x2="3" y1="12" y2="12"/>',
+    llm_call:
+      '<path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.582a.5.5 0 0 1 0 .962L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>' +
+      '<path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/>',
+    condition:
+      '<line x1="6" x2="6" y1="3" y2="15"/>' +
+      '<circle cx="18" cy="6" r="3"/>' +
+      '<circle cx="6" cy="18" r="3"/>' +
+      '<path d="M18 9a9 9 0 0 1-9 9"/>',
+    hitl_breakpoint:
+      '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>' +
+      '<circle cx="9" cy="7" r="4"/>' +
+      '<polyline points="16 11 18 13 22 9"/>',
+    output:
+      '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>' +
+      '<polyline points="16 17 21 12 16 7"/>' +
+      '<line x1="21" x2="9" y1="12" y2="12"/>',
+  };
+
+  /* Accents mirror src/canvas/nodes/BaseNode.tsx NODE_HEX */
+  const ACCENT = {
+    input:           '#3b82f6',
+    llm_call:        '#8b5cf6',
+    condition:       '#f59e0b',
+    hitl_breakpoint: '#f97316',
+    output:          '#6b7280',
+  };
+
+  /* Triage flow — input → classify → route → (escalate ⏶ | answer ⏷) → reply */
   const nodes = [
-    { id: 'in',   x: 60,  y: 220, label: 'Input',    kind: '00 entry'  },
-    { id: 'llm',  x: 220, y: 130, label: 'Planner',  kind: '01 llm', accent: true },
-    { id: 'tool', x: 220, y: 300, label: 'Tools',    kind: '02 tool'   },
-    { id: 'hitl', x: 380, y: 130, label: 'Review',   kind: '03 hitl'   },
-    { id: 'mem',  x: 380, y: 300, label: 'Memory',   kind: '04 memory' },
-    { id: 'gate', x: 540, y: 215, label: 'Guardrail',kind: '05 guard'  },
-    { id: 'out',  x: 680, y: 215, label: 'Output',   kind: '06 exit'   },
-  ];
-  const edges = [
-    ['in','llm'], ['in','tool'],
-    ['llm','hitl'], ['tool','mem'],
-    ['hitl','gate'], ['mem','gate'],
-    ['gate','out'],
-    ['llm','tool']
+    { id: 'in',       type: 'input',           label: 'user_query', x:  15, y: 220, compat: ['full','full','full','full'] },
+    { id: 'classify', type: 'llm_call',        label: 'classify',   x: 187, y: 220, compat: ['full','full','full','full'] },
+    { id: 'route',    type: 'condition',       label: 'route',      x: 359, y: 220, compat: ['full','full','full','full'] },
+    { id: 'escalate', type: 'hitl_breakpoint', label: 'escalate',   x: 359, y:  80, compat: ['full','part','part','part'] },
+    { id: 'answer',   type: 'llm_call',        label: 'answer',     x: 187, y: 370, compat: ['full','full','full','full'] },
+    { id: 'out',      type: 'output',          label: 'reply',      x: 359, y: 370, compat: ['full','full','full','full'] },
   ];
 
-  function renderNodes(){
+  const edges = [
+    { from: 'in',       to: 'classify' },                                 /* R → L */
+    { from: 'classify', to: 'route' },                                    /* R → L */
+    { from: 'route',    to: 'escalate', srcSide: 'T', tgtSide: 'B' },     /* up    */
+    { from: 'route',    to: 'answer',   srcSide: 'B', tgtSide: 'T' },     /* down-left */
+    { from: 'answer',   to: 'out' },                                      /* R → L */
+  ];
+
+  function renderNodes() {
     nodes.forEach(n => {
+      const accent = ACCENT[n.type] || '#6366f1';
+      const tint   = accent + '1f';   /* ~12% alpha header tint */
+      const compatHtml = n.compat.map((lvl, i) => {
+        const cls = lvl === 'full' ? 'full' : lvl === 'part' ? 'part' : 'miss';
+        const lbl = ['LG','CR','MA','MS'][i];
+        return '<span class="rt ' + cls + '">' + lbl + '</span>';
+      }).join('');
       const el = document.createElement('div');
-      el.className = 'graph-node' + (n.accent ? ' accent' : '');
+      el.className = 'cv-node';
       el.dataset.id = n.id;
-      el.innerHTML = '<span class="kind">' + n.kind + '</span><span class="name">' + n.label + '</span>';
+      el.style.setProperty('--node-accent', accent);
+      el.style.setProperty('--node-tint',   tint);
+      el.style.left = n.x + 'px';
+      el.style.top  = n.y + 'px';
+      el.innerHTML =
+        '<div class="cv-node__head">' +
+          '<span class="cv-node__icon"><svg viewBox="0 0 24 24">' + (ICONS[n.type] || '') + '</svg></span>' +
+          '<span class="cv-node__label">' + n.label + '</span>' +
+          '<span class="cv-node__type">' + n.type + '</span>' +
+        '</div>' +
+        '<div class="cv-node__compat">' + compatHtml + '</div>' +
+        '<span class="cv-handle l"></span>' +
+        '<span class="cv-handle r"></span>';
       frame.appendChild(el);
       n.el = el;
-      positionNode(n);
       attachDrag(n);
     });
   }
-  function positionNode(n){
-    n.el.style.left = (n.x - n.el.offsetWidth/2) + 'px';
-    n.el.style.top  = (n.y - n.el.offsetHeight/2) + 'px';
+
+  /* Endpoint: x, y just past the handle on the chosen side + outward unit-vector for the bezier handle */
+  function endpoint(node, side) {
+    const HOFF = 7;  /* push start/end past the handle dot so the line is visible */
+    switch (side) {
+      case 'R': return { x: node.x + W + HOFF,  y: node.y + H/2,        dx:  1, dy:  0 };
+      case 'L': return { x: node.x - HOFF,       y: node.y + H/2,        dx: -1, dy:  0 };
+      case 'T': return { x: node.x + W/2,        y: node.y - HOFF,       dx:  0, dy: -1 };
+      case 'B': return { x: node.x + W/2,        y: node.y + H + HOFF,   dx:  0, dy:  1 };
+    }
   }
-  function drawEdges(){
+  function pathFor(src, tgt) {
+    const dist = Math.max(Math.max(Math.abs(tgt.x - src.x), Math.abs(tgt.y - src.y)) * 0.5, 18);
+    const c1x = src.x + src.dx * dist;
+    const c1y = src.y + src.dy * dist;
+    const c2x = tgt.x + tgt.dx * dist;
+    const c2y = tgt.y + tgt.dy * dist;
+    return 'M ' + src.x + ' ' + src.y +
+           ' C ' + c1x + ' ' + c1y + ', ' + c2x + ' ' + c2y + ', ' + tgt.x + ' ' + tgt.y;
+  }
+
+  function syncSvg() {
+    const w = frame.clientWidth;
+    const h = frame.clientHeight;
+    svg.setAttribute('width', w);
+    svg.setAttribute('height', h);
+    svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+  }
+
+  function drawEdges() {
+    syncSvg();
     const ns = 'http://www.w3.org/2000/svg';
     while (svg.firstChild) svg.removeChild(svg.firstChild);
     const defs = document.createElementNS(ns, 'defs');
-    defs.innerHTML = '<marker id="arrB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="oklch(0.55 0.018 270)"/></marker>';
+    defs.innerHTML =
+      '<marker id="arrEdge" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">' +
+        '<path d="M0 0 L10 5 L0 10 z" fill="#a0a0c8"/>' +
+      '</marker>';
     svg.appendChild(defs);
-    edges.forEach(([a,b]) => {
-      const A = nodes.find(n=>n.id===a), B = nodes.find(n=>n.id===b);
+    edges.forEach(e => {
+      const A = nodes.find(n => n.id === e.from);
+      const B = nodes.find(n => n.id === e.to);
+      if (!A || !B) return;
+      const src = endpoint(A, e.srcSide || 'R');
+      const tgt = endpoint(B, e.tgtSide || 'L');
       const path = document.createElementNS(ns, 'path');
-      const mx = (A.x + B.x) / 2;
-      const d = `M ${A.x} ${A.y} C ${mx} ${A.y}, ${mx} ${B.y}, ${B.x} ${B.y}`;
-      path.setAttribute('d', d);
-      path.setAttribute('stroke', 'oklch(0.55 0.018 270)');
-      path.setAttribute('stroke-width', '1');
-      path.setAttribute('fill', 'none');
-      path.setAttribute('stroke-dasharray', '0');
-      path.setAttribute('marker-end', 'url(#arrB)');
+      path.setAttribute('class', 'edge');
+      path.setAttribute('d', pathFor(src, tgt));
+      path.setAttribute('marker-end', 'url(#arrEdge)');
       svg.appendChild(path);
     });
   }
-  function attachDrag(n){
+
+  function attachDrag(n) {
     let sx, sy, ox, oy;
     n.el.addEventListener('pointerdown', e => {
       e.preventDefault();
@@ -1185,20 +1326,19 @@
     n.el.addEventListener('pointermove', e => {
       if (!n.el.classList.contains('dragging')) return;
       const fw = frame.clientWidth, fh = frame.clientHeight;
-      n.x = Math.max(50, Math.min(fw - 50, ox + (e.clientX - sx)));
-      n.y = Math.max(28, Math.min(fh - 28, oy + (e.clientY - sy)));
-      positionNode(n);
+      n.x = Math.max(4,    Math.min(fw - W - 4, ox + (e.clientX - sx)));
+      n.y = Math.max(40,   Math.min(fh - H - 30, oy + (e.clientY - sy)));
+      n.el.style.left = n.x + 'px';
+      n.el.style.top  = n.y + 'px';
       drawEdges();
     });
-    n.el.addEventListener('pointerup', () => n.el.classList.remove('dragging'));
+    n.el.addEventListener('pointerup',     () => n.el.classList.remove('dragging'));
     n.el.addEventListener('pointercancel', () => n.el.classList.remove('dragging'));
   }
 
   renderNodes();
-  requestAnimationFrame(() => {
-    nodes.forEach(positionNode);
-    drawEdges();
-  });
+  requestAnimationFrame(drawEdges);
+  window.addEventListener('resize', drawEdges);
 })();
 </script>
 
