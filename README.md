@@ -2,11 +2,11 @@
 
 Open-source visual builder for production AI agent harnesses. One canvas, one runtime-neutral FlowSpec, four runtime adapters plus A2A.
 
-**Live site:** https://itsharness.github.io/itsharness/
+**Live site:** https://itsharness.com
 
 ## Status
 
-In design stage (Phase 0 of 5). The FlowSpec v0.1.0 is frozen and a 36-question public design log is open. Public release is targeted for week 20.
+In design stage (Phase 1 of 5). The FlowSpec v0.1.0 is frozen and a 36-question public design log is open. Public release is targeted for week 20.
 
 ## Supported runtimes
 
