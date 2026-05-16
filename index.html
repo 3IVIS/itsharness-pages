@@ -96,7 +96,7 @@
       "name": "What is the FlowSpec?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "FlowSpec is the neutral intermediate representation that decouples the canvas from any runtime. Version 0.1.0 has 14 node types (input, output, llm_call, tool_invoke, agent_role, agent_debate, condition, parallel_fork, parallel_join, hitl_breakpoint, memory_read, memory_write, subgraph, transform), a discriminated edge union, and three optional config sections (checkpoint, streaming, telemetry)."
+        "text": "FlowSpec is the neutral intermediate representation that decouples the canvas from any runtime. Version 0.2.0 has 14 node types (input, output, llm_call, tool_invoke, agent_role, agent_debate, condition, parallel_fork, parallel_join, hitl_breakpoint, memory_read, memory_write, subgraph, transform), a discriminated edge union, and four optional config sections (checkpoint, streaming, telemetry, a2a_config)."
       }
     },
     {
@@ -104,7 +104,7 @@
       "name": "What stage is the project at?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "itsharness is in the design stage (Phase 0 of 5). The FlowSpec v0.1.0 is frozen and a 36-question public design log is open. Phase 1 (canvas plus LangGraph adapter) starts after the public RFC. Public release is targeted for week 20."
+        "text": "itsharness is in the design stage (Phase 0 of 5). The FlowSpec v0.2.0 is frozen and a 36-question public design log is open. Phase 1 (canvas plus LangGraph adapter) starts after the public RFC. Public release is targeted for week 20."
       }
     },
     {
@@ -364,11 +364,14 @@
     fill: none;
   }
 
-  /* node cards — mirror the actual canvas .cf-node */
+  /* node cards — mirror the actual canvas .cf-node (BaseNode.tsx, v0.2)
+     Visual model: left-border accent stripe, NO tinted header,
+     colored icon + optional glyph-modifier, single pinned-compat pill
+     in the header, full 4-runtime row revealed on hover/select. */
   .cv-node {
     position: absolute;
     z-index: 3;
-    width: 150px;
+    width: 170px;
     background: #16161f;
     border: 0.5px solid #2d2d42;
     border-left: 3px solid var(--node-accent, #6366f1);
@@ -378,6 +381,7 @@
     user-select: none;
     font-family: "IBM Plex Sans", sans-serif;
     color: #e2e2ec;
+    overflow: hidden;
     transition: box-shadow .14s ease, border-color .14s ease;
   }
   .cv-node:hover {
@@ -391,46 +395,91 @@
     z-index: 7;
   }
   .cv-node__head {
-    display: flex; align-items: center; gap: 6px;
-    padding: 6px 8px;
-    background: var(--node-tint, rgba(99,102,241,0.08));
-    border-bottom: 0.5px solid #1f1f2e;
-    border-top-right-radius: 5px;
+    display: flex; align-items: center; gap: 7px;
+    padding: 8px 9px 7px;
+  }
+  .cv-node__icon-stack {
+    position: relative;
+    display: inline-flex;
+    flex-shrink: 0;
   }
   .cv-node__icon {
     display: inline-flex;
     color: var(--node-accent, #6366f1);
-    flex-shrink: 0;
+    opacity: 0.88;
   }
   .cv-node__icon svg {
-    width: 12px; height: 12px;
+    width: 14px; height: 14px;
     stroke: currentColor;
-    stroke-width: 1.8;
+    stroke-width: 1.75;
     fill: none;
     stroke-linecap: round;
     stroke-linejoin: round;
   }
+  /* small subscript glyph — distinguishes family members that share a hue
+     (memory_read/write, parallel_fork/join, agent_role/debate) */
+  .cv-node__glyph-mod {
+    position: absolute;
+    bottom: -3px; right: -4px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #16161f;
+    border: 1px solid #484866;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 7.5px;
+    font-weight: 700;
+    color: #e2e2ec;
+    line-height: 1;
+    pointer-events: none;
+  }
   .cv-node__label {
     flex: 1;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 500;
     color: #e2e2ec;
     letter-spacing: -0.01em;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    line-height: 1.3;
     min-width: 0;
   }
-  .cv-node__type {
+  /* single pinned-compat pill — replaces old type chip.
+     Color reflects support level of the flow's preferred adapter. */
+  .compat-pin {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
     font-family: "IBM Plex Mono", monospace;
     font-size: 8.5px;
-    color: #6e6e92;
-    letter-spacing: 0.06em;
+    font-weight: 600;
+    padding: 1.5px 4px;
+    border-radius: 3px;
     flex-shrink: 0;
+    letter-spacing: 0.05em;
+    line-height: 1;
   }
+  .compat-pin.full { background: rgba(74,222,128,0.10); color: #4ade80; border: 0.5px solid rgba(74,222,128,0.22); }
+  .compat-pin.part { background: rgba(251,191,36,0.10); color: #fbbf24; border: 0.5px solid rgba(251,191,36,0.28); }
+  .compat-pin.miss { background: rgba(239,68,68,0.10);  color: #f87171; border: 0.5px solid rgba(239,68,68,0.28); }
+  /* full 4-runtime row — hidden by default, revealed on hover/drag.
+     Matches cf-node__compat--full's max-height transition in the canvas. */
   .cv-node__compat {
     display: flex; gap: 3px;
-    padding: 4px 6px 5px;
+    padding: 0 8px;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height .18s ease, opacity .14s ease, padding .18s ease;
+  }
+  .cv-node:hover .cv-node__compat,
+  .cv-node.dragging .cv-node__compat {
+    max-height: 22px;
+    opacity: 1;
+    padding: 2px 8px 6px;
   }
   .cv-node__compat .rt {
     flex: 1;
@@ -438,21 +487,21 @@
     font-size: 8px;
     font-weight: 600;
     text-align: center;
-    padding: 2.5px 0;
+    padding: 2px 0;
     border-radius: 2px;
     letter-spacing: 0.05em;
   }
   .rt.full { background: rgba(34,197,94,0.16);  color: #4ade80; }
   .rt.part { background: rgba(245,158,11,0.18); color: #fbbf24; }
   .rt.miss { background: rgba(239,68,68,0.18);  color: #f87171; }
+  .rt.pinned { outline: 0.5px solid rgba(255,255,255,0.22); font-weight: 700; }
   .cv-handle {
     position: absolute;
     width: 7px; height: 7px;
     border-radius: 50%;
     background: #1d1d28;
     border: 1.5px solid var(--node-accent, #6366f1);
-    top: 50%;
-    transform: translateY(-50%);
+    top: 14px;            /* aligns with header center for consistent edge entry */
     z-index: 4;
   }
   .cv-handle.l { left: -4px; }
@@ -966,7 +1015,7 @@
       <div class="bp-grid"></div>
       <div class="bp-title">DWG · <b>FIG-01 / triage flow</b></div>
       <div class="bp-stage"><span class="blip"></span>phase 1 · canvas</div>
-      <div class="bp-rev">SPEC · <b>v0.2</b> · DRAG ANY NODE</div>
+      <div class="bp-rev">SPEC · <b>v0.2</b> · HOVER OR DRAG FOR FULL COMPAT</div>
       <svg class="graph-svg" id="hgraphB-svg"></svg>
     </div>
   </div>
@@ -1047,9 +1096,9 @@
       <thead><tr><th style="width:30%">Feature</th><th class="runtime" style="width:17.5%">LangGraph</th><th class="runtime" style="width:17.5%">CrewAI</th><th class="runtime" style="width:17.5%">Mastra</th><th class="runtime" style="width:17.5%">MS Agent Framework</th></tr></thead>
       <tbody>
         <tr><td><div class="feat">llm_call · structured output</div><div class="desc">Prompt templates, model overrides, validators.</div></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td></tr>
-        <tr><td><div class="feat">agent_role · agent_debate</div><div class="desc">Named personas, multi-agent loops, selection.</div></td><td><span class="badge b-part">via subgraph</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td></tr>
+        <tr><td><div class="feat">agent_role · agent_debate</div><div class="desc">Named personas, multi-agent loops, selection.</div></td><td><span class="badge b-part">via synthesis</span></td><td><span class="badge b-full">role native</span></td><td><span class="badge b-part">via synthesis</span></td><td><span class="badge b-full">debate native</span></td></tr>
         <tr><td><div class="feat">condition · parallel_fork / join</div><div class="desc">Branching, fan-out, configurable join reducers.</div></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td></tr>
-        <tr><td><div class="feat">hitl_breakpoint</div><div class="desc">Pause, inspect, edit state, resume.</div></td><td><span class="badge b-full">full</span></td><td><span class="badge b-part">partial</span></td><td><span class="badge b-part">partial</span></td><td><span class="badge b-part">partial</span></td></tr>
+        <tr><td><div class="feat">hitl_breakpoint</div><div class="desc">Pause, inspect, edit state, resume.</div></td><td><span class="badge b-full">full</span></td><td><span class="badge b-part">partial</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-part">partial</span></td></tr>
         <tr><td><div class="feat">memory · semantic (vector)</div><div class="desc">Embeddings, top-k, similarity threshold.</div></td><td><span class="badge b-part">via plugin</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td></tr>
         <tr><td><div class="feat">streaming · tokens / updates</div><div class="desc">Token streaming and graph-update events.</div></td><td><span class="badge b-full">full</span></td><td><span class="badge b-part">partial</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-part">via adapter</span></td></tr>
         <tr><td><div class="feat">checkpoint · Postgres / Redis</div><div class="desc">Durable execution, resume from any node.</div></td><td><span class="badge b-full">full</span></td><td><span class="badge b-part">via plugin</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-part">via Dapr / Orleans</span></td></tr>
@@ -1179,7 +1228,11 @@
   const svg   = document.getElementById('hgraphB-svg');
   if (!frame || !svg) return;
 
-  const W = 150, H = 50;
+  /* W = 160 matches the ~196-260px range of .cf-node, scaled to fit the hero column.
+     H = 30 is the *default-state* header height; the compat row expands the
+     node downward on hover, just like the real canvas (cf-node__compat--full). */
+  const W = 160, H = 30;
+  const HEAD_CY = 15;  /* vertical center of the header — where handles live */
 
   /* Lucide-style 24×24 stroke icons — match the real canvas */
   const ICONS = {
@@ -1205,7 +1258,7 @@
       '<line x1="21" x2="9" y1="12" y2="12"/>',
   };
 
-  /* Accents mirror src/canvas/nodes/BaseNode.tsx NODE_HEX */
+  /* Accents mirror src/canvas/nodes/BaseNode.tsx NODE_HEX (v0.2) */
   const ACCENT = {
     input:           '#3b82f6',
     llm_call:        '#8b5cf6',
@@ -1214,14 +1267,37 @@
     output:          '#6b7280',
   };
 
-  /* Triage flow — input → classify → route → (escalate ⏶ | answer ⏷) → reply */
+  /* Mirrors src/spec/schema.ts ADAPTER_LABELS */
+  const ADAPTER_LBL = ['LG','CR','MA','MS'];
+
+  /* Mirrors src/canvas/nodes/BaseNode.tsx NODE_GLYPH_MOD — small subscript
+     that distinguishes family members sharing a hue. None of the nodes in
+     this triage flow use a shared hue, so all entries return ''. */
+  const GLYPH_MOD = {
+    memory_read:   '↑',
+    memory_write:  '↓',
+    parallel_fork: '⊕',
+    parallel_join: '⊖',
+    agent_role:    '◉',
+    agent_debate:  '⋯',
+  };
+
+  /* Mirrors src/canvas/nodes/BaseNode.tsx NODE_TYPE_LABELS — hitl_breakpoint → 'hitl' */
+  const TYPE_LABEL = { hitl_breakpoint: 'hitl' };
+
+  /* The flow has a preferred adapter (langgraph) — drives the single compat-pin
+     shown in the header. Index 0 of each node's compat array. */
+  const PINNED_IDX = 0;
+
+  /* Triage flow — input → classify → route → (escalate ⏶ | answer ⏷) → reply
+     Positions widened for the new W=160 nodes; vertical layout preserved. */
   const nodes = [
-    { id: 'in',       type: 'input',           label: 'user_query', x:  15, y: 220, compat: ['full','full','full','full'] },
-    { id: 'classify', type: 'llm_call',        label: 'classify',   x: 187, y: 220, compat: ['full','full','full','full'] },
-    { id: 'route',    type: 'condition',       label: 'route',      x: 359, y: 220, compat: ['full','full','full','full'] },
-    { id: 'escalate', type: 'hitl_breakpoint', label: 'escalate',   x: 359, y:  80, compat: ['full','part','part','part'] },
-    { id: 'answer',   type: 'llm_call',        label: 'answer',     x: 187, y: 370, compat: ['full','full','full','full'] },
-    { id: 'out',      type: 'output',          label: 'reply',      x: 359, y: 370, compat: ['full','full','full','full'] },
+    { id: 'in',       type: 'input',           label: 'user_query', x:  15, y: 230, compat: ['full','full','full','full'] },
+    { id: 'classify', type: 'llm_call',        label: 'classify',   x: 205, y: 230, compat: ['full','full','full','full'] },
+    { id: 'route',    type: 'condition',       label: 'route',      x: 395, y: 230, compat: ['full','full','full','full'] },
+    { id: 'escalate', type: 'hitl_breakpoint', label: 'escalate',   x: 395, y:  80, compat: ['full','part','full','part'] },
+    { id: 'answer',   type: 'llm_call',        label: 'answer',     x: 205, y: 380, compat: ['full','full','full','full'] },
+    { id: 'out',      type: 'output',          label: 'reply',      x: 395, y: 380, compat: ['full','full','full','full'] },
   ];
 
   const edges = [
@@ -1235,24 +1311,35 @@
   function renderNodes() {
     nodes.forEach(n => {
       const accent = ACCENT[n.type] || '#6366f1';
-      const tint   = accent + '1f';   /* ~12% alpha header tint */
+      /* full 4-runtime row — rendered hidden, revealed by CSS on hover/drag */
       const compatHtml = n.compat.map((lvl, i) => {
         const cls = lvl === 'full' ? 'full' : lvl === 'part' ? 'part' : 'miss';
-        const lbl = ['LG','CR','MA','MS'][i];
-        return '<span class="rt ' + cls + '">' + lbl + '</span>';
+        const pin = i === PINNED_IDX ? ' pinned' : '';
+        return '<span class="rt ' + cls + pin + '">' + ADAPTER_LBL[i] + '</span>';
       }).join('');
+      /* single pinned-compat pill in the header — replaces the old type chip */
+      const pinLvl = n.compat[PINNED_IDX];
+      const pinCls = pinLvl === 'full' ? 'full' : pinLvl === 'part' ? 'part' : 'miss';
+      const pinHtml = '<span class="compat-pin ' + pinCls + '">' + ADAPTER_LBL[PINNED_IDX] + '</span>';
+      const glyph  = GLYPH_MOD[n.type] || '';
+      const glyphHtml = glyph ? '<span class="cv-node__glyph-mod">' + glyph + '</span>' : '';
+      /* hitl_breakpoint renders as 'hitl' by default in BaseNode; respect data.label if set */
+      const label = n.label || TYPE_LABEL[n.type] || n.type;
+
       const el = document.createElement('div');
       el.className = 'cv-node';
       el.dataset.id = n.id;
       el.style.setProperty('--node-accent', accent);
-      el.style.setProperty('--node-tint',   tint);
       el.style.left = n.x + 'px';
       el.style.top  = n.y + 'px';
       el.innerHTML =
         '<div class="cv-node__head">' +
-          '<span class="cv-node__icon"><svg viewBox="0 0 24 24">' + (ICONS[n.type] || '') + '</svg></span>' +
-          '<span class="cv-node__label">' + n.label + '</span>' +
-          '<span class="cv-node__type">' + n.type + '</span>' +
+          '<span class="cv-node__icon-stack">' +
+            '<span class="cv-node__icon"><svg viewBox="0 0 24 24">' + (ICONS[n.type] || '') + '</svg></span>' +
+            glyphHtml +
+          '</span>' +
+          '<span class="cv-node__label">' + label + '</span>' +
+          pinHtml +
         '</div>' +
         '<div class="cv-node__compat">' + compatHtml + '</div>' +
         '<span class="cv-handle l"></span>' +
@@ -1263,12 +1350,14 @@
     });
   }
 
-  /* Endpoint: x, y just past the handle on the chosen side + outward unit-vector for the bezier handle */
+  /* Endpoint: x, y just past the handle on the chosen side + outward unit-vector for the bezier handle.
+     L/R handles live at the head center (HEAD_CY), not the box center, so edges stay attached
+     visually even when the compat row expands on hover. */
   function endpoint(node, side) {
     const HOFF = 7;  /* push start/end past the handle dot so the line is visible */
     switch (side) {
-      case 'R': return { x: node.x + W + HOFF,  y: node.y + H/2,        dx:  1, dy:  0 };
-      case 'L': return { x: node.x - HOFF,       y: node.y + H/2,        dx: -1, dy:  0 };
+      case 'R': return { x: node.x + W + HOFF,  y: node.y + HEAD_CY,    dx:  1, dy:  0 };
+      case 'L': return { x: node.x - HOFF,       y: node.y + HEAD_CY,    dx: -1, dy:  0 };
       case 'T': return { x: node.x + W/2,        y: node.y - HOFF,       dx:  0, dy: -1 };
       case 'B': return { x: node.x + W/2,        y: node.y + H + HOFF,   dx:  0, dy:  1 };
     }
