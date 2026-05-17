@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Its Harness — open-source visual builder for AI agent harnesses</title>
-<meta name="description" content="Open-source visual builder for production AI agent harnesses. One canvas, one runtime-neutral FlowSpec, adapters for LangGraph, CrewAI, Mastra, and Microsoft Agent Framework — plus A2A. Apache 2.0, in design stage.">
+<title>itsharness — open-source visual builder for AI agent harnesses</title>
+<meta name="description" content="Open-source visual builder for production AI agent harnesses. One canvas, one runtime-neutral FlowSpec, adapters for LangGraph, CrewAI, Mastra, and (planned) Microsoft Agent Framework — plus A2A. Apache 2.0, v0.4 (pass28): phases 0–2 complete.">
 <meta name="keywords" content="AI agents, agent orchestration, LangGraph, CrewAI, Mastra, Microsoft Agent Framework, MS Agent Framework, Semantic Kernel, A2A protocol, MCP, visual workflow builder, agent harness, FlowSpec, open source, Apache 2.0, agentic AI, LLM workflow, AutoGen">
-<meta name="author" content="Its Harness contributors">
+<meta name="author" content="itsharness contributors">
 <meta name="theme-color" content="#4F46E5">
 <meta name="color-scheme" content="light">
 <meta name="robots" content="index, follow">
@@ -15,20 +15,20 @@
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Its Harness">
+<meta property="og:site_name" content="itsharness">
 <meta property="og:url" content="https://itsharness.com/">
-<meta property="og:title" content="Its Harness — open-source visual builder for AI agent harnesses">
-<meta property="og:description" content="One canvas, one runtime-neutral FlowSpec. Adapters for LangGraph, CrewAI, Mastra, and Microsoft Agent Framework — plus A2A. In design stage. Come help shape it.">
+<meta property="og:title" content="itsharness — open-source visual builder for AI agent harnesses">
+<meta property="og:description" content="One canvas, one runtime-neutral FlowSpec. LangGraph + CrewAI executable, Mastra codegen, MS Agent Framework planned — plus A2A. v0.4 (pass28): phases 0–2 complete.">
 <meta property="og:image" content="https://itsharness.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Its Harness: visual AI agent harness builder. One canvas. One neutral spec. Four runtimes plus A2A.">
+<meta property="og:image:alt" content="itsharness: visual AI agent harness builder. One canvas. One neutral spec. Four runtimes plus A2A.">
 <meta property="og:locale" content="en_US">
 
 <!-- Twitter / X -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Its Harness — visual AI agent harness builder">
-<meta name="twitter:description" content="One canvas, one neutral FlowSpec. Four runtime adapters plus A2A. Apache 2.0, in design stage. Come help shape it.">
+<meta name="twitter:title" content="itsharness — visual AI agent harness builder">
+<meta name="twitter:description" content="One canvas, one neutral FlowSpec. LangGraph + CrewAI + Mastra adapters, HITL + Langfuse wired, security-hardened. v0.4 (pass28), Apache 2.0.">
 <meta name="twitter:image" content="https://itsharness.com/og-image.png">
 
 <!-- Favicons -->
@@ -37,23 +37,23 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
 <!-- LLM-readable index -->
-<link rel="alternate" type="text/markdown" title="Its Harness summary for LLMs" href="llms.txt">
+<link rel="alternate" type="text/markdown" title="itsharness summary for LLMs" href="llms.txt">
 
 <!-- Structured data: SoftwareApplication -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  "name": "Its Harness",
+  "name": "itsharness",
   "applicationCategory": "DeveloperApplication",
   "applicationSubCategory": "AI Agent Orchestration",
   "operatingSystem": "Web, macOS, Linux, Windows",
   "description": "Open-source visual builder for production AI agent harnesses. Authors a runtime-neutral FlowSpec that compiles to LangGraph, CrewAI, Mastra, and Microsoft Agent Framework \u2014 plus the A2A protocol for invocation of any framework-agnostic agent.",
   "url": "https://itsharness.com/",
   "license": "https://www.apache.org/licenses/LICENSE-2.0",
-  "softwareVersion": "0.2.0",
+  "softwareVersion": "0.4.0",
   "softwareHelp": "https://itsharness.com/#spec",
-  "developmentStatus": "Design stage",
+  "developmentStatus": "Phase 2 complete — v0.4 (pass28) shipped",
   "isAccessibleForFree": true,
   "offers": {
     "@type": "Offer",
@@ -62,7 +62,7 @@
   },
   "author": {
     "@type": "Organization",
-    "name": "Its Harness contributors",
+    "name": "itsharness contributors",
     "url": "https://github.com/3IVIS/itsharness"
   },
   "keywords": "AI agents, agent orchestration, LangGraph, CrewAI, Mastra, Microsoft Agent Framework, A2A protocol, MCP, visual workflow, FlowSpec, agentic AI"
@@ -77,15 +77,15 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Its Harness?",
+      "name": "What is itsharness?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Its Harness is an open-source visual builder for production AI agent harnesses. You author flows visually on a canvas; Its Harness compiles them into a runtime-neutral FlowSpec, then runtime adapters translate the spec into LangGraph, CrewAI, Mastra, or Microsoft Agent Framework code. The A2A protocol layer lets you invoke any A2A-compatible framework (Google ADK, OpenAI Agents SDK, Claude Agent SDK) without writing a custom adapter."
+        "text": "itsharness is an open-source visual builder for production AI agent harnesses. You author flows visually on a canvas; itsharness compiles them into a runtime-neutral FlowSpec, then runtime adapters translate the spec into LangGraph, CrewAI, Mastra, or Microsoft Agent Framework code. The A2A protocol layer lets you invoke any A2A-compatible framework (Google ADK, OpenAI Agents SDK, Claude Agent SDK) without writing a custom adapter."
       }
     },
     {
       "@type": "Question",
-      "name": "Which AI agent frameworks does Its Harness support?",
+      "name": "Which AI agent frameworks does itsharness support?",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Four first-class runtime adapters: LangGraph (Python/JS), CrewAI (Python), Mastra (TypeScript), and Microsoft Agent Framework (C#/Python, covering both Semantic Kernel and AutoGen users). The A2A protocol covers framework-agnostic invocation of any A2A-compatible agent."
@@ -104,7 +104,7 @@
       "name": "What stage is the project at?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Its Harness is in the design stage (Phase 0 of 5). The FlowSpec v0.2.0 is frozen and a 36-question public design log is open. Phase 1 (canvas plus LangGraph adapter) starts after the public RFC. Public release is targeted for week 20."
+        "text": "Phases 0, 1, and 2 are complete — v0.4 (pass28) is shipped. The FlowSpec v0.2.0 is frozen and the RFC is closed (resolved via ADR-001). The canvas is live with all 14 node types. LangGraph and CrewAI run end-to-end; Mastra ships full codegen (execution runner planned). HITL pause/resume, Langfuse self-host, and a security/hardening pass have all landed. Phase 3 (teams, eval, persisted job store) is the current focus."
       }
     },
     {
@@ -112,7 +112,7 @@
       "name": "How can I contribute?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Three lanes: argue with the FlowSpec on GitHub Discussions, claim a scoped module (adapter, node pack, validator, diff viewer) from the good-first-issues list, or subscribe for the alpha. The highest-leverage contributions today are design conversations and counter-proposals."
+        "text": "Three lanes: claim a scoped Phase 3 module (RBAC, Alembic migrations, Postgres-backed job store, Mastra execution runner, DeepEval/Ragas integration) from the issues list, run the alpha against your own flows and file feedback, or build a third-party node pack against the FlowSpec."
       }
     },
     {
@@ -132,8 +132,8 @@
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "Its Harness",
-  "alternateName": "Its Harness — visual AI agent harness builder",
+  "name": "itsharness",
+  "alternateName": "itsharness — visual AI agent harness builder",
   "url": "https://itsharness.com/",
   "inLanguage": "en"
 }
@@ -971,11 +971,11 @@
         <circle cx="22" cy="10" r="3" fill="oklch(0.46 0.16 268)"/>
         <circle cx="16" cy="24" r="3" fill="oklch(0.19 0.024 270)"/>
       </svg>
-      <span class="name">Its Harness</span>
+      <span class="name">itsharness</span>
     </a>
     <div class="sheet-meta">
       <span>sheet · <b>00 / overview</b></span>
-      <span>rev · <b>0.2 phase 1</b></span>
+      <span>rev · <b>v0.4 pass28</b></span>
     </div>
     <div class="nav">
       <a href="#involved">Get involved</a>
@@ -992,30 +992,30 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <div class="eyebrow"><span class="bar"></span>Open source · phase 1 · canvas live</div>
+      <div class="eyebrow">OPEN SOURCE · PHASES 0–2 DONE · V0.4</div>
       <h1>It's all about the <em>harness</em>.<br>It's <em>AI's</em> harness.</h1>
       <p class="lede">
-        <strong>Its Harness</strong> is an open-source visual builder for production AI harnesses:
+        <strong>itsharness</strong> is an open-source visual builder for production AI harnesses:
         canvas, neutral spec, safety rails, run loop. One graph editor, one runtime-neutral IR,
-        adapters for <strong>LangGraph</strong>, <strong>CrewAI</strong>, <strong>Mastra</strong>, and
+        adapters for <strong>LangGraph</strong>, <strong>CrewAI</strong>, <strong>Mastra</strong>, and (planned)
         <strong>Microsoft Agent Framework</strong> &mdash; plus <strong>A2A</strong>, the protocol layer
-        that makes Its Harness the orchestrator of orchestrators.
+        that makes itsharness the orchestrator of orchestrators.
       </p>
       <div class="cta-row">
         <a class="btn js-gh-star" href="https://github.com/3IVIS/itsharness" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.78 0c2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.84 1.18 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
           Star on GitHub<span class="count" data-gh-stars>★ 0</span>
         </a>
-        <a class="btn ghost" href="https://github.com/3IVIS/itsharness/discussions" target="_blank" rel="noopener">Read the RFC</a>
-        <span class="cta-note">Apache 2.0 · spec 0.2 · canvas live</span>
+        <a class="btn ghost" href="https://github.com/3IVIS/itsharness/discussions" target="_blank" rel="noopener">Read the roadmap</a>
+        <span class="cta-note">Apache 2.0 · spec 0.2</span>
       </div>
     </div>
 
     <div class="blueprint" id="hgraphB">
       <div class="bp-grid"></div>
       <div class="bp-title">DWG · <b>FIG-01 / triage flow</b></div>
-      <div class="bp-stage"><span class="blip"></span>phase 1 · canvas</div>
-      <div class="bp-rev">SPEC · <b>v0.2</b> · HOVER OR DRAG FOR FULL COMPAT</div>
+      <div class="bp-stage"><span class="blip"></span>phase 2 · runtime live</div>
+      <div class="bp-rev">SPEC · <b>v0.2</b> · ADAPTER · <b>v0.4</b> · HOVER FOR FULL COMPAT</div>
       <svg class="graph-svg" id="hgraphB-svg"></svg>
     </div>
   </div>
@@ -1111,38 +1111,38 @@
 <section class="roadmap" id="roadmap">
   <div class="wrap">
     <div class="section-eyebrow">§ 04 · roadmap</div>
-    <h2>Five phases. <em>One</em> done, <em>one</em> underway.</h2>
-    <p class="roadmap-lede">Phase 0 closed with the spec locked at v0.2. Phase 1 is mid-build — canvas live, adapter codegen gated on the RFC. Each phase is independently deployable. Public release at week 20.</p>
+    <h2>Five phases. <em>Three</em> done, <em>one</em> underway.</h2>
+    <p class="roadmap-lede">Spec frozen at v0.2 with the RFC closed (ADR-001). Canvas + three adapters live. Observability, HITL, and a security/hardening pass all shipped in v0.4 (pass28). Phase 3 — teams, eval, persisted job store — is the next gate.</p>
     <div class="phase-strip">
       <div class="phase">
-        <div class="phase-marker"><span class="num">phase 00</span><span>W1–3</span></div>
-        <div class="phase-name">Spec design</div>
-        <p class="phase-desc">Neutral IR v0.2, 14 node types, 4 runtime maps + A2A, 5 example flows, public RFC.</p>
+        <div class="phase-marker"><span class="num">phase 00</span><span>spec</span></div>
+        <div class="phase-name">Spec &amp; schema</div>
+        <p class="phase-desc">Neutral IR v0.2, 14 node types, 4 runtime maps + A2A, 5 example flows, RFC closed via ADR-001.</p>
         <div class="phase-status">✓ complete</div>
       </div>
+      <div class="phase">
+        <div class="phase-marker"><span class="num">phase 01</span><span>canvas + adapters</span></div>
+        <div class="phase-name">Canvas + 3 adapters</div>
+        <p class="phase-desc">XYFlow canvas, 14 nodes, Zod validation, auth, versioning. LangGraph + CrewAI execute; Mastra codegen.</p>
+        <div class="phase-status">✓ complete</div>
+      </div>
+      <div class="phase">
+        <div class="phase-marker"><span class="num">phase 02</span><span>observability</span></div>
+        <div class="phase-name">Obs + HITL + hardening</div>
+        <p class="phase-desc">HITL pause/resume, Langfuse self-host (ClickHouse + Redis), per-node traces, LiteLLM costs, security pass.</p>
+        <div class="phase-status">✓ V0.4</div>
+      </div>
       <div class="phase is-now">
-        <div class="phase-marker"><span class="num">phase 01</span><span>W4–11</span></div>
-        <div class="phase-name">Canvas + LangGraph</div>
-        <p class="phase-desc">Canvas live: 14 nodes, validation, library, export. Adapter stub deployed; codegen awaiting RFC.</p>
+        <div class="phase-marker"><span class="num">phase 03</span><span>now</span></div>
+        <div class="phase-name">Teams + eval + persistence</div>
+        <p class="phase-desc">RBAC, JWT revocation, Alembic, Postgres-backed jobs, Mastra runner, DeepEval/Ragas, prompt versioning. 🎯 v1.0.</p>
         <div class="phase-status">● in progress</div>
       </div>
       <div class="phase">
-        <div class="phase-marker"><span class="num">phase 02</span><span>W12–20</span></div>
-        <div class="phase-name">Observability + A2A</div>
-        <p class="phase-desc">Langfuse traces, HITL UI, LiteLLM, REST + MCP + A2A deploy. 🚀 public release.</p>
-        <div class="phase-status">public v0.1</div>
-      </div>
-      <div class="phase">
-        <div class="phase-marker"><span class="num">phase 03</span><span>W21–32</span></div>
-        <div class="phase-name">Teams + CrewAI + Mastra</div>
-        <p class="phase-desc">CrewAI adapter, Mastra adapter, RBAC, version diff, evals, marketplace. 🎯 v1.0.</p>
-        <div class="phase-status">v1.0</div>
-      </div>
-      <div class="phase">
-        <div class="phase-marker"><span class="num">phase 04</span><span>W33+</span></div>
-        <div class="phase-name">Enterprise + Microsoft</div>
-        <p class="phase-desc">Real-time collab (Yjs), MS Agent Framework adapter, SSO, on-prem Helm, embeddable canvas.</p>
-        <div class="phase-status">enterprise</div>
+        <div class="phase-marker"><span class="num">phase 04</span><span>next</span></div>
+        <div class="phase-name">Enterprise + collab + MS</div>
+        <p class="phase-desc">Real-time collab (Yjs), MS Agent Framework adapter, SSO, on-prem Helm, embeddable canvas package.</p>
+        <div class="phase-status">planned</div>
       </div>
     </div>
   </div>
@@ -1150,27 +1150,28 @@
 
 <section class="design-log" id="log">
   <div class="wrap">
-    <div class="section-eyebrow">§ 05 · phase 1 status</div>
-    <h2 style="max-width:760px">Canvas live. <em>Adapter</em> next.</h2>
-    <p class="section-lede" style="max-width:620px;margin:14px 0 32px">All 14 node types are drawable, configurable, validated, exportable. Five reference flows ship today. The LangGraph adapter is stubbed; codegen unlocks when the RFC closes.</p>
+    <div class="section-eyebrow">§ 05 · v0.4 pass28 status</div>
+    <h2 style="max-width:760px">Three runtimes. <em>Hardened.</em> Traced.</h2>
+    <p class="section-lede" style="max-width:620px;margin:14px 0 32px">All 14 node types are drawable, configurable, validated, and — for LangGraph and CrewAI — executable end-to-end. HITL pause/resume works. Every run produces a Langfuse trace with per-node child spans. v0.4 (pass28) closed a 12-fix security and hardening pass on top.</p>
 
     <div class="dlog-grid">
       <div class="dlog-stats">
-        <div class="stat"><div class="n">14</div><div class="lbl">node types</div><div class="det">Per-type config panels. Every spec field directly editable on the canvas.</div></div>
-        <div class="stat"><div class="n">5</div><div class="lbl">example flows</div><div class="det">RAG, HITL, parallel, crew, debate — each valid against the schema.</div></div>
-        <div class="stat"><div class="n">17</div><div class="lbl">tests passing</div><div class="det">Vitest suite covers all five flows plus cross-reference error cases.</div></div>
-        <div class="stat"><div class="n">1</div><div class="lbl">adapter stub</div><div class="det">FastAPI sidecar at <code style="font-size:11px">/compile</code>. Real codegen on RFC close.</div></div>
+        <div class="stat"><div class="n">14</div><div class="lbl">node types</div><div class="det">Every spec field directly editable. Live execution overlay: pending → running → paused → done / error.</div></div>
+        <div class="stat"><div class="n">3</div><div class="lbl">runtimes</div><div class="det">LangGraph + CrewAI execute via <code style="font-size:11px">POST /run</code>. Mastra full codegen; execution runner planned.</div></div>
+        <div class="stat"><div class="n">82</div><div class="lbl">items shipped</div><div class="det">Phases 0–2 plus the pass28 hardening pass. See the roadmap for the full ledger.</div></div>
+        <div class="stat"><div class="n">12</div><div class="lbl">security fixes</div><div class="det"><code style="font-size:11px">fn_ref</code> allowlist at all 3 entry points, body cap, timing-safe login, CSP, JOB TTL, non-root containers.</div></div>
       </div>
 
       <div class="featured-q">
-        <div class="label">RFC · last call before adapter codegen</div>
-        <div class="qtitle">context_from on edges — CrewAI semantics, or generalised to every runtime?</div>
-        <p class="qbody">The spec borrows CrewAI's <code>Task.context</code> to thread context across nodes. LangGraph, Mastra and MS Agent Framework would need a shim to honour it. Generalise the semantics in v0.2.1 and let every adapter consume them, or leave it CrewAI-flavoured and have the other adapters translate? Working assumption: generalise. Real-world voices wanted before we hardcode it into the adapter.</p>
+        <div class="label">SECURITY &amp; HARDENING</div>
+        <div class="qtitle">Critical: <code>/run</code> now validates <code>fn_ref</code> before <code>exec()</code>.</div>
+        <p class="qbody"><code>POST /run</code> previously skipped <code>validate_spec()</code>, so path-traversal and shell-injection <code>fn_ref</code> values reached <code>exec()</code> directly when callers bypassed <code>/compile</code>. Validation now runs at all three entry points — <code>/compile</code>, <code>/flows</code>, and <code>/run</code>. Two regression tests added. Plus: timing-safe login, 1 MB body cap, CSP header, password policy, proxy-aware rate limiter, <code>JOB_TTL_HOURS</code> eviction, separate LiteLLM database, non-root containers.</p>
         <div class="qmeta">
-          <span>priority · <b>high</b></span>
-          <span>category · edges · spec v0.2</span>
-          <span>status · RFC open</span>
-          <a href="https://github.com/3IVIS/itsharness/discussions" target="_blank" rel="noopener">Argue in Discussions →</a>
+          <span>severity · <b>critical</b></span>
+          <span>fixes · #2–#26, #45</span>
+          <span>status · shipped in v0.4</span>
+          <a href="itsharness-roadmap-v10.html" target="_blank" rel="noopener">
+</a>
         </div>
       </div>
     </div>
@@ -1180,30 +1181,31 @@
 <section class="body-section" id="involved">
   <div class="wrap">
     <div class="section-eyebrow">§ 06 · getting involved</div>
-    <h2>The design is <em>open</em>. The decisions are still cheap.</h2>
+    <h2>The runtime is <em>live</em>. Phase 3 is wide open.</h2>
     <p class="section-lede">
-      We're deliberately slow before we're fast. The IR, the node taxonomy, and the adapter
-      contract land first — code follows. Three lanes, three weeks-of-effort, pick whichever fits.
+      Spec, canvas, three adapters, and the security pass are landed. The next gate — teams, eval,
+      persistence — is the highest-leverage place to contribute. Three lanes, three weeks-of-effort,
+      pick whichever fits.
     </p>
 
     <div class="lanes">
       <div class="lane">
-        <div class="num">track <b>A</b> · shape</div>
-        <h3>Argue with the spec</h3>
-        <p>The neutral IR is the lingua franca between canvas and four adapters. Every shape decision ripples through all of them. Read the v0.1 spec, push back, propose alternatives.</p>
-        <a href="https://github.com/3IVIS/itsharness/discussions" target="_blank" rel="noopener">Open the RFC →</a>
+        <div class="num">track <b>A</b> · build</div>
+        <h3>Claim a Phase 3 module</h3>
+        <p>RBAC + JWT revocation, Alembic migrations, Postgres-backed job store, Mastra execution runner, DeepEval / Ragas eval harness, prompt versioning. Each issue is scoped tight enough that a weekend can land something whole.</p>
+        <a href="https://github.com/3IVIS/itsharness/issues?q=is%3Aissue+is%3Aopen+label%3Aphase-3" target="_blank" rel="noopener">Phase 3 issues →</a>
       </div>
       <div class="lane">
-        <div class="num">track <b>B</b> · build</div>
-        <h3>Claim a module</h3>
-        <p>Adapters, node packs, the IR validator, the diff viewer. Issues are scoped tight enough that a weekend can land something whole and useful.</p>
-        <a href="https://github.com/3IVIS/itsharness/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22" target="_blank" rel="noopener">Good first issues →</a>
-      </div>
-      <div class="lane">
-        <div class="num">track <b>C</b> · try</div>
+        <div class="num">track <b>B</b> · run</div>
         <h3>Run the alpha</h3>
-        <p>The first runnable canvas is stitching together now. Subscribe to get the build the moment it's stable enough to point at a real flow of yours.</p>
-        <a href="https://github.com/3IVIS/itsharness" target="_blank" rel="noopener">Get the alpha →</a>
+        <p>Three runtimes work end-to-end (LangGraph + CrewAI execute, Mastra compiles). HITL, Langfuse, LiteLLM all wired. Point it at a real flow of yours and file what breaks.</p>
+        <a href="https://github.com/3IVIS/itsharness#quick-start" target="_blank" rel="noopener">Quick-start →</a>
+      </div>
+      <div class="lane">
+        <div class="num">track <b>C</b> · extend</div>
+        <h3>Build a node pack</h3>
+        <p>The FlowSpec is frozen at v0.2.0 with semantics codified in ADR-001. Third-party node types as npm packages (<code style="font-size:11.5px">@itsharness/nodes/…</code>) are the marketplace target for v1.0.</p>
+        <a href="https://github.com/3IVIS/itsharness/tree/main/spec" target="_blank" rel="noopener">Read the spec →</a>
       </div>
     </div>
   </div>
@@ -1218,7 +1220,7 @@
       <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener">License · Apache 2.0</a>
     </div>
     <div class="center">it's all about the harness, after all.</div>
-    <div>© 2026 Its Harness contributors</div>
+    <div>© 2026 itsharness contributors</div>
   </div>
 </footer>
 
