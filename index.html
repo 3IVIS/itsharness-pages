@@ -3,43 +3,36 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>Its Harness — open-source visual builder for AI agent harnesses</title>
-<meta name="description" content="Open-source visual builder for production AI agent harnesses. One canvas, one runtime-neutral FlowSpec, adapters for LangGraph, CrewAI, Mastra, and (planned) Microsoft Agent Framework — plus A2A. Apache 2.0, v0.4 (pass28): phases 0–2 complete.">
-<meta name="keywords" content="AI agents, agent orchestration, LangGraph, CrewAI, Mastra, Microsoft Agent Framework, MS Agent Framework, Semantic Kernel, A2A protocol, MCP, visual workflow builder, agent harness, FlowSpec, open source, Apache 2.0, agentic AI, LLM workflow, AutoGen">
+<meta name="description" content="Open-source visual builder for production AI agent harnesses. One canvas, one runtime-neutral FlowSpec, adapters for LangGraph, CrewAI, Mastra, and Microsoft Agent Framework — plus A2A. Apache 2.0, v0.8.0: all four phases complete, 240 items shipped.">
+<meta name="keywords" content="AI agents, agent orchestration, LangGraph, CrewAI, Mastra, Microsoft Agent Framework, MS Agent Framework, Semantic Kernel, A2A protocol, MCP, visual workflow builder, agent harness, FlowSpec, open source, Apache 2.0, agentic AI, LLM workflow, Yjs, embeddable canvas, SSO, OIDC, SCIM, Helm">
 <meta name="author" content="Its Harness contributors">
 <meta name="theme-color" content="#4F46E5">
 <meta name="color-scheme" content="light">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://itsharness.com/">
 
-<!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Its Harness">
 <meta property="og:url" content="https://itsharness.com/">
 <meta property="og:title" content="Its Harness — open-source visual builder for AI agent harnesses">
-<meta property="og:description" content="One canvas, one runtime-neutral FlowSpec. LangGraph + CrewAI executable, Mastra codegen, MS Agent Framework planned — plus A2A. v0.4 (pass28): phases 0–2 complete.">
+<meta property="og:description" content="One canvas, one runtime-neutral FlowSpec. All four runtimes executable (LangGraph, CrewAI, Mastra, MAF). Real-time Yjs collab, SSO/SCIM, Helm, embeddable canvas. v0.8.0: 240 items shipped, all phases complete.">
 <meta property="og:image" content="https://itsharness.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Its Harness: visual AI agent harness builder. One canvas. One neutral spec. Four runtimes plus A2A.">
 <meta property="og:locale" content="en_US">
 
-<!-- Twitter / X -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Its Harness — visual AI agent harness builder">
-<meta name="twitter:description" content="One canvas, one neutral FlowSpec. LangGraph + CrewAI + Mastra adapters, HITL + Langfuse wired, security-hardened. v0.4 (pass28), Apache 2.0.">
+<meta name="twitter:description" content="One canvas, one neutral FlowSpec. All four runtimes executable. SSO, Helm, Yjs collab, embeddable @itsharness/canvas. v0.8.0, 240 items, Apache 2.0.">
 <meta name="twitter:image" content="https://itsharness.com/og-image.png">
 
-<!-- Favicons -->
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-
-<!-- LLM-readable index -->
 <link rel="alternate" type="text/markdown" title="Its Harness summary for LLMs" href="llms.txt">
 
-<!-- Structured data: SoftwareApplication -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -48,95 +41,35 @@
   "applicationCategory": "DeveloperApplication",
   "applicationSubCategory": "AI Agent Orchestration",
   "operatingSystem": "Web, macOS, Linux, Windows",
-  "description": "Open-source visual builder for production AI agent harnesses. Authors a runtime-neutral FlowSpec that compiles to LangGraph, CrewAI, Mastra, and Microsoft Agent Framework \u2014 plus the A2A protocol for invocation of any framework-agnostic agent.",
+  "description": "Open-source visual builder for production AI agent harnesses. Authors a runtime-neutral FlowSpec that compiles to LangGraph, CrewAI, Mastra, and Microsoft Agent Framework. All four phases complete in v0.8.0.",
   "url": "https://itsharness.com/",
   "license": "https://www.apache.org/licenses/LICENSE-2.0",
-  "softwareVersion": "0.4.0",
+  "softwareVersion": "0.8.0",
   "softwareHelp": "https://itsharness.com/#spec",
-  "developmentStatus": "Phase 2 complete — v0.4 (pass28) shipped",
+  "developmentStatus": "All four phases complete — v0.8.0 shipped, 240 items",
   "isAccessibleForFree": true,
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "author": {
-    "@type": "Organization",
-    "name": "Its Harness contributors",
-    "url": "https://github.com/3IVIS/itsharness"
-  },
-  "keywords": "AI agents, agent orchestration, LangGraph, CrewAI, Mastra, Microsoft Agent Framework, A2A protocol, MCP, visual workflow, FlowSpec, agentic AI"
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "Its Harness contributors", "url": "https://github.com/3IVIS/itsharness" },
+  "keywords": "AI agents, agent orchestration, LangGraph, CrewAI, Mastra, Microsoft Agent Framework, A2A protocol, MCP, visual workflow, FlowSpec, Yjs collaboration, embeddable canvas, SSO, Helm"
 }
 </script>
 
-<!-- Structured data: FAQPage — surfaces in LLM/search answers -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What is Its Harness?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Its Harness is an open-source visual builder for production AI agent harnesses. You author flows visually on a canvas; Its Harness compiles them into a runtime-neutral FlowSpec, then runtime adapters translate the spec into LangGraph, CrewAI, Mastra, or Microsoft Agent Framework code. The A2A protocol layer lets you invoke any A2A-compatible framework (Google ADK, OpenAI Agents SDK, Claude Agent SDK) without writing a custom adapter."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Which AI agent frameworks does Its Harness support?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Four first-class runtime adapters: LangGraph (Python/JS), CrewAI (Python), Mastra (TypeScript), and Microsoft Agent Framework (C#/Python, covering both Semantic Kernel and AutoGen users). The A2A protocol covers framework-agnostic invocation of any A2A-compatible agent."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is the FlowSpec?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "FlowSpec is the neutral intermediate representation that decouples the canvas from any runtime. Version 0.2.0 has 14 node types (input, output, llm_call, tool_invoke, agent_role, agent_debate, condition, parallel_fork, parallel_join, hitl_breakpoint, memory_read, memory_write, subgraph, transform), a discriminated edge union, and four optional config sections (checkpoint, streaming, telemetry, a2a_config)."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What stage is the project at?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Phases 0, 1, and 2 are complete — v0.4 (pass28) is shipped. The FlowSpec v0.2.0 is frozen and the RFC is closed (resolved via ADR-001). The canvas is live with all 14 node types. LangGraph and CrewAI run end-to-end; Mastra ships full codegen (execution runner planned). HITL pause/resume, Langfuse self-host, and a security/hardening pass have all landed. Phase 3 (teams, eval, persisted job store) is the current focus."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How can I contribute?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Three lanes: claim a scoped Phase 3 module (RBAC, Alembic migrations, Postgres-backed job store, Mastra execution runner, DeepEval/Ragas integration) from the issues list, run the alpha against your own flows and file feedback, or build a third-party node pack against the FlowSpec."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is the license?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Apache 2.0."
-      }
-    }
+    { "@type": "Question", "name": "What is Its Harness?", "acceptedAnswer": { "@type": "Answer", "text": "Its Harness is an open-source visual builder for production AI agent harnesses. You author flows visually on a canvas; Its Harness compiles them into a runtime-neutral FlowSpec, then runtime adapters translate the spec into LangGraph, CrewAI, Mastra, or Microsoft Agent Framework code. All four runtimes are fully executable. The A2A protocol layer lets you invoke any A2A-compatible framework without writing a custom adapter." } },
+    { "@type": "Question", "name": "Which AI agent frameworks does Its Harness support?", "acceptedAnswer": { "@type": "Answer", "text": "Four first-class runtime adapters, all fully executable: LangGraph (Python/JS), CrewAI (Python), Mastra (TypeScript), and Microsoft Agent Framework (semantic-kernel v1.x). The A2A protocol covers framework-agnostic invocation of any A2A-compatible agent." } },
+    { "@type": "Question", "name": "What is the FlowSpec?", "acceptedAnswer": { "@type": "Answer", "text": "FlowSpec is the neutral intermediate representation decoupling the canvas from any runtime. Version 0.2.0 has 14 node types, a discriminated edge union, and four optional config sections." } },
+    { "@type": "Question", "name": "What stage is the project at?", "acceptedAnswer": { "@type": "Answer", "text": "All four phases are complete. v0.8.0 shipped 240 items. All four runtimes are fully executable. Phase 4 delivered: MS Agent Framework adapter, SSO/OIDC+SCIM, Visual CI/CD, on-prem Helm chart, Yjs real-time collaboration, and @itsharness/canvas embeddable npm package." } },
+    { "@type": "Question", "name": "What is the license?", "acceptedAnswer": { "@type": "Answer", "text": "Apache 2.0." } }
   ]
 }
 </script>
 
-<!-- Structured data: BreadcrumbList for site root -->
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Its Harness",
-  "alternateName": "Its Harness — visual AI agent harness builder",
-  "url": "https://itsharness.com/",
-  "inLanguage": "en"
-}
+{ "@context": "https://schema.org", "@type": "WebSite", "name": "Its Harness", "alternateName": "Its Harness — visual AI agent harness builder", "url": "https://itsharness.com/", "inLanguage": "en" }
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -144,810 +77,205 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: oklch(0.972 0.008 270);
-    --bg-2: oklch(0.948 0.012 270);
-    --paper: oklch(0.985 0.008 270);
-    --ink: oklch(0.19 0.024 270);
-    --ink-2: oklch(0.37 0.020 270);
-    --ink-3: oklch(0.55 0.018 270);
-    --line: oklch(0.84 0.014 270);
-    --line-2: oklch(0.74 0.016 270);
-    --grid: oklch(0.86 0.016 270);
-    --grid-strong: oklch(0.78 0.020 270);
-    --accent: oklch(0.46 0.16 268);
-    --accent-ink: oklch(0.36 0.16 270);
-    --accent-soft: oklch(0.46 0.16 268 / 0.10);
+    --bg: oklch(0.972 0.008 270);--bg-2: oklch(0.948 0.012 270);
+    --paper: oklch(0.985 0.008 270);--ink: oklch(0.19 0.024 270);
+    --ink-2: oklch(0.37 0.020 270);--ink-3: oklch(0.55 0.018 270);
+    --line: oklch(0.84 0.014 270);--line-2: oklch(0.74 0.016 270);
+    --accent: oklch(0.46 0.16 268);--accent-ink: oklch(0.36 0.16 270);
     --accent-tint: oklch(0.93 0.030 270);
+    --green-ink: oklch(0.38 0.12 148);--green-tint: oklch(0.93 0.040 148);
   }
-  * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; background: var(--bg) !important; color: var(--ink); }
-  body {
-    font-family: "IBM Plex Sans", sans-serif;
-    font-size: 16px;
-    line-height: 1.55;
-    -webkit-font-smoothing: antialiased;
-  }
-  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 48px; }
+  *{box-sizing:border-box}html,body{margin:0;padding:0;background:var(--bg)!important;color:var(--ink)}
+  body{font-family:"IBM Plex Sans",sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 48px}
 
-  /* mono caps utility */
-  .mono {
-    font-family: "IBM Plex Mono", monospace;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-  }
+  /* alpha notice */
+  .alpha-notice{display:flex;gap:16px;align-items:flex-start;border:1px solid oklch(0.78 0.090 60);border-left:3px solid oklch(0.62 0.14 60);border-radius:4px;padding:18px 20px;background:oklch(0.96 0.030 60);margin-bottom:36px}
+  .alpha-notice__icon{flex-shrink:0;color:oklch(0.52 0.14 60);margin-top:2px}
+  .alpha-notice__icon svg{width:18px;height:18px}
+  .alpha-notice__title{font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:oklch(0.42 0.14 60);margin-bottom:6px}
+  .alpha-notice__text{font-size:14px;color:oklch(0.38 0.10 60);line-height:1.6;margin:0}
 
-  /* header — like a drawing sheet title bar */
-  header.site {
-    border-bottom: 1px solid var(--line);
-    background: var(--paper);
-  }
-  .site-inner {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    gap: 24px;
-    padding: 18px 0;
-  }
-  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); }
-  .brand .mark { width: 28px; height: 28px; }
-  .brand .name {
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 16px;
-    font-weight: 500;
-  }
-  .sheet-meta {
-    /* removed from markup — declarations kept inert in case the block is ever reintroduced */
-    display: none;
-  }
-  .nav {
-    display: flex; align-items: center; gap: 22px;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 12.5px;
-  }
-  .nav a {
-    color: var(--ink-2); text-decoration: none;
-    border-bottom: 1px solid transparent; padding-bottom: 1px;
-  }
-  .nav a:hover { color: var(--ink); border-bottom-color: var(--ink-3); }
-  .btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 9px 14px; border-radius: 6px;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 13px; font-weight: 500;
-    text-decoration: none;
-    border: 1px solid var(--ink);
-    background: var(--ink); color: var(--paper);
-    transition: transform .12s ease;
-  }
-  .btn:hover { transform: translateY(-1px); }
-  .btn.ghost { background: transparent; color: var(--ink); border-color: var(--line-2); }
-  .btn.ghost:hover { border-color: var(--ink); }
-  .btn svg { width: 14px; height: 14px; }
-  .btn .count {
-    padding-left: 10px; margin-left: 4px;
-    border-left: 1px solid oklch(1 0 0 / 0.22);
-    color: oklch(1 0 0 / 0.65);
-    font-size: 12px;
-  }
-  .btn.ghost .count { border-left-color: var(--line); color: var(--ink-3); }
+  /* header */
+  header.site{border-bottom:1px solid var(--line);background:var(--paper)}
+  .site-inner{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:24px;padding:18px 0}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+  .brand .mark{width:28px;height:28px}
+  .brand .name{font-family:"IBM Plex Mono",monospace;font-size:16px;font-weight:500}
+  .nav{display:flex;align-items:center;gap:22px;font-family:"IBM Plex Mono",monospace;font-size:12.5px}
+  .nav a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:1px}
+  .nav a:hover{color:var(--ink);border-bottom-color:var(--ink-3)}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:6px;font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:500;text-decoration:none;border:1px solid var(--ink);background:var(--ink);color:var(--paper);transition:transform .12s ease}
+  .btn:hover{transform:translateY(-1px)}
+  .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line-2)}
+  .btn.ghost:hover{border-color:var(--ink)}
+  .btn svg{width:14px;height:14px}
+  .btn .count{padding-left:10px;margin-left:4px;border-left:1px solid oklch(1 0 0 / .22);color:oklch(1 0 0 / .65);font-size:12px}
+  .btn.ghost .count{border-left-color:var(--line);color:var(--ink-3)}
 
   /* hero */
-  .hero { padding: 64px 0 80px; position: relative; }
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.05fr;
-    gap: 56px;
-    align-items: center;
-  }
+  .hero{padding:64px 0 80px;position:relative}
+  .hero-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:56px;align-items:center}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--accent-ink);margin-bottom:26px;display:flex;align-items:center;gap:10px}
+  .eyebrow .bar{width:28px;height:1px;background:var(--accent-ink);opacity:.6}
+  h1{font-family:"IBM Plex Sans",sans-serif;font-weight:300;font-size:58px;line-height:1.04;letter-spacing:-.03em;margin:0 0 28px;color:var(--ink);text-wrap:balance}
+  h1 em{font-family:"Instrument Serif",serif;font-style:italic;font-weight:400;color:var(--accent-ink)}
+  .lede{font-size:17px;line-height:1.6;color:var(--ink-2);margin:0 0 24px;max-width:520px;text-wrap:pretty}
+  .lede strong{color:var(--ink);font-weight:500}
+  .runtime-pills{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 28px}
+  .rt-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:3px;font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:500;letter-spacing:.06em;border:1px solid oklch(0.72 0.090 148);background:var(--green-tint);color:var(--green-ink)}
+  .rt-pill .dot{width:5px;height:5px;border-radius:50%;background:var(--green-ink)}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+  .cta-note{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-3);margin-left:6px;text-transform:uppercase;letter-spacing:.1em}
 
-  .eyebrow {
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    color: var(--accent-ink);
-    margin-bottom: 26px;
-    display: flex; align-items: center; gap: 10px;
-  }
-  .eyebrow .bar { width: 28px; height: 1px; background: var(--accent-ink); opacity: 0.6; }
+  /* blueprint */
+  .blueprint{position:relative;background:#0d0d12;border:1px solid var(--line);height:500px;border-radius:4px;overflow:hidden;color:#e2e2ec}
+  .bp-grid{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1.5px);background-size:22px 22px;pointer-events:none}
+  .bp-title,.bp-rev,.bp-stage{position:absolute;font-family:"IBM Plex Mono",monospace;font-size:10px;text-transform:uppercase;letter-spacing:.18em;color:rgba(226,226,236,.42);z-index:4;pointer-events:none}
+  .bp-title{top:12px;left:14px}.bp-title b{color:rgba(226,226,236,.82);font-weight:500}
+  .bp-rev{bottom:10px;right:14px;letter-spacing:.16em}.bp-rev b{color:rgba(226,226,236,.7);font-weight:500}
+  .bp-stage{top:12px;right:14px;display:inline-flex;align-items:center;gap:7px;letter-spacing:.14em}
+  .bp-stage .blip{width:6px;height:6px;border-radius:50%;background:#4ade80;box-shadow:0 0 8px rgba(74,222,128,.7);animation:blip 2s ease-in-out infinite}
+  @keyframes blip{0%,100%{opacity:1}50%{opacity:.4}}
+  .graph-svg{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;overflow:visible}
+  .graph-svg path.edge{stroke:#a0a0c8;stroke-width:2;fill:none}
 
-  h1 {
-    font-family: "IBM Plex Sans", sans-serif;
-    font-weight: 300;
-    font-size: 58px;
-    line-height: 1.04;
-    letter-spacing: -0.03em;
-    margin: 0 0 28px;
-    color: var(--ink);
-    text-wrap: balance;
-  }
-  h1 em {
-    font-family: "Instrument Serif", serif;
-    font-style: italic;
-    font-weight: 400;
-    color: var(--accent-ink);
-  }
-  .lede {
-    font-size: 17px;
-    line-height: 1.6;
-    color: var(--ink-2);
-    margin: 0 0 32px;
-    max-width: 520px;
-    text-wrap: pretty;
-  }
-  .lede strong { color: var(--ink); font-weight: 500; }
-  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-  .cta-note {
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 11.5px;
-    color: var(--ink-3);
-    margin-left: 6px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
+  /* canvas nodes */
+  .cv-node{position:absolute;z-index:3;width:170px;background:#16161f;border:.5px solid #2d2d42;border-left:3px solid var(--node-accent,#6366f1);border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.5),0 1px 2px rgba(0,0,0,.3);cursor:grab;user-select:none;font-family:"IBM Plex Sans",sans-serif;color:#e2e2ec;overflow:hidden;transition:box-shadow .14s ease,border-color .14s ease}
+  .cv-node:hover{border-color:#484866;box-shadow:0 4px 16px rgba(0,0,0,.6),0 2px 4px rgba(0,0,0,.4)}
+  .cv-node.dragging{cursor:grabbing;border-color:#6366f1;box-shadow:0 0 0 1px #6366f1,0 10px 28px -6px rgba(99,102,241,.4);z-index:7}
+  .cv-node__head{display:flex;align-items:center;gap:7px;padding:8px 9px 7px}
+  .cv-node__icon-stack{position:relative;display:inline-flex;flex-shrink:0}
+  .cv-node__icon{display:inline-flex;color:var(--node-accent,#6366f1);opacity:.88}
+  .cv-node__icon svg{width:14px;height:14px;stroke:currentColor;stroke-width:1.75;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .cv-node__label{flex:1;font-size:12px;font-weight:500;color:#e2e2ec;letter-spacing:-.01em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.3;min-width:0}
+  .compat-pin{display:inline-flex;align-items:center;gap:3px;font-family:"IBM Plex Mono",monospace;font-size:8.5px;font-weight:600;padding:1.5px 4px;border-radius:3px;flex-shrink:0;letter-spacing:.05em;line-height:1}
+  .compat-pin.full{background:rgba(74,222,128,.10);color:#4ade80;border:.5px solid rgba(74,222,128,.22)}
+  .compat-pin.part{background:rgba(251,191,36,.10);color:#fbbf24;border:.5px solid rgba(251,191,36,.28)}
+  .compat-pin.miss{background:rgba(239,68,68,.10);color:#f87171;border:.5px solid rgba(239,68,68,.28)}
+  .cv-node__compat{display:flex;gap:3px;padding:0 8px;max-height:0;opacity:0;overflow:hidden;transition:max-height .18s ease,opacity .14s ease,padding .18s ease}
+  .cv-node:hover .cv-node__compat,.cv-node.dragging .cv-node__compat{max-height:22px;opacity:1;padding:2px 8px 6px}
+  .cv-node__compat .rt{flex:1;font-family:"IBM Plex Mono",monospace;font-size:8px;font-weight:600;text-align:center;padding:2px 0;border-radius:2px;letter-spacing:.05em}
+  .rt.full{background:rgba(34,197,94,.16);color:#4ade80}.rt.part{background:rgba(245,158,11,.18);color:#fbbf24}.rt.miss{background:rgba(239,68,68,.18);color:#f87171}
+  .rt.pinned{outline:.5px solid rgba(255,255,255,.22);font-weight:700}
+  .cv-handle{position:absolute;width:7px;height:7px;border-radius:50%;background:#1d1d28;border:1.5px solid var(--node-accent,#6366f1);top:14px;z-index:4}
+  .cv-handle.l{left:-4px}.cv-handle.r{right:-4px}
 
-  /* blueprint canvas — mirrors the actual dark XYFlow canvas */
-  .blueprint {
-    position: relative;
-    background: #0d0d12;
-    border: 1px solid var(--line);
-    height: 500px;
-    border-radius: 4px;
-    overflow: hidden;
-    color: #e2e2ec;
-  }
-  .bp-grid {
-    position: absolute; inset: 0;
-    background-image:
-      radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1.5px);
-    background-size: 22px 22px;
-    background-position: 0 0;
-    pointer-events: none;
-  }
-  .bp-title {
-    position: absolute;
-    top: 12px; left: 14px;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    color: rgba(226,226,236,0.42);
-    z-index: 4;
-    pointer-events: none;
-  }
-  .bp-title b { color: rgba(226,226,236,0.82); font-weight: 500; }
-  .bp-rev {
-    position: absolute;
-    bottom: 10px; right: 14px;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: rgba(226,226,236,0.42);
-    z-index: 4;
-    pointer-events: none;
-  }
-  .bp-rev b { color: rgba(226,226,236,0.7); font-weight: 500; }
+  /* spec */
+  .spec{padding:64px 0 56px;border-top:1px solid var(--line);background:var(--paper)}
+  .spec-head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:32px}
+  .spec-head p{margin:0;color:var(--ink-2);font-size:15.5px;line-height:1.6;text-wrap:pretty}
+  .spec-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:20px}
+  .code-card{background:var(--paper);border:1px solid var(--line);border-radius:4px;overflow:hidden;display:flex;flex-direction:column}
+  .code-bar{display:flex;align-items:center;justify-content:space-between;padding:9px 14px;border-bottom:1px solid var(--line);background:var(--bg-2);font-family:"IBM Plex Mono",monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-3)}
+  .code-bar b{color:var(--ink-2);font-weight:500;letter-spacing:.08em}
+  .code-bar .dots{display:flex;gap:5px}.code-bar .dots span{width:8px;height:8px;border-radius:50%;background:var(--line);border:1px solid var(--line-2)}.code-bar .dots span:first-child{background:var(--accent);border-color:var(--accent)}
+  pre.code{margin:0;padding:16px 18px 18px;font-family:"IBM Plex Mono",monospace;font-size:11.5px;line-height:1.65;color:oklch(0.28 0.020 250);overflow-x:auto;background:var(--paper);flex:1}
+  .code .kw{color:oklch(0.36 0.16 270)}.code .str{color:oklch(0.42 0.10 60)}.code .num{color:oklch(0.42 0.12 145)}.code .p{color:oklch(0.50 0.020 270)}
+  .taxonomy{border:1px solid var(--line);border-radius:4px;padding:20px;background:var(--paper);display:flex;flex-direction:column;gap:14px}
+  .tax-title{font-family:"IBM Plex Mono",monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-3);display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:10px}
+  .tax-title b{color:var(--ink-2);font-weight:500}.tax-title .right{color:var(--accent-ink);font-weight:500}
+  .tax-group{display:flex;flex-direction:column;gap:6px}
+  .tax-group .label{font-family:"IBM Plex Mono",monospace;font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-3)}
+  .tax-chips{display:flex;flex-wrap:wrap;gap:5px}
+  .chip{display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border:1px solid var(--line);border-radius:2px;background:var(--bg);font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink)}
+  .chip .dot{width:5px;height:5px;border-radius:50%;background:var(--accent)}
 
-  .bp-stage {
-    position: absolute;
-    top: 12px; right: 14px;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 10px;
-    color: rgba(226,226,236,0.42);
-    z-index: 4;
-    pointer-events: none;
-    display: inline-flex; align-items: center; gap: 7px;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-  }
-  .bp-stage .blip {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: #6366f1;
-    box-shadow: 0 0 8px rgba(99,102,241,0.7);
-    animation: blip 2s ease-in-out infinite;
-  }
-  @keyframes blip { 0%,100%{opacity:1} 50%{opacity:.4} }
+  /* matrix */
+  .matrix{padding:56px 0;border-top:1px solid var(--line);background:var(--bg)}
+  .mx-table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:var(--paper);margin-top:28px}
+  .mx-table th,.mx-table td{padding:13px 18px;border-bottom:1px solid var(--line);text-align:left;font-size:14px;vertical-align:middle}
+  .mx-table th{background:var(--bg-2);font-family:"IBM Plex Mono",monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-3);font-weight:500}
+  .mx-table th.runtime{color:var(--accent-ink)}.mx-table tbody tr:last-child td{border-bottom:none}
+  .mx-table td .feat{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--ink);font-weight:500}
+  .mx-table td .desc{font-size:13px;color:var(--ink-2);margin-top:2px}
+  .badge{display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border-radius:2px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.08em}
+  .b-full{background:oklch(0.92 0.040 155);color:oklch(0.32 0.10 155)}
+  .b-part{background:oklch(0.93 0.045 75);color:oklch(0.36 0.10 75)}
+  .b-miss{background:oklch(0.93 0.030 30);color:oklch(0.40 0.13 30)}
 
-  .graph-svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; overflow: visible; }
-  .graph-svg path.edge {
-    stroke: #a0a0c8;
-    stroke-width: 2;
-    fill: none;
-  }
+  /* roadmap */
+  .roadmap{padding:56px 0;border-top:1px solid var(--line);background:var(--paper)}
+  .roadmap-lede{font-size:15.5px;color:var(--ink-2);max-width:640px;margin:0 0 32px;line-height:1.6;text-wrap:pretty}
+  .phase-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:var(--paper)}
+  .phase{padding:22px 20px;border-right:1px solid var(--line);position:relative;display:flex;flex-direction:column;gap:8px;background:var(--paper)}
+  .phase:last-child{border-right:none}
+  .phase.is-done{background:var(--green-tint)}
+  .phase.is-done::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--green-ink)}
+  .phase-marker{display:flex;justify-content:space-between;align-items:baseline;font-family:"IBM Plex Mono",monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-3)}
+  .phase-marker .num{font-weight:500;font-size:11px}.phase.is-done .phase-marker .num{color:var(--green-ink)}
+  .phase-name{font-family:"IBM Plex Sans",sans-serif;font-size:17px;font-weight:500;line-height:1.2;color:var(--ink);letter-spacing:-.01em}
+  .phase-desc{font-size:12.5px;line-height:1.55;color:var(--ink-2);margin:0}
+  .phase-status{margin-top:auto;padding-top:6px;font-family:"IBM Plex Mono",monospace;font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-3)}
+  .phase.is-done .phase-status{color:var(--green-ink);font-weight:500}
 
-  /* node cards — mirror the actual canvas .cf-node (BaseNode.tsx, v0.2)
-     Visual model: left-border accent stripe, NO tinted header,
-     colored icon + optional glyph-modifier, single pinned-compat pill
-     in the header, full 4-runtime row revealed on hover/select. */
-  .cv-node {
-    position: absolute;
-    z-index: 3;
-    width: 170px;
-    background: #16161f;
-    border: 0.5px solid #2d2d42;
-    border-left: 3px solid var(--node-accent, #6366f1);
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.5), 0 1px 2px rgba(0,0,0,0.3);
-    cursor: grab;
-    user-select: none;
-    font-family: "IBM Plex Sans", sans-serif;
-    color: #e2e2ec;
-    overflow: hidden;
-    transition: box-shadow .14s ease, border-color .14s ease;
-  }
-  .cv-node:hover {
-    border-color: #484866;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.6), 0 2px 4px rgba(0,0,0,0.4);
-  }
-  .cv-node.dragging {
-    cursor: grabbing;
-    border-color: #6366f1;
-    box-shadow: 0 0 0 1px #6366f1, 0 10px 28px -6px rgba(99,102,241,0.4);
-    z-index: 7;
-  }
-  .cv-node__head {
-    display: flex; align-items: center; gap: 7px;
-    padding: 8px 9px 7px;
-  }
-  .cv-node__icon-stack {
-    position: relative;
-    display: inline-flex;
-    flex-shrink: 0;
-  }
-  .cv-node__icon {
-    display: inline-flex;
-    color: var(--node-accent, #6366f1);
-    opacity: 0.88;
-  }
-  .cv-node__icon svg {
-    width: 14px; height: 14px;
-    stroke: currentColor;
-    stroke-width: 1.75;
-    fill: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-  /* small subscript glyph — distinguishes family members that share a hue
-     (memory_read/write, parallel_fork/join, agent_role/debate) */
-  .cv-node__glyph-mod {
-    position: absolute;
-    bottom: -3px; right: -4px;
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    background: #16161f;
-    border: 1px solid #484866;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 7.5px;
-    font-weight: 700;
-    color: #e2e2ec;
-    line-height: 1;
-    pointer-events: none;
-  }
-  .cv-node__label {
-    flex: 1;
-    font-size: 12px;
-    font-weight: 500;
-    color: #e2e2ec;
-    letter-spacing: -0.01em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    line-height: 1.3;
-    min-width: 0;
-  }
-  /* single pinned-compat pill — replaces old type chip.
-     Color reflects support level of the flow's preferred adapter. */
-  .compat-pin {
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 8.5px;
-    font-weight: 600;
-    padding: 1.5px 4px;
-    border-radius: 3px;
-    flex-shrink: 0;
-    letter-spacing: 0.05em;
-    line-height: 1;
-  }
-  .compat-pin.full { background: rgba(74,222,128,0.10); color: #4ade80; border: 0.5px solid rgba(74,222,128,0.22); }
-  .compat-pin.part { background: rgba(251,191,36,0.10); color: #fbbf24; border: 0.5px solid rgba(251,191,36,0.28); }
-  .compat-pin.miss { background: rgba(239,68,68,0.10);  color: #f87171; border: 0.5px solid rgba(239,68,68,0.28); }
-  /* full 4-runtime row — hidden by default, revealed on hover/drag.
-     Matches cf-node__compat--full's max-height transition in the canvas. */
-  .cv-node__compat {
-    display: flex; gap: 3px;
-    padding: 0 8px;
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: max-height .18s ease, opacity .14s ease, padding .18s ease;
-  }
-  .cv-node:hover .cv-node__compat,
-  .cv-node.dragging .cv-node__compat {
-    max-height: 22px;
-    opacity: 1;
-    padding: 2px 8px 6px;
-  }
-  .cv-node__compat .rt {
-    flex: 1;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 8px;
-    font-weight: 600;
-    text-align: center;
-    padding: 2px 0;
-    border-radius: 2px;
-    letter-spacing: 0.05em;
-  }
-  .rt.full { background: rgba(34,197,94,0.16);  color: #4ade80; }
-  .rt.part { background: rgba(245,158,11,0.18); color: #fbbf24; }
-  .rt.miss { background: rgba(239,68,68,0.18);  color: #f87171; }
-  .rt.pinned { outline: 0.5px solid rgba(255,255,255,0.22); font-weight: 700; }
-  .cv-handle {
-    position: absolute;
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: #1d1d28;
-    border: 1.5px solid var(--node-accent, #6366f1);
-    top: 14px;            /* aligns with header center for consistent edge entry */
-    z-index: 4;
-  }
-  .cv-handle.l { left: -4px; }
-  .cv-handle.r { right: -4px; }
+  /* stats */
+  .design-log{padding:48px 0;border-top:1px solid var(--line);background:var(--bg)}
+  .dlog-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:48px;align-items:start}
+  .dlog-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border:1px solid var(--line);border-radius:4px;overflow:hidden}
+  .stat{padding:20px 22px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--paper)}
+  .stat:nth-child(2n){border-right:none}.stat:nth-last-child(-n+2){border-bottom:none}
+  .stat .n{font-family:"IBM Plex Sans",sans-serif;font-weight:300;font-size:42px;line-height:1;letter-spacing:-.03em;color:var(--accent-ink)}
+  .stat .n.green{color:var(--green-ink)}
+  .stat .lbl{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--ink-2);margin-top:8px;text-transform:uppercase;letter-spacing:.14em}
+  .stat .det{font-size:12.5px;color:var(--ink-3);margin-top:4px;line-height:1.5}
+  .featured-q{border:1px solid var(--line);border-radius:4px;padding:22px 24px;background:var(--paper);border-left:3px solid var(--green-ink)}
+  .featured-q .label{font-family:"IBM Plex Mono",monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.16em;color:var(--green-ink);margin-bottom:10px}
+  .featured-q .qtitle{font-family:"IBM Plex Sans",sans-serif;font-size:19px;font-weight:500;color:var(--ink);margin:0 0 10px;line-height:1.3;letter-spacing:-.01em;text-wrap:balance}
+  .featured-q .qbody{font-size:14.5px;color:var(--ink-2);margin:0 0 16px;line-height:1.6;text-wrap:pretty}
+  .featured-q .qmeta{display:flex;gap:14px;align-items:center;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-3);flex-wrap:wrap}
+  .featured-q .qmeta b{color:var(--green-ink);font-weight:500}
 
-  /* spec section */
-  .spec {
-    padding: 64px 0 56px;
-    border-top: 1px solid var(--line);
-    background: var(--paper);
-  }
-  .spec-head { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 32px; }
-  .spec-head p { margin: 0; color: var(--ink-2); font-size: 15.5px; line-height: 1.6; text-wrap: pretty; }
-  .spec-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: 20px; }
-  .code-card {
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    overflow: hidden;
-    display: flex; flex-direction: column;
-  }
-  .code-bar {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 9px 14px;
-    border-bottom: 1px solid var(--line);
-    background: var(--bg-2);
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 10.5px;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--ink-3);
-  }
-  .code-bar b { color: var(--ink-2); font-weight: 500; letter-spacing: 0.08em; }
-  .code-bar .dots { display: flex; gap: 5px; }
-  .code-bar .dots span { width: 8px; height: 8px; border-radius: 50%; background: var(--line); border: 1px solid var(--line-2); }
-  .code-bar .dots span:first-child { background: var(--accent); border-color: var(--accent); }
-  pre.code {
-    margin: 0;
-    padding: 16px 18px 18px;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 11.5px;
-    line-height: 1.65;
-    color: oklch(0.28 0.020 250);
-    overflow-x: auto;
-    background: var(--paper);
-    flex: 1;
-  }
-  .code .kw { color: oklch(0.36 0.16 270); }
-  .code .str { color: oklch(0.42 0.10 60); }
-  .code .num { color: oklch(0.42 0.12 145); }
-  .code .p { color: oklch(0.50 0.020 270); }
-  .taxonomy {
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    padding: 20px 20px;
-    background: var(--paper);
-    display: flex; flex-direction: column; gap: 14px;
-  }
-  .tax-title {
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 10.5px;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: var(--ink-3);
-    display: flex; justify-content: space-between; align-items: baseline;
-    border-bottom: 1px solid var(--line);
-    padding-bottom: 10px;
-  }
-  .tax-title b { color: var(--ink-2); font-weight: 500; }
-  .tax-title .right { color: var(--accent-ink); font-weight: 500; }
-  .tax-group { display: flex; flex-direction: column; gap: 6px; }
-  .tax-group .label {
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: var(--ink-3);
-  }
-  .tax-chips { display: flex; flex-wrap: wrap; gap: 5px; }
-  .chip {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 4px 9px;
-    border: 1px solid var(--line);
-    border-radius: 2px;
-    background: var(--bg);
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 11px;
-    color: var(--ink);
-  }
-  .chip .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+  /* p4 grid */
+  .p4-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:4px;overflow:hidden;margin-top:28px}
+  .p4-item{padding:20px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--paper);display:flex;flex-direction:column;gap:8px}
+  .p4-item:nth-child(3n){border-right:none}.p4-item:nth-last-child(-n+3){border-bottom:none}
+  .p4-icon{font-family:"IBM Plex Mono",monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.14em;color:var(--green-ink)}
+  .p4-name{font-family:"IBM Plex Sans",sans-serif;font-size:15px;font-weight:500;color:var(--ink);line-height:1.25}
+  .p4-desc{font-size:13px;color:var(--ink-2);line-height:1.55}
 
-  /* runtime matrix */
-  .matrix {
-    padding: 56px 0 56px;
-    border-top: 1px solid var(--line);
-    background: var(--bg);
-  }
-
-  /* roadmap strip */
-  .roadmap {
-    padding: 56px 0 56px;
-    border-top: 1px solid var(--line);
-    background: var(--paper);
-  }
-  .roadmap h2 { max-width: 760px; }
-  .roadmap-lede {
-    font-size: 15.5px;
-    color: var(--ink-2);
-    max-width: 620px;
-    margin: 0 0 32px;
-    line-height: 1.6;
-    text-wrap: pretty;
-  }
-  .phase-strip {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 0;
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    overflow: hidden;
-    background: var(--paper);
-  }
-  .phase {
-    padding: 22px 20px 22px;
-    border-right: 1px solid var(--line);
-    position: relative;
-    display: flex; flex-direction: column; gap: 8px;
-    background: var(--paper);
-  }
-  .phase:last-child { border-right: none; }
-  .phase.is-now {
-    background: var(--accent-tint);
-  }
-  .phase.is-now::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: var(--accent);
-  }
-  .phase-marker {
-    display: flex; justify-content: space-between; align-items: baseline;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 10.5px;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: var(--ink-3);
-  }
-  .phase-marker .num {
-    color: var(--accent-ink);
-    font-weight: 500;
-    font-size: 11px;
-  }
-  .phase.is-now .phase-marker .num { color: var(--accent-ink); }
-  .phase-name {
-    font-family: "IBM Plex Sans", sans-serif;
-    font-size: 17px;
-    font-weight: 500;
-    line-height: 1.2;
-    color: var(--ink);
-    letter-spacing: -0.01em;
-  }
-  .phase-desc { font-size: 12.5px; line-height: 1.55; color: var(--ink-2); margin: 0; }
-  .phase-status {
-    margin-top: auto;
-    padding-top: 6px;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--ink-3);
-  }
-  .phase.is-now .phase-status { color: var(--accent-ink); font-weight: 500; }
-
-  /* design log band */
-  .design-log {
-    padding: 48px 0 48px;
-    border-top: 1px solid var(--line);
-    background: var(--bg);
-  }
-  .dlog-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 48px;
-    align-items: start;
-  }
-  .dlog-stats {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0;
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-  .stat {
-    padding: 20px 22px;
-    border-right: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    background: var(--paper);
-  }
-  .stat:nth-child(2n) { border-right: none; }
-  .stat:nth-last-child(-n+2) { border-bottom: none; }
-  .stat .n {
-    font-family: "IBM Plex Sans", sans-serif;
-    font-weight: 300;
-    font-size: 42px;
-    line-height: 1;
-    letter-spacing: -0.03em;
-    color: var(--accent-ink);
-  }
-  .stat .lbl {
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 10.5px;
-    color: var(--ink-2);
-    margin-top: 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-  }
-  .stat .det {
-    font-size: 12.5px;
-    color: var(--ink-3);
-    margin-top: 4px;
-    line-height: 1.5;
-  }
-  .featured-q {
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    padding: 22px 24px 22px;
-    background: var(--paper);
-    border-left: 3px solid var(--accent);
-  }
-  .featured-q .label {
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 10.5px;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: var(--accent-ink);
-    margin-bottom: 10px;
-  }
-  .featured-q .qtitle {
-    font-family: "IBM Plex Sans", sans-serif;
-    font-size: 19px;
-    font-weight: 500;
-    color: var(--ink);
-    margin: 0 0 10px;
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-    text-wrap: balance;
-  }
-  .featured-q .qbody {
-    font-size: 14.5px;
-    color: var(--ink-2);
-    margin: 0 0 16px;
-    line-height: 1.6;
-    text-wrap: pretty;
-  }
-  .featured-q .qmeta {
-    display: flex; gap: 14px; align-items: center;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 11px;
-    color: var(--ink-3);
-    flex-wrap: wrap;
-  }
-  .featured-q .qmeta b { color: var(--accent-ink); font-weight: 500; }
-  .featured-q a {
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 12.5px;
-    color: var(--accent-ink);
-    text-decoration: none;
-    border-bottom: 1px solid currentColor;
-    padding-bottom: 1px;
-    margin-left: auto;
-  }
-  .featured-q a:hover { color: var(--ink); }
-  .mx-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    overflow: hidden;
-    background: var(--paper);
-    margin-top: 28px;
-  }
-  .mx-table th, .mx-table td {
-    padding: 13px 18px;
-    border-bottom: 1px solid var(--line);
-    text-align: left;
-    font-size: 14px;
-    vertical-align: middle;
-  }
-  .mx-table th {
-    background: var(--bg-2);
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 10.5px;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: var(--ink-3);
-    font-weight: 500;
-  }
-  .mx-table th.runtime { color: var(--accent-ink); }
-  .mx-table tbody tr:last-child td { border-bottom: none; }
-  .mx-table td .feat { font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--ink); font-weight: 500; }
-  .mx-table td .desc { font-size: 13px; color: var(--ink-2); margin-top: 2px; }
-  .badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 4px 9px; border-radius: 2px;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 10.5px; font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
-  .b-full { background: oklch(0.92 0.040 155); color: oklch(0.32 0.10 155); }
-  .b-part { background: oklch(0.93 0.045 75); color: oklch(0.36 0.10 75); }
-  .b-miss { background: oklch(0.93 0.030 30); color: oklch(0.40 0.13 30); }
-
-  /* body section */
-  .body-section {
-    padding: 64px 0 56px;
-    border-top: 1px solid var(--line);
-    background: var(--paper);
-  }
-  .section-eyebrow {
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: var(--ink-3);
-    margin-bottom: 14px;
-  }
-  h2 {
-    font-family: "IBM Plex Sans", sans-serif;
-    font-weight: 300;
-    font-size: 32px;
-    line-height: 1.18;
-    letter-spacing: -0.025em;
-    color: var(--ink);
-    margin: 0 0 14px;
-    max-width: 760px;
-    text-wrap: balance;
-  }
-  h2 em { font-family: "Instrument Serif", serif; font-style: italic; color: var(--accent-ink); }
-  .section-lede {
-    font-size: 16px;
-    color: var(--ink-2);
-    max-width: 640px;
-    margin: 0 0 36px;
-    line-height: 1.6;
-    text-wrap: pretty;
-  }
-  .lanes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
-  .lane {
-    padding: 26px 24px 24px;
-    background: var(--paper);
-    display: flex; flex-direction: column; gap: 12px;
-    border-right: 1px solid var(--line);
-    position: relative;
-  }
-  .lane:last-child { border-right: none; }
-  .lane .num {
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 10.5px;
-    color: var(--ink-3);
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-  }
-  .lane .num b { color: var(--accent-ink); font-weight: 500; }
-  .lane h3 {
-    margin: 0;
-    font-family: "IBM Plex Sans", sans-serif;
-    font-weight: 500;
-    font-size: 19px;
-    line-height: 1.25;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-  }
-  .lane p {
-    margin: 0;
-    font-size: 14.5px;
-    line-height: 1.55;
-    color: var(--ink-2);
-  }
-  .lane a {
-    margin-top: auto;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 12.5px;
-    color: var(--accent-ink);
-    text-decoration: none;
-    border-bottom: 1px solid currentColor;
-    align-self: flex-start;
-    padding-bottom: 1px;
-  }
-  .lane a:hover { color: var(--ink); }
+  /* sections */
+  .body-section{padding:64px 0 56px;border-top:1px solid var(--line);background:var(--paper)}
+  .section-eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-3);margin-bottom:14px}
+  h2{font-family:"IBM Plex Sans",sans-serif;font-weight:300;font-size:32px;line-height:1.18;letter-spacing:-.025em;color:var(--ink);margin:0 0 14px;max-width:760px;text-wrap:balance}
+  h2 em{font-family:"Instrument Serif",serif;font-style:italic;color:var(--accent-ink)}
+  .section-lede{font-size:16px;color:var(--ink-2);max-width:640px;margin:0 0 36px;line-height:1.6;text-wrap:pretty}
+  .lanes{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:4px;overflow:hidden}
+  .lane{padding:26px 24px 24px;background:var(--paper);display:flex;flex-direction:column;gap:12px;border-right:1px solid var(--line);position:relative}
+  .lane:last-child{border-right:none}
+  .lane .num{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.18em}
+  .lane .num b{color:var(--accent-ink);font-weight:500}
+  .lane h3{margin:0;font-family:"IBM Plex Sans",sans-serif;font-weight:500;font-size:19px;line-height:1.25;letter-spacing:-.01em;color:var(--ink)}
+  .lane p{margin:0;font-size:14.5px;line-height:1.55;color:var(--ink-2)}
+  .lane a{margin-top:auto;font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--accent-ink);text-decoration:none;border-bottom:1px solid currentColor;align-self:flex-start;padding-bottom:1px}
+  .lane a:hover{color:var(--ink)}
 
   /* footer */
-  footer.site {
-    padding: 28px 0 32px;
-    border-top: 1px solid var(--line);
-    background: var(--bg);
-  }
-  .foot {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: 24px;
-    align-items: baseline;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 11.5px;
-    color: var(--ink-3);
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-  }
-  .foot a { color: var(--ink-2); text-decoration: none; margin-right: 18px; }
-  .foot a:hover { color: var(--ink); }
-  .foot .center { text-align: center; font-family: "Instrument Serif", serif; font-style: italic; font-size: 14.5px; color: var(--ink-3); text-transform: none; letter-spacing: 0; }
+  footer.site{padding:28px 0 32px;border-top:1px solid var(--line);background:var(--bg)}
+  .foot{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:baseline;font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.14em}
+  .foot a{color:var(--ink-2);text-decoration:none;margin-right:18px}.foot a:hover{color:var(--ink)}
+  .foot .center{text-align:center;font-family:"Instrument Serif",serif;font-style:italic;font-size:14.5px;color:var(--ink-3);text-transform:none;letter-spacing:0}
 
-  /* ---------- responsive (mobile + tablet) ---------- */
-  @media (max-width: 980px) {
-    .wrap { padding: 0 24px; }
-    .site-inner { grid-template-columns: auto auto; gap: 14px; }
-    .sheet-meta { display: none; }
-    .nav { display: none; }
-    .hero { padding: 44px 0 56px; }
-    .hero-grid { grid-template-columns: 1fr; gap: 36px; }
-    h1 { font-size: clamp(36px, 8vw, 52px); }
-    .blueprint { height: 380px; }
-    .spec-grid { grid-template-columns: 1fr; gap: 18px; }
-    .spec-head { grid-template-columns: 1fr; gap: 14px; }
-    .matrix { overflow-x: auto; }
-    .mx-table { min-width: 760px; }
-    .phase-strip { grid-template-columns: 1fr; }
-    .phase { border-right: none; border-bottom: 1px solid var(--line); }
-    .phase:last-child { border-bottom: none; }
-    .dlog-grid { grid-template-columns: 1fr; gap: 24px; }
-    .lanes { grid-template-columns: 1fr; }
-    .lane { border-right: none; border-bottom: 1px solid var(--line); }
-    .lane:last-child { border-bottom: none; }
-    .foot { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
-    .foot a { margin-right: 14px; }
-    h2 { font-size: 26px; }
-    .featured-q .qmeta a { margin-left: 0; }
+  @media(max-width:980px){
+    .wrap{padding:0 24px}.site-inner{grid-template-columns:auto auto;gap:14px}.nav{display:none}
+    .hero{padding:44px 0 56px}.hero-grid{grid-template-columns:1fr;gap:36px}
+    h1{font-size:clamp(36px,8vw,52px)}.blueprint{height:380px}
+    .spec-grid,.spec-head{grid-template-columns:1fr;gap:18px}
+    .matrix{overflow-x:auto}.mx-table{min-width:760px}
+    .phase-strip{grid-template-columns:1fr}
+    .phase{border-right:none;border-bottom:1px solid var(--line)}.phase:last-child{border-bottom:none}
+    .dlog-grid{grid-template-columns:1fr;gap:24px}
+    .lanes{grid-template-columns:1fr}.lane{border-right:none;border-bottom:1px solid var(--line)}.lane:last-child{border-bottom:none}
+    .p4-grid{grid-template-columns:1fr}
+    .p4-item{border-right:none!important;border-bottom:1px solid var(--line)!important}.p4-item:last-child{border-bottom:none!important}
+    .foot{display:flex;flex-direction:column;align-items:flex-start;gap:14px}.foot a{margin-right:14px}
+    h2{font-size:26px}.alpha-notice{flex-direction:column;gap:12px}
   }
-  @media (max-width: 520px) {
-    .wrap { padding: 0 18px; }
-    .cta-row { flex-direction: column; align-items: stretch; gap: 10px; }
-    .cta-row .btn { justify-content: center; }
-    .cta-note { margin-left: 0; text-align: center; }
-    .dlog-stats { grid-template-columns: 1fr; }
-    .stat { border-right: none; }
-    .featured-q .qmeta { flex-direction: column; align-items: flex-start; gap: 6px; }
+  @media(max-width:520px){
+    .wrap{padding:0 18px}.cta-row{flex-direction:column;align-items:stretch;gap:10px}.cta-row .btn{justify-content:center}
+    .cta-note{margin-left:0;text-align:center}.dlog-stats{grid-template-columns:1fr}.stat{border-right:none}.runtime-pills{gap:5px}
   }
-  @media (prefers-reduced-motion: reduce) {
-    .blip { animation: none !important; }
-    * { transition-duration: 0.01ms !important; }
-  }
+  @media(prefers-reduced-motion:reduce){.blip{animation:none!important}*{transition-duration:.01ms!important}}
 </style>
 </head>
 <body>
@@ -966,13 +294,15 @@
       <span class="name">Its Harness</span>
     </a>
     <div class="nav">
+      <a href="#spec">FlowSpec</a>
+      <a href="#matrix">Runtimes</a>
+      <a href="#roadmap">Roadmap</a>
       <a href="#involved">Get involved</a>
       <a href="https://github.com/3IVIS/itsharness/discussions">Discussions</a>
-      <a href="https://github.com/3IVIS/itsharness/discussions">RFC</a>
     </div>
     <a class="btn js-gh-star" href="https://github.com/3IVIS/itsharness" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.78 0c2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.84 1.18 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
-      Star<span class="count" data-gh-stars>★ 0</span>
+      Star<span class="count" data-gh-stars>&#9733; 0</span>
     </a>
   </div>
 </header>
@@ -980,29 +310,34 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <div class="eyebrow">OPEN SOURCE · PHASES 0–2 DONE · V0.4</div>
-      <h1>It's all about the <em>harness</em>.<br>It's <em>AI's</em> harness.</h1>
+      <div class="eyebrow"><span class="bar"></span>OPEN SOURCE &#xb7; PUBLIC ALPHA &#xb7; V0.8.0</div>
+      <h1>It&#8217;s all about the <em>harness</em>.<br>It&#8217;s <em>AI&#8217;s</em> harness.</h1>
       <p class="lede">
-        <strong>Its Harness</strong> is an open-source visual builder for production AI harnesses:
-        canvas, neutral spec, safety rails, run loop. One graph editor, one runtime-neutral IR,
-        adapters for <strong>LangGraph</strong>, <strong>CrewAI</strong>, <strong>Mastra</strong>, and (planned)
-        <strong>Microsoft Agent Framework</strong> &mdash; plus <strong>A2A</strong>, the protocol layer
-        that makes Its Harness the orchestrator of orchestrators.
+        <strong>Its Harness</strong> is an open-source visual builder for production AI agent harnesses:
+        canvas, neutral spec, safety rails, run loop. One graph editor, one runtime-neutral IR &#8212;
+        all four runtimes fully executable end-to-end.
       </p>
+      <div class="runtime-pills">
+        <span class="rt-pill"><span class="dot"></span>LangGraph</span>
+        <span class="rt-pill"><span class="dot"></span>CrewAI</span>
+        <span class="rt-pill"><span class="dot"></span>Mastra</span>
+        <span class="rt-pill"><span class="dot"></span>MS Agent Framework</span>
+        <span class="rt-pill"><span class="dot"></span>A2A</span>
+      </div>
       <div class="cta-row">
         <a class="btn js-gh-star" href="https://github.com/3IVIS/itsharness" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.78 0c2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.73.81 1.18 1.84 1.18 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
-          Star on GitHub<span class="count" data-gh-stars>★ 0</span>
+          Star on GitHub<span class="count" data-gh-stars>&#9733; 0</span>
         </a>
-        <span class="cta-note">Apache 2.0 · spec 0.2</span>
+        <span class="cta-note">Apache 2.0 &#xb7; spec 0.2</span>
       </div>
     </div>
 
     <div class="blueprint" id="hgraphB">
       <div class="bp-grid"></div>
-      <div class="bp-title">DWG · <b>FIG-01 / triage flow</b></div>
-      <div class="bp-stage"><span class="blip"></span>phase 2 · runtime live</div>
-      <div class="bp-rev">SPEC · <b>v0.2</b> · ADAPTER · <b>v0.4</b> · HOVER FOR FULL COMPAT</div>
+      <div class="bp-title">DWG &#xb7; <b>FIG-01 / triage flow</b></div>
+      <div class="bp-stage"><span class="blip"></span>all phases done &#xb7; 4 runtimes executable</div>
+      <div class="bp-rev">SPEC &#xb7; <b>v0.2</b> &#xb7; RELEASE &#xb7; <b>v0.8.0</b> &#xb7; HOVER FOR FULL COMPAT</div>
       <svg class="graph-svg" id="hgraphB-svg"></svg>
     </div>
   </div>
@@ -1012,18 +347,17 @@
   <div class="wrap">
     <div class="spec-head">
       <div>
-        <div class="section-eyebrow">§ 02 · specification</div>
-        <h2>FlowSpec <em>v0.2.0</em>. The IR is live. The canvas authors it.</h2>
+        <div class="section-eyebrow">&#167; 02 &#xb7; specification</div>
+        <h2>FlowSpec <em>v0.2.0</em>. The IR is frozen. The canvas authors it.</h2>
       </div>
-      <p>Two required fields, fourteen node types, a discriminated edge union, three optional config sections. The canvas emits this on every change. Adapters consume it. Below — a real flow, in real JSON.</p>
+      <p>Two required fields, fourteen node types, a discriminated edge union, three optional config sections. The canvas emits this on every change. All four runtime adapters consume it. Below &#8212; a real flow, in real JSON.</p>
     </div>
-
     <div class="spec-grid">
       <div class="code-card">
         <div class="code-bar">
           <div class="dots"><span></span><span></span><span></span></div>
           <b>flows/support-triage.flow.json</b>
-          <span>v0.1.0</span>
+          <span>v0.2.0</span>
         </div>
 <pre class="code"><span class="p">{</span>
   <span class="kw">"spec_version"</span><span class="p">:</span> <span class="str">"0.2.0"</span><span class="p">,</span>
@@ -1032,9 +366,9 @@
   <span class="kw">"state_schema"</span><span class="p">:</span> <span class="p">{</span>
     <span class="kw">"type"</span><span class="p">:</span> <span class="str">"object"</span><span class="p">,</span>
     <span class="kw">"properties"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="kw">"query"</span><span class="p">:</span> <span class="p">{</span> <span class="kw">"type"</span><span class="p">:</span> <span class="str">"string"</span> <span class="p">},</span>
+      <span class="kw">"query"</span><span class="p">:</span>    <span class="p">{</span> <span class="kw">"type"</span><span class="p">:</span> <span class="str">"string"</span> <span class="p">},</span>
       <span class="kw">"severity"</span><span class="p">:</span> <span class="p">{</span> <span class="kw">"type"</span><span class="p">:</span> <span class="str">"string"</span><span class="p">,</span> <span class="kw">"default"</span><span class="p">:</span> <span class="str">"low"</span> <span class="p">},</span>
-      <span class="kw">"messages"</span><span class="p">:</span> <span class="p">{</span> <span class="kw">"type"</span><span class="p">:</span> <span class="str">"array"</span><span class="p">,</span> <span class="kw">"reducer"</span><span class="p">:</span> <span class="str">"append"</span> <span class="p">}</span>
+      <span class="kw">"messages"</span><span class="p">:</span> <span class="p">{</span> <span class="kw">"type"</span><span class="p">:</span> <span class="str">"array"</span><span class="p">,</span>  <span class="kw">"reducer"</span><span class="p">:</span> <span class="str">"append"</span> <span class="p">}</span>
     <span class="p">}</span>
   <span class="p">},</span>
   <span class="kw">"nodes"</span><span class="p">:</span> <span class="p">[</span>
@@ -1043,8 +377,7 @@
       <span class="kw">"prompt_template"</span><span class="p">:</span> <span class="str">"Classify severity: {{query}}"</span><span class="p">,</span>
       <span class="kw">"structured_output"</span><span class="p">:</span> <span class="p">{</span> <span class="kw">"schema_ref"</span><span class="p">:</span> <span class="str">"Severity"</span> <span class="p">}</span> <span class="p">},</span>
     <span class="p">{</span> <span class="kw">"type"</span><span class="p">:</span> <span class="str">"condition"</span><span class="p">,</span>       <span class="kw">"id"</span><span class="p">:</span> <span class="str">"route"</span><span class="p">,</span>
-      <span class="kw">"branches"</span><span class="p">:</span> <span class="p">[{</span>
-        <span class="kw">"condition"</span><span class="p">:</span> <span class="p">{</span> <span class="kw">"type"</span><span class="p">:</span> <span class="str">"expr"</span><span class="p">,</span>
+      <span class="kw">"branches"</span><span class="p">:</span> <span class="p">[{</span> <span class="kw">"condition"</span><span class="p">:</span> <span class="p">{</span> <span class="kw">"type"</span><span class="p">:</span> <span class="str">"expr"</span><span class="p">,</span>
           <span class="kw">"expr"</span><span class="p">:</span> <span class="str">"$.state.severity == 'high'"</span> <span class="p">},</span>
         <span class="kw">"target"</span><span class="p">:</span> <span class="str">"escalate"</span> <span class="p">}],</span>
       <span class="kw">"default_target"</span><span class="p">:</span> <span class="str">"answer"</span> <span class="p">},</span>
@@ -1054,12 +387,11 @@
   <span class="p">],</span>
   <span class="kw">"flow_config"</span><span class="p">:</span> <span class="p">{</span>
     <span class="kw">"checkpoint"</span><span class="p">:</span> <span class="p">{</span> <span class="kw">"enabled"</span><span class="p">:</span> <span class="kw">true</span> <span class="p">},</span>
-    <span class="kw">"streaming"</span><span class="p">:</span>  <span class="p">{</span> <span class="kw">"enabled"</span><span class="p">:</span> <span class="kw">true</span><span class="p">,</span> <span class="kw">"mode"</span><span class="p">:</span> <span class="str">"tokens"</span> <span class="p">},</span>
-    <span class="kw">"telemetry"</span><span class="p">:</span>  <span class="p">{</span> <span class="kw">"enabled"</span><span class="p">:</span> <span class="kw">true</span><span class="p">,</span> <span class="kw">"provider"</span><span class="p">:</span> <span class="str">"langfuse"</span> <span class="p">}</span>
+    <span class="kw">"streaming"</span><span class="p">:</span>  <span class="p">{</span> <span class="kw">"enabled"</span><span class="p">:</span> <span class="kw">true</span><span class="p">,</span>  <span class="kw">"mode"</span><span class="p">:</span> <span class="str">"tokens"</span> <span class="p">},</span>
+    <span class="kw">"telemetry"</span><span class="p">:</span>  <span class="p">{</span> <span class="kw">"enabled"</span><span class="p">:</span> <span class="kw">true</span><span class="p">,</span>  <span class="kw">"provider"</span><span class="p">:</span> <span class="str">"langfuse"</span> <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">}</span></pre>
       </div>
-
       <div class="taxonomy">
         <div class="tax-title"><b>node taxonomy</b><span class="right">14 types</span></div>
         <div class="tax-group"><span class="label">i/o</span><div class="tax-chips"><span class="chip"><span class="dot"></span>input</span><span class="chip"><span class="dot"></span>output</span></div></div>
@@ -1077,19 +409,25 @@
 
 <section class="matrix" id="matrix">
   <div class="wrap">
-    <div class="section-eyebrow">§ 03 · runtime conformance</div>
-    <h2 style="max-width:760px">Every node type, <em>mapped</em> across four runtimes.</h2>
+    <div class="section-eyebrow">&#167; 03 &#xb7; runtime conformance</div>
+    <h2 style="max-width:760px">Every node type, <em>mapped</em> across four runtimes. All executable.</h2>
     <table class="mx-table">
-      <thead><tr><th style="width:30%">Feature</th><th class="runtime" style="width:17.5%">LangGraph</th><th class="runtime" style="width:17.5%">CrewAI</th><th class="runtime" style="width:17.5%">Mastra</th><th class="runtime" style="width:17.5%">MS Agent Framework</th></tr></thead>
+      <thead><tr>
+        <th style="width:30%">Feature</th>
+        <th class="runtime" style="width:17.5%">LangGraph</th>
+        <th class="runtime" style="width:17.5%">CrewAI</th>
+        <th class="runtime" style="width:17.5%">Mastra</th>
+        <th class="runtime" style="width:17.5%">MS Agent Framework</th>
+      </tr></thead>
       <tbody>
-        <tr><td><div class="feat">llm_call · structured output</div><div class="desc">Prompt templates, model overrides, validators.</div></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td></tr>
-        <tr><td><div class="feat">agent_role · agent_debate</div><div class="desc">Named personas, multi-agent loops, selection.</div></td><td><span class="badge b-part">via synthesis</span></td><td><span class="badge b-full">role native</span></td><td><span class="badge b-part">via synthesis</span></td><td><span class="badge b-full">debate native</span></td></tr>
-        <tr><td><div class="feat">condition · parallel_fork / join</div><div class="desc">Branching, fan-out, configurable join reducers.</div></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td></tr>
-        <tr><td><div class="feat">hitl_breakpoint</div><div class="desc">Pause, inspect, edit state, resume.</div></td><td><span class="badge b-full">full</span></td><td><span class="badge b-part">partial</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-part">partial</span></td></tr>
-        <tr><td><div class="feat">memory · semantic (vector)</div><div class="desc">Embeddings, top-k, similarity threshold.</div></td><td><span class="badge b-part">via plugin</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td></tr>
-        <tr><td><div class="feat">streaming · tokens / updates</div><div class="desc">Token streaming and graph-update events.</div></td><td><span class="badge b-full">full</span></td><td><span class="badge b-part">partial</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-part">via adapter</span></td></tr>
-        <tr><td><div class="feat">checkpoint · Postgres / Redis</div><div class="desc">Durable execution, resume from any node.</div></td><td><span class="badge b-full">full</span></td><td><span class="badge b-part">via plugin</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-part">via Dapr / Orleans</span></td></tr>
-        <tr><td><div class="feat">A2A protocol · expose &amp; invoke</div><div class="desc">AgentCard generation, cross-framework invocation.</div></td><td colspan="4" style="text-align:center"><span class="badge b-full">framework-agnostic · covers Google ADK, OpenAI &amp; Claude Agent SDKs, HF</span></td></tr>
+        <tr><td><div class="feat">llm_call &#xb7; structured output</div><div class="desc">Prompt templates, model overrides, validators.</div></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td></tr>
+        <tr><td><div class="feat">agent_role &#xb7; agent_debate</div><div class="desc">Named personas, multi-agent loops. MAF maps natively to AgentGroupChat.</div></td><td><span class="badge b-part">via synthesis</span></td><td><span class="badge b-full">role native</span></td><td><span class="badge b-part">via synthesis</span></td><td><span class="badge b-full">AgentGroupChat native</span></td></tr>
+        <tr><td><div class="feat">condition &#xb7; parallel_fork / join</div><div class="desc">Branching, fan-out, configurable join reducers.</div></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td></tr>
+        <tr><td><div class="feat">hitl_breakpoint</div><div class="desc">Pause, inspect, edit state, resume.</div></td><td><span class="badge b-full">full</span></td><td><span class="badge b-part">partial</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">_HitlPause exception</span></td></tr>
+        <tr><td><div class="feat">memory &#xb7; semantic (vector)</div><div class="desc">Embeddings, top-k, similarity threshold.</div></td><td><span class="badge b-part">via plugin</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-full">full</span></td></tr>
+        <tr><td><div class="feat">streaming &#xb7; tokens / updates</div><div class="desc">Token streaming and graph-update events.</div></td><td><span class="badge b-full">full</span></td><td><span class="badge b-part">partial</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-part">via adapter</span></td></tr>
+        <tr><td><div class="feat">checkpoint &#xb7; Postgres / Redis</div><div class="desc">Durable execution, resume from any node.</div></td><td><span class="badge b-full">full</span></td><td><span class="badge b-part">via plugin</span></td><td><span class="badge b-full">full</span></td><td><span class="badge b-part">via Dapr / Orleans</span></td></tr>
+        <tr><td><div class="feat">A2A protocol &#xb7; expose &amp; invoke</div><div class="desc">AgentCard generation, cross-framework invocation.</div></td><td colspan="4" style="text-align:center"><span class="badge b-full">framework-agnostic &#xb7; Google ADK, OpenAI &amp; Claude Agent SDKs, HF</span></td></tr>
       </tbody>
     </table>
   </div>
@@ -1097,39 +435,39 @@
 
 <section class="roadmap" id="roadmap">
   <div class="wrap">
-    <div class="section-eyebrow">§ 04 · roadmap</div>
-    <h2>Five phases. <em>Three</em> done, <em>one</em> underway.</h2>
-    <p class="roadmap-lede">Spec frozen at v0.2 with the RFC closed (ADR-001). Canvas + three adapters live. Observability, HITL, and a security/hardening pass all shipped in v0.4 (pass28). Phase 3 — teams, eval, persisted job store — is the next gate.</p>
+    <div class="section-eyebrow">&#167; 04 &#xb7; roadmap</div>
+    <h2>Five phases. <em>All</em> complete.</h2>
+    <p class="roadmap-lede">All four phases delivered in v0.8.0. FlowSpec v0.2.0 frozen, RFC closed via ADR-001. Canvas, all four runtime adapters, observability, HITL, teams, eval, one-click deploy, marketplace, SSO/OIDC+SCIM, on-prem Helm chart, Yjs real-time collab, and the <code>@itsharness/canvas</code> embeddable npm package &#8212; all live.</p>
     <div class="phase-strip">
-      <div class="phase">
+      <div class="phase is-done">
         <div class="phase-marker"><span class="num">phase 00</span><span>spec</span></div>
         <div class="phase-name">Spec &amp; schema</div>
         <p class="phase-desc">Neutral IR v0.2, 14 node types, 4 runtime maps + A2A, 5 example flows, RFC closed via ADR-001.</p>
-        <div class="phase-status">✓ complete</div>
+        <div class="phase-status">&#10003; complete</div>
       </div>
-      <div class="phase">
-        <div class="phase-marker"><span class="num">phase 01</span><span>canvas + adapters</span></div>
+      <div class="phase is-done">
+        <div class="phase-marker"><span class="num">phase 01</span><span>canvas</span></div>
         <div class="phase-name">Canvas + 3 adapters</div>
         <p class="phase-desc">XYFlow canvas, 14 nodes, Zod validation, auth, versioning. LangGraph + CrewAI execute; Mastra codegen.</p>
-        <div class="phase-status">✓ complete</div>
+        <div class="phase-status">&#10003; complete</div>
       </div>
-      <div class="phase">
-        <div class="phase-marker"><span class="num">phase 02</span><span>observability</span></div>
+      <div class="phase is-done">
+        <div class="phase-marker"><span class="num">phase 02</span><span>obs + hitl</span></div>
         <div class="phase-name">Obs + HITL + hardening</div>
-        <p class="phase-desc">HITL pause/resume, Langfuse self-host (ClickHouse + Redis), per-node traces, LiteLLM costs, security pass.</p>
-        <div class="phase-status">✓ V0.4</div>
+        <p class="phase-desc">HITL pause/resume, Langfuse self-host, per-node OTel traces, LiteLLM costs, 12-fix security pass.</p>
+        <div class="phase-status">&#10003; complete</div>
       </div>
-      <div class="phase is-now">
-        <div class="phase-marker"><span class="num">phase 03</span><span>now</span></div>
-        <div class="phase-name">Teams + eval + persistence</div>
-        <p class="phase-desc">RBAC, JWT revocation, Alembic, Postgres-backed jobs, Mastra runner, DeepEval/Ragas, prompt versioning. 🎯 v1.0.</p>
-        <div class="phase-status">● in progress</div>
+      <div class="phase is-done">
+        <div class="phase-marker"><span class="num">phase 03</span><span>teams + eval</span></div>
+        <div class="phase-name">Teams + eval + deploy</div>
+        <p class="phase-desc">RBAC, JWT revocation, Alembic, Postgres jobs, Mastra runner, DeepEval/Ragas, one-click deploy, marketplace.</p>
+        <div class="phase-status">&#10003; v0.7.0</div>
       </div>
-      <div class="phase">
-        <div class="phase-marker"><span class="num">phase 04</span><span>next</span></div>
-        <div class="phase-name">Enterprise + collab + MS</div>
-        <p class="phase-desc">Real-time collab (Yjs), MS Agent Framework adapter, SSO, on-prem Helm, embeddable canvas package.</p>
-        <div class="phase-status">planned</div>
+      <div class="phase is-done">
+        <div class="phase-marker"><span class="num">phase 04</span><span>enterprise</span></div>
+        <div class="phase-name">Enterprise + collab</div>
+        <p class="phase-desc">MAF adapter, SSO/OIDC+SCIM, Visual CI/CD, Helm chart, Yjs collab, @itsharness/canvas npm package.</p>
+        <div class="phase-status">&#10003; v0.8.0</div>
       </div>
     </div>
   </div>
@@ -1137,27 +475,58 @@
 
 <section class="design-log" id="log">
   <div class="wrap">
-    <div class="section-eyebrow">§ 05 · v0.4 pass28 status</div>
-    <h2 style="max-width:760px">Three runtimes. <em>Hardened.</em> Traced.</h2>
-    <p class="section-lede" style="max-width:620px;margin:14px 0 32px">All 14 node types are drawable, configurable, validated, and — for LangGraph and CrewAI — executable end-to-end. HITL pause/resume works. Every run produces a Langfuse trace with per-node child spans. v0.4 (pass28) closed a 12-fix security and hardening pass on top.</p>
-
+    <div class="section-eyebrow">&#167; 05 &#xb7; v0.8.0 delivery</div>
+    <h2 style="max-width:760px">Four runtimes. <em>All</em> executable. Enterprise-ready.</h2>
+    <p class="section-lede" style="max-width:620px;margin:14px 0 32px">All 14 node types drawable, configurable, validated, and executable across all four runtimes. Phase 4 completes the arc from prototype to production: MS Agent Framework, SSO/SCIM, Helm, Visual CI/CD, real-time collab, and an embeddable React package.</p>
     <div class="dlog-grid">
       <div class="dlog-stats">
-        <div class="stat"><div class="n">14</div><div class="lbl">node types</div><div class="det">Every spec field directly editable. Live execution overlay: pending → running → paused → done / error.</div></div>
-        <div class="stat"><div class="n">3</div><div class="lbl">runtimes</div><div class="det">LangGraph + CrewAI execute via <code style="font-size:11px">POST /run</code>. Mastra full codegen; execution runner planned.</div></div>
-        <div class="stat"><div class="n">82</div><div class="lbl">items shipped</div><div class="det">Phases 0–2 plus the pass28 hardening pass. See the roadmap for the full ledger.</div></div>
-        <div class="stat"><div class="n">12</div><div class="lbl">security fixes</div><div class="det"><code style="font-size:11px">fn_ref</code> allowlist at all 3 entry points, body cap, timing-safe login, CSP, JOB TTL, non-root containers.</div></div>
+        <div class="stat"><div class="n green">240</div><div class="lbl">items shipped</div><div class="det">Across all four phases. 8-pass review on v0.8.0 fixed 20 bugs before release.</div></div>
+        <div class="stat"><div class="n green">4</div><div class="lbl">runtimes executable</div><div class="det">LangGraph, CrewAI, Mastra, and MS Agent Framework all run end-to-end via <code style="font-size:11px">POST /run</code>.</div></div>
+        <div class="stat"><div class="n">14</div><div class="lbl">node types</div><div class="det">All spec fields directly editable. Live execution overlay with pending &#8594; running &#8594; paused &#8594; done / error.</div></div>
+        <div class="stat"><div class="n">8</div><div class="lbl">Alembic migrations</div><div class="det">0001 &#8594; 0008. SSO columns, RBAC, job store, unified deploy, marketplace, multi-tenant namespacing.</div></div>
       </div>
-
       <div class="featured-q">
-        <div class="label">SECURITY &amp; HARDENING</div>
-        <div class="qtitle">Critical: <code>/run</code> now validates <code>fn_ref</code> before <code>exec()</code>.</div>
-        <p class="qbody"><code>POST /run</code> previously skipped <code>validate_spec()</code>, so path-traversal and shell-injection <code>fn_ref</code> values reached <code>exec()</code> directly when callers bypassed <code>/compile</code>. Validation now runs at all three entry points — <code>/compile</code>, <code>/flows</code>, and <code>/run</code>. Two regression tests added. Plus: timing-safe login, 1 MB body cap, CSP header, password policy, proxy-aware rate limiter, <code>JOB_TTL_HOURS</code> eviction, separate LiteLLM database, non-root containers.</p>
+        <div class="label">PHASE 4 HIGHLIGHT &#8212; ENTERPRISE DELIVERY</div>
+        <div class="qtitle">The four-runtime NODE_SUPPORT_MATRIX is complete.</div>
+        <p class="qbody">The MS Agent Framework adapter (<code>maf_adapter.py</code>, ~800 LOC, semantic-kernel v1.x) closes the matrix. <code>agent_debate</code> maps natively to <code>AgentGroupChat</code> + <code>KernelFunctionTerminationStrategy</code> &#8212; the only adapter where this is native rather than synthesised as a loop. Conditional SK imports mean pure transform, HITL, or tool-only flows compile and run without <code>semantic-kernel</code> installed. Alongside MAF: SSO/OIDC + SCIM 2.0, a 5-stage Visual CI/CD pipeline, a 15-file on-prem Helm chart covering all 9 services, Yjs real-time collab with multi-user cursors and IndexedDB offline persistence, and the <code>@itsharness/canvas</code> embeddable npm package.</p>
         <div class="qmeta">
-          <span>severity · <b>critical</b></span>
-          <span>fixes · #2–#26, #45</span>
-          <span>status · shipped in v0.4</span>
+          <span>release &#xb7; <b>v0.8.0</b></span>
+          <span>items this phase &#xb7; <b>6</b></span>
+          <span>total &#xb7; <b>240</b></span>
         </div>
+      </div>
+    </div>
+    <div class="section-eyebrow" style="margin-top:48px;margin-bottom:20px">Phase 4 &#8212; six deliverables</div>
+    <div class="p4-grid">
+      <div class="p4-item">
+        <div class="p4-icon">&#10003; adapter</div>
+        <div class="p4-name">MS Agent Framework</div>
+        <div class="p4-desc">~800 LOC, semantic-kernel v1.x. All 14 node types. <code>agent_debate</code> &#8594; native <code>AgentGroupChat</code>. Conditional SK imports. 38-test suite. Completes the four-runtime matrix.</div>
+      </div>
+      <div class="p4-item">
+        <div class="p4-icon">&#10003; auth</div>
+        <div class="p4-name">SSO / OIDC + SCIM 2.0</div>
+        <div class="p4-desc">OIDC auth-code flow, single-use refresh token rotation, SCIM deactivation, group-claim &#8594; org-role mapping. Migration 0008. 30 tests.</div>
+      </div>
+      <div class="p4-item">
+        <div class="p4-icon">&#10003; ci/cd</div>
+        <div class="p4-name">Visual CI/CD pipeline</div>
+        <div class="p4-desc">5-stage <code>deploy.yml</code>. <code>deploy_flows.py</code> + <code>smoke_test.py</code>. Updated <code>ci.yml</code> and <code>eval.yml</code> with MAF gates and debate quality metrics.</div>
+      </div>
+      <div class="p4-item">
+        <div class="p4-icon">&#10003; infra</div>
+        <div class="p4-name">On-prem Helm chart</div>
+        <div class="p4-desc">15-file chart. All 9 services. Bitnami sub-charts for Postgres/Redis. Full SSO env var wiring. <code>existingSecret</code> escape hatch. SIGTERM handling.</div>
+      </div>
+      <div class="p4-item">
+        <div class="p4-icon">&#10003; collab</div>
+        <div class="p4-name">Real-time collab (Yjs)</div>
+        <div class="p4-desc">8 files, 743 LOC. Yjs CRDT + y-websocket + XYFlow binding. Multi-user cursors + presence. IndexedDB offline persistence. Opt-in via <code>docker-compose.collab.yml</code>.</div>
+      </div>
+      <div class="p4-item">
+        <div class="p4-icon">&#10003; package</div>
+        <div class="p4-name">@itsharness/canvas</div>
+        <div class="p4-desc"><code>ItsHarnessCanvas</code> React component. Per-instance Zustand store &#8212; safe to mount multiple times. ESM + CJS + types. <code>onSpecChange</code>, <code>execStats</code>, <code>theme</code> props. Publish CI on <code>canvas-v*</code> tags.</div>
       </div>
     </div>
   </div>
@@ -1165,32 +534,38 @@
 
 <section class="body-section" id="involved">
   <div class="wrap">
-    <div class="section-eyebrow">§ 06 · getting involved</div>
-    <h2>The runtime is <em>live</em>. Phase 3 is wide open.</h2>
-    <p class="section-lede">
-      Spec, canvas, three adapters, and the security pass are landed. The next gate — teams, eval,
-      persistence — is the highest-leverage place to contribute. Three lanes, three weeks-of-effort,
-      pick whichever fits.
-    </p>
+    <div class="section-eyebrow">&#167; 06 &#xb7; public alpha</div>
+    <h2>Its Harness is in <em>public alpha</em>. We need your flows.</h2>
+    <p class="section-lede">All four runtimes are executable and the feature set is complete, but this is alpha software &#8212; rough edges exist and your real-world flows will find them faster than any test suite. Two things matter most right now: bugs you hit, and features you wish existed.</p>
+
+    <div class="alpha-notice">
+      <div class="alpha-notice__icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      <div class="alpha-notice__body">
+        <div class="alpha-notice__title">Public alpha &#8212; expect rough edges</div>
+        <p class="alpha-notice__text">APIs may shift, Docker Compose behaviour may differ across environments, and edge cases in less-common node combinations are not yet fully covered. Run it, break it, and tell us what happened. Every report directly shapes what gets fixed next.</p>
+      </div>
+    </div>
 
     <div class="lanes">
       <div class="lane">
-        <div class="num">track <b>A</b> · build</div>
-        <h3>Claim a Phase 3 module</h3>
-        <p>RBAC + JWT revocation, Alembic migrations, Postgres-backed job store, Mastra execution runner, DeepEval / Ragas eval harness, prompt versioning. Each issue is scoped tight enough that a weekend can land something whole.</p>
-        <a href="https://github.com/3IVIS/itsharness/issues?q=is%3Aissue+is%3Aopen+label%3Aphase-3" target="_blank" rel="noopener">Phase 3 issues →</a>
+        <div class="num">track <b>A</b> &#xb7; run &amp; report</div>
+        <h3>Run it against your flows</h3>
+        <p>One <code>docker compose up</code> starts all nine services. Point it at a real flow &#8212; your actual use case, not a toy example. When something breaks, crashes silently, or produces wrong output, open a bug report. Include your FlowSpec JSON, the runtime you used, and the full error. The more specific, the faster it gets fixed.</p>
+        <a href="https://github.com/3IVIS/itsharness/issues/new?template=bug_report.md" target="_blank" rel="noopener">Report a bug &#8594;</a>
       </div>
       <div class="lane">
-        <div class="num">track <b>B</b> · run</div>
-        <h3>Run the alpha</h3>
-        <p>Three runtimes work end-to-end (LangGraph + CrewAI execute, Mastra compiles). HITL, Langfuse, LiteLLM all wired. Point it at a real flow of yours and file what breaks.</p>
-        <a href="https://github.com/3IVIS/itsharness#quick-start" target="_blank" rel="noopener">Quick-start →</a>
+        <div class="num">track <b>B</b> &#xb7; request</div>
+        <h3>Tell us what&#8217;s missing</h3>
+        <p>Missing a node type? A runtime behaviour that doesn&#8217;t map cleanly? An integration you&#8217;d use every day? Open a feature request. Describe what you&#8217;re trying to build and where Its Harness falls short &#8212; concrete use cases carry far more weight than abstract asks. All requests are triaged publicly.</p>
+        <a href="https://github.com/3IVIS/itsharness/issues/new?template=feature_request.md" target="_blank" rel="noopener">Request a feature &#8594;</a>
       </div>
       <div class="lane">
-        <div class="num">track <b>C</b> · extend</div>
+        <div class="num">track <b>C</b> &#xb7; extend</div>
         <h3>Build a node pack</h3>
-        <p>The FlowSpec is frozen at v0.2.0 with semantics codified in ADR-001. Third-party node types as npm packages (<code style="font-size:11.5px">@itsharness/nodes/…</code>) are the marketplace target for v1.0.</p>
-        <a href="https://github.com/3IVIS/itsharness/tree/main/spec" target="_blank" rel="noopener">Read the spec →</a>
+        <p>FlowSpec is frozen at v0.2.0, semantics codified in ADR-001. Third-party node types as npm packages (<code style="font-size:11.5px">@itsharness/nodes/&#8230;</code>) are the marketplace target. Six verified seed packages ship today &#8212; the spec and canvas package are stable enough to build on.</p>
+        <a href="https://github.com/3IVIS/itsharness/tree/main/spec" target="_blank" rel="noopener">Read the spec &#8594;</a>
       </div>
     </div>
   </div>
@@ -1202,256 +577,116 @@
       <a href="https://github.com/3IVIS/itsharness" target="_blank" rel="noopener">GitHub</a>
       <a href="https://github.com/3IVIS/itsharness/discussions" target="_blank" rel="noopener">Discussions</a>
       <a href="https://github.com/3IVIS/itsharness/discussions" target="_blank" rel="noopener">RFC</a>
-      <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener">License · Apache 2.0</a>
+      <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener">License &#xb7; Apache 2.0</a>
     </div>
-    <div class="center">it's all about the harness, after all.</div>
-    <div>© 2026 Its Harness contributors</div>
+    <div class="center">it&#8217;s all about the harness, after all.</div>
+    <div>&#169; 2026 Its Harness contributors</div>
   </div>
 </footer>
 
 <script>
 (function(){
-  const frame = document.getElementById('hgraphB');
-  const svg   = document.getElementById('hgraphB-svg');
-  if (!frame || !svg) return;
-
-  /* W = 160 matches the ~196-260px range of .cf-node, scaled to fit the hero column.
-     H = 30 is the *default-state* header height; the compat row expands the
-     node downward on hover, just like the real canvas (cf-node__compat--full). */
-  const W = 160, H = 30;
-  const HEAD_CY = 15;  /* vertical center of the header — where handles live */
-
-  /* Lucide-style 24×24 stroke icons — match the real canvas */
-  const ICONS = {
-    input:
-      '<path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>' +
-      '<polyline points="10 17 15 12 10 7"/>' +
-      '<line x1="15" x2="3" y1="12" y2="12"/>',
-    llm_call:
-      '<path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.582a.5.5 0 0 1 0 .962L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>' +
-      '<path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/>',
-    condition:
-      '<line x1="6" x2="6" y1="3" y2="15"/>' +
-      '<circle cx="18" cy="6" r="3"/>' +
-      '<circle cx="6" cy="18" r="3"/>' +
-      '<path d="M18 9a9 9 0 0 1-9 9"/>',
-    hitl_breakpoint:
-      '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>' +
-      '<circle cx="9" cy="7" r="4"/>' +
-      '<polyline points="16 11 18 13 22 9"/>',
-    output:
-      '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>' +
-      '<polyline points="16 17 21 12 16 7"/>' +
-      '<line x1="21" x2="9" y1="12" y2="12"/>',
+  const frame=document.getElementById('hgraphB'),svg=document.getElementById('hgraphB-svg');
+  if(!frame||!svg)return;
+  const W=160,H=30,HEAD_CY=15;
+  const ICONS={
+    input:'<path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/>',
+    llm_call:'<path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.582a.5.5 0 0 1 0 .962L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/>',
+    condition:'<line x1="6" x2="6" y1="3" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/>',
+    hitl_breakpoint:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/>',
+    output:'<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/>'
   };
-
-  /* Accents mirror src/canvas/nodes/BaseNode.tsx NODE_HEX (v0.2) */
-  const ACCENT = {
-    input:           '#3b82f6',
-    llm_call:        '#8b5cf6',
-    condition:       '#f59e0b',
-    hitl_breakpoint: '#f97316',
-    output:          '#6b7280',
-  };
-
-  /* Mirrors src/spec/schema.ts ADAPTER_LABELS */
-  const ADAPTER_LBL = ['LG','CR','MA','MS'];
-
-  /* Mirrors src/canvas/nodes/BaseNode.tsx NODE_GLYPH_MOD — small subscript
-     that distinguishes family members sharing a hue. None of the nodes in
-     this triage flow use a shared hue, so all entries return ''. */
-  const GLYPH_MOD = {
-    memory_read:   '↑',
-    memory_write:  '↓',
-    parallel_fork: '⊕',
-    parallel_join: '⊖',
-    agent_role:    '◉',
-    agent_debate:  '⋯',
-  };
-
-  /* Mirrors src/canvas/nodes/BaseNode.tsx NODE_TYPE_LABELS — hitl_breakpoint → 'hitl' */
-  const TYPE_LABEL = { hitl_breakpoint: 'hitl' };
-
-  /* The flow has a preferred adapter (langgraph) — drives the single compat-pin
-     shown in the header. Index 0 of each node's compat array. */
-  const PINNED_IDX = 0;
-
-  /* Triage flow — input → classify → route → (escalate ⏶ | answer ⏷) → reply
-     Positions widened for the new W=160 nodes; vertical layout preserved. */
-  const nodes = [
-    { id: 'in',       type: 'input',           label: 'user_query', x:  15, y: 230, compat: ['full','full','full','full'] },
-    { id: 'classify', type: 'llm_call',        label: 'classify',   x: 205, y: 230, compat: ['full','full','full','full'] },
-    { id: 'route',    type: 'condition',       label: 'route',      x: 395, y: 230, compat: ['full','full','full','full'] },
-    { id: 'escalate', type: 'hitl_breakpoint', label: 'escalate',   x: 395, y:  80, compat: ['full','part','full','part'] },
-    { id: 'answer',   type: 'llm_call',        label: 'answer',     x: 205, y: 380, compat: ['full','full','full','full'] },
-    { id: 'out',      type: 'output',          label: 'reply',      x: 395, y: 380, compat: ['full','full','full','full'] },
+  const ACCENT={input:'#3b82f6',llm_call:'#8b5cf6',condition:'#f59e0b',hitl_breakpoint:'#f97316',output:'#6b7280'};
+  const ADAPTER_LBL=['LG','CR','MA','MS'],PINNED_IDX=0;
+  const nodes=[
+    {id:'in',      type:'input',          label:'user_query',x:15, y:230,compat:['full','full','full','full']},
+    {id:'classify',type:'llm_call',       label:'classify',  x:205,y:230,compat:['full','full','full','full']},
+    {id:'route',   type:'condition',      label:'route',     x:395,y:230,compat:['full','full','full','full']},
+    {id:'escalate',type:'hitl_breakpoint',label:'escalate',  x:395,y:80, compat:['full','part','full','full']},
+    {id:'answer',  type:'llm_call',       label:'answer',    x:205,y:380,compat:['full','full','full','full']},
+    {id:'out',     type:'output',         label:'reply',     x:395,y:380,compat:['full','full','full','full']}
   ];
-
-  const edges = [
-    { from: 'in',       to: 'classify' },                                 /* R → L */
-    { from: 'classify', to: 'route' },                                    /* R → L */
-    { from: 'route',    to: 'escalate', srcSide: 'T', tgtSide: 'B' },     /* up    */
-    { from: 'route',    to: 'answer',   srcSide: 'B', tgtSide: 'T' },     /* down-left */
-    { from: 'answer',   to: 'out' },                                      /* R → L */
+  const edges=[
+    {from:'in',to:'classify'},
+    {from:'classify',to:'route'},
+    {from:'route',to:'escalate',srcSide:'T',tgtSide:'B'},
+    {from:'route',to:'answer',srcSide:'B',tgtSide:'T'},
+    {from:'answer',to:'out'}
   ];
-
-  function renderNodes() {
-    nodes.forEach(n => {
-      const accent = ACCENT[n.type] || '#6366f1';
-      /* full 4-runtime row — rendered hidden, revealed by CSS on hover/drag */
-      const compatHtml = n.compat.map((lvl, i) => {
-        const cls = lvl === 'full' ? 'full' : lvl === 'part' ? 'part' : 'miss';
-        const pin = i === PINNED_IDX ? ' pinned' : '';
-        return '<span class="rt ' + cls + pin + '">' + ADAPTER_LBL[i] + '</span>';
+  function renderNodes(){
+    nodes.forEach(n=>{
+      const accent=ACCENT[n.type]||'#6366f1';
+      const compatHtml=n.compat.map((lvl,i)=>{
+        const cls=lvl==='full'?'full':lvl==='part'?'part':'miss';
+        const pin=i===PINNED_IDX?' pinned':'';
+        return '<span class="rt '+cls+pin+'">'+ADAPTER_LBL[i]+'</span>';
       }).join('');
-      /* single pinned-compat pill in the header — replaces the old type chip */
-      const pinLvl = n.compat[PINNED_IDX];
-      const pinCls = pinLvl === 'full' ? 'full' : pinLvl === 'part' ? 'part' : 'miss';
-      const pinHtml = '<span class="compat-pin ' + pinCls + '">' + ADAPTER_LBL[PINNED_IDX] + '</span>';
-      const glyph  = GLYPH_MOD[n.type] || '';
-      const glyphHtml = glyph ? '<span class="cv-node__glyph-mod">' + glyph + '</span>' : '';
-      /* hitl_breakpoint renders as 'hitl' by default in BaseNode; respect data.label if set */
-      const label = n.label || TYPE_LABEL[n.type] || n.type;
-
-      const el = document.createElement('div');
-      el.className = 'cv-node';
-      el.dataset.id = n.id;
-      el.style.setProperty('--node-accent', accent);
-      el.style.left = n.x + 'px';
-      el.style.top  = n.y + 'px';
-      el.innerHTML =
-        '<div class="cv-node__head">' +
-          '<span class="cv-node__icon-stack">' +
-            '<span class="cv-node__icon"><svg viewBox="0 0 24 24">' + (ICONS[n.type] || '') + '</svg></span>' +
-            glyphHtml +
-          '</span>' +
-          '<span class="cv-node__label">' + label + '</span>' +
-          pinHtml +
-        '</div>' +
-        '<div class="cv-node__compat">' + compatHtml + '</div>' +
-        '<span class="cv-handle l"></span>' +
-        '<span class="cv-handle r"></span>';
-      frame.appendChild(el);
-      n.el = el;
-      attachDrag(n);
+      const pinCls=n.compat[PINNED_IDX]==='full'?'full':n.compat[PINNED_IDX]==='part'?'part':'miss';
+      const el=document.createElement('div');
+      el.className='cv-node';el.dataset.id=n.id;
+      el.style.setProperty('--node-accent',accent);
+      el.style.left=n.x+'px';el.style.top=n.y+'px';
+      el.innerHTML='<div class="cv-node__head"><span class="cv-node__icon-stack"><span class="cv-node__icon"><svg viewBox="0 0 24 24">'+(ICONS[n.type]||'')+'</svg></span></span><span class="cv-node__label">'+n.label+'</span><span class="compat-pin '+pinCls+'">'+ADAPTER_LBL[PINNED_IDX]+'</span></div><div class="cv-node__compat">'+compatHtml+'</div><span class="cv-handle l"></span><span class="cv-handle r"></span>';
+      frame.appendChild(el);n.el=el;attachDrag(n);
     });
   }
-
-  /* Endpoint: x, y just past the handle on the chosen side + outward unit-vector for the bezier handle.
-     L/R handles live at the head center (HEAD_CY), not the box center, so edges stay attached
-     visually even when the compat row expands on hover. */
-  function endpoint(node, side) {
-    const HOFF = 7;  /* push start/end past the handle dot so the line is visible */
-    switch (side) {
-      case 'R': return { x: node.x + W + HOFF,  y: node.y + HEAD_CY,    dx:  1, dy:  0 };
-      case 'L': return { x: node.x - HOFF,       y: node.y + HEAD_CY,    dx: -1, dy:  0 };
-      case 'T': return { x: node.x + W/2,        y: node.y - HOFF,       dx:  0, dy: -1 };
-      case 'B': return { x: node.x + W/2,        y: node.y + H + HOFF,   dx:  0, dy:  1 };
-    }
+  function endpoint(node,side){
+    const HOFF=7;
+    if(side==='R')return{x:node.x+W+HOFF,y:node.y+HEAD_CY,dx:1,dy:0};
+    if(side==='L')return{x:node.x-HOFF,y:node.y+HEAD_CY,dx:-1,dy:0};
+    if(side==='T')return{x:node.x+W/2,y:node.y-HOFF,dx:0,dy:-1};
+    return{x:node.x+W/2,y:node.y+H+HOFF,dx:0,dy:1};
   }
-  function pathFor(src, tgt) {
-    const dist = Math.max(Math.max(Math.abs(tgt.x - src.x), Math.abs(tgt.y - src.y)) * 0.5, 18);
-    const c1x = src.x + src.dx * dist;
-    const c1y = src.y + src.dy * dist;
-    const c2x = tgt.x + tgt.dx * dist;
-    const c2y = tgt.y + tgt.dy * dist;
-    return 'M ' + src.x + ' ' + src.y +
-           ' C ' + c1x + ' ' + c1y + ', ' + c2x + ' ' + c2y + ', ' + tgt.x + ' ' + tgt.y;
+  function pathFor(s,t){
+    const d=Math.max(Math.max(Math.abs(t.x-s.x),Math.abs(t.y-s.y))*.5,18);
+    return'M '+s.x+' '+s.y+' C '+(s.x+s.dx*d)+' '+(s.y+s.dy*d)+', '+(t.x+t.dx*d)+' '+(t.y+t.dy*d)+', '+t.x+' '+t.y;
   }
-
-  function syncSvg() {
-    const w = frame.clientWidth;
-    const h = frame.clientHeight;
-    svg.setAttribute('width', w);
-    svg.setAttribute('height', h);
-    svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
-  }
-
-  function drawEdges() {
-    syncSvg();
-    const ns = 'http://www.w3.org/2000/svg';
-    while (svg.firstChild) svg.removeChild(svg.firstChild);
-    const defs = document.createElementNS(ns, 'defs');
-    defs.innerHTML =
-      '<marker id="arrEdge" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">' +
-        '<path d="M0 0 L10 5 L0 10 z" fill="#a0a0c8"/>' +
-      '</marker>';
+  function syncSvg(){const w=frame.clientWidth,h=frame.clientHeight;svg.setAttribute('width',w);svg.setAttribute('height',h);svg.setAttribute('viewBox','0 0 '+w+' '+h);}
+  function drawEdges(){
+    syncSvg();const ns='http://www.w3.org/2000/svg';
+    while(svg.firstChild)svg.removeChild(svg.firstChild);
+    const defs=document.createElementNS(ns,'defs');
+    defs.innerHTML='<marker id="arrEdge" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#a0a0c8"/></marker>';
     svg.appendChild(defs);
-    edges.forEach(e => {
-      const A = nodes.find(n => n.id === e.from);
-      const B = nodes.find(n => n.id === e.to);
-      if (!A || !B) return;
-      const src = endpoint(A, e.srcSide || 'R');
-      const tgt = endpoint(B, e.tgtSide || 'L');
-      const path = document.createElementNS(ns, 'path');
-      path.setAttribute('class', 'edge');
-      path.setAttribute('d', pathFor(src, tgt));
-      path.setAttribute('marker-end', 'url(#arrEdge)');
+    edges.forEach(e=>{
+      const A=nodes.find(n=>n.id===e.from),B=nodes.find(n=>n.id===e.to);
+      if(!A||!B)return;
+      const path=document.createElementNS(ns,'path');
+      path.setAttribute('class','edge');
+      path.setAttribute('d',pathFor(endpoint(A,e.srcSide||'R'),endpoint(B,e.tgtSide||'L')));
+      path.setAttribute('marker-end','url(#arrEdge)');
       svg.appendChild(path);
     });
   }
-
-  function attachDrag(n) {
-    let sx, sy, ox, oy;
-    n.el.addEventListener('pointerdown', e => {
-      e.preventDefault();
-      n.el.classList.add('dragging');
-      n.el.setPointerCapture(e.pointerId);
-      sx = e.clientX; sy = e.clientY; ox = n.x; oy = n.y;
+  function attachDrag(n){
+    let sx,sy,ox,oy;
+    n.el.addEventListener('pointerdown',e=>{e.preventDefault();n.el.classList.add('dragging');n.el.setPointerCapture(e.pointerId);sx=e.clientX;sy=e.clientY;ox=n.x;oy=n.y;});
+    n.el.addEventListener('pointermove',e=>{
+      if(!n.el.classList.contains('dragging'))return;
+      const fw=frame.clientWidth,fh=frame.clientHeight;
+      n.x=Math.max(4,Math.min(fw-W-4,ox+(e.clientX-sx)));
+      n.y=Math.max(40,Math.min(fh-H-30,oy+(e.clientY-sy)));
+      n.el.style.left=n.x+'px';n.el.style.top=n.y+'px';drawEdges();
     });
-    n.el.addEventListener('pointermove', e => {
-      if (!n.el.classList.contains('dragging')) return;
-      const fw = frame.clientWidth, fh = frame.clientHeight;
-      n.x = Math.max(4,    Math.min(fw - W - 4, ox + (e.clientX - sx)));
-      n.y = Math.max(40,   Math.min(fh - H - 30, oy + (e.clientY - sy)));
-      n.el.style.left = n.x + 'px';
-      n.el.style.top  = n.y + 'px';
-      drawEdges();
-    });
-    n.el.addEventListener('pointerup',     () => n.el.classList.remove('dragging'));
-    n.el.addEventListener('pointercancel', () => n.el.classList.remove('dragging'));
+    n.el.addEventListener('pointerup',()=>n.el.classList.remove('dragging'));
+    n.el.addEventListener('pointercancel',()=>n.el.classList.remove('dragging'));
   }
-
-  renderNodes();
-  requestAnimationFrame(drawEdges);
-  window.addEventListener('resize', drawEdges);
+  renderNodes();requestAnimationFrame(drawEdges);window.addEventListener('resize',drawEdges);
 })();
 </script>
 
 <script>
-/* live GitHub star count — keeps "★ 0" baseline if the API is unreachable */
 (function(){
-  const targets = document.querySelectorAll('[data-gh-stars]');
-  if (!targets.length) return;
-  const REPO = '3IVIS/itsharness';
-  const CACHE_KEY = 'gh-stars:' + REPO;
-  const CACHE_TTL = 10 * 60 * 1000; // 10 min — keeps us well clear of the 60/hr unauthed limit
-
-  function format(n){
-    if (n >= 1000) return (n / 1000).toFixed(n >= 10000 ? 0 : 1).replace(/\.0$/, '') + 'k';
-    return String(n);
-  }
-  function paint(n){
-    const label = '★ ' + format(n);
-    targets.forEach(el => { el.textContent = label; });
-  }
-
-  try {
-    const cached = JSON.parse(sessionStorage.getItem(CACHE_KEY) || 'null');
-    if (cached && Date.now() - cached.t < CACHE_TTL && typeof cached.n === 'number') {
-      paint(cached.n);
-      return;
-    }
-  } catch (e) {}
-
-  fetch('https://api.github.com/repos/' + REPO, { headers: { 'Accept': 'application/vnd.github+json' } })
-    .then(r => r.ok ? r.json() : null)
-    .then(data => {
-      if (!data || typeof data.stargazers_count !== 'number') return;
-      paint(data.stargazers_count);
-      try { sessionStorage.setItem(CACHE_KEY, JSON.stringify({ n: data.stargazers_count, t: Date.now() })); } catch (e) {}
-    })
-    .catch(() => { /* leave baseline */ });
+  const targets=document.querySelectorAll('[data-gh-stars]');
+  if(!targets.length)return;
+  const REPO='3IVIS/itsharness',CACHE_KEY='gh-stars:'+REPO,CACHE_TTL=600000;
+  function format(n){return n>=1000?(n/1000).toFixed(n>=10000?0:1).replace(/\.0$/,'')+'k':String(n);}
+  function paint(n){const l='\u2605 '+format(n);targets.forEach(el=>{el.textContent=l;});}
+  try{const c=JSON.parse(sessionStorage.getItem(CACHE_KEY)||'null');if(c&&Date.now()-c.t<CACHE_TTL&&typeof c.n==='number'){paint(c.n);return;}}catch(e){}
+  fetch('https://api.github.com/repos/'+REPO,{headers:{'Accept':'application/vnd.github+json'}})
+    .then(r=>r.ok?r.json():null)
+    .then(d=>{if(!d||typeof d.stargazers_count!=='number')return;paint(d.stargazers_count);try{sessionStorage.setItem(CACHE_KEY,JSON.stringify({n:d.stargazers_count,t:Date.now()}));}catch(e){}})
+    .catch(()=>{});
 })();
 </script>
 
