@@ -1,8 +1,8 @@
-# itsharness
+# Its Harness
 
 > Open-source visual builder for production AI agent harnesses. One canvas, one runtime-neutral FlowSpec, four runtime adapters plus the A2A protocol. Apache 2.0. Currently in design stage.
 
-itsharness is in **Phase 0 of 5** — the FlowSpec v0.1.0 is frozen and a public design log of 36 questions is open. Public release is targeted for week 20. The project is recruiting collaborators on the design, not yet on the code.
+Its Harness is in **Phase 0 of 5** — the FlowSpec v0.1.0 is frozen and a public design log of 36 questions is open. Public release is targeted for week 20. The project is recruiting collaborators on the design, not yet on the code.
 
 ## Key facts
 
@@ -14,7 +14,7 @@ itsharness is in **Phase 0 of 5** — the FlowSpec v0.1.0 is frozen and a public
 
 ## What it does
 
-itsharness lets you author AI agent workflows visually on a canvas. The canvas emits a runtime-neutral JSON specification called FlowSpec. Runtime adapters then translate FlowSpec into native code for the agent framework you target. Swap runtimes without rewriting the flow.
+Its Harness lets you author AI agent workflows visually on a canvas. The canvas emits a runtime-neutral JSON specification called FlowSpec. Runtime adapters then translate FlowSpec into native code for the agent framework you target. Swap runtimes without rewriting the flow.
 
 ## Supported runtimes
 
@@ -77,8 +77,8 @@ Three lanes:
 
 ## Frequently asked questions
 
-**What is itsharness?**  
-An open-source visual builder for production AI agent harnesses. You draw flows on a canvas; itsharness compiles them into a runtime-neutral FlowSpec, then adapters translate that into LangGraph, CrewAI, Mastra, or Microsoft Agent Framework code. The A2A protocol layer covers everything else.
+**What is Its Harness?**  
+An open-source visual builder for production AI agent harnesses. You draw flows on a canvas; Its Harness compiles them into a runtime-neutral FlowSpec, then adapters translate that into LangGraph, CrewAI, Mastra, or Microsoft Agent Framework code. The A2A protocol layer covers everything else.
 
 **Why a neutral spec instead of building on one framework?**  
 The neutral IR decouples the canvas from any runtime. Adding a new runtime means writing one adapter file. Canvas features (versioning, RBAC, evals, collab) are completely decoupled from runtime choice.
