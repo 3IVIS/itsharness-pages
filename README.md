@@ -1,4 +1,4 @@
-# itsharness
+# Its Harness
 
 Open-source visual builder for production AI agent harnesses. One canvas, one runtime-neutral FlowSpec, four runtime adapters plus A2A.
 
