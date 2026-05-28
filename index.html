@@ -536,9 +536,10 @@ footer{
     <nav class="nav">
       <a href="#why">Why</a>
       <a href="#quickstart">Get started</a>
-      <a href="#models">Models</a>
-      <a href="#examples">Examples</a>
+      <a href="#flowspec">How it works</a>
       <a href="#runtimes">Frameworks</a>
+      <a href="#examples">Examples</a>
+      <a href="#involved">Contribute</a>
     </nav>
 
     <a class="btn" href="https://github.com/3IVIS/itsharness">
@@ -666,7 +667,114 @@ footer{
 
 </section>
 
-<section class="section" id="flowspec">
+<section class="section alt" id="quickstart">
+
+  <div class="wrap">
+
+    <div class="section-eyebrow">
+      GET STARTED
+    </div>
+
+    <h2>
+      Up and running in
+      <em>two commands.</em>
+    </h2>
+
+    <p class="section-lede">
+      Its Harness runs entirely on your machine via Docker. No cloud account, no sign-up — just clone and run.
+    </p>
+
+    <div class="flow-grid">
+
+      <div class="code-card">
+        <div class="code-bar" style="display:flex;align-items:center;gap:10px;"><span style="display:flex;gap:4px;"><span style="width:8px;height:8px;border-radius:50%;background:var(--accent);"></span><span style="width:8px;height:8px;border-radius:50%;background:var(--line);border:1px solid oklch(.74 .016 270);"></span><span style="width:8px;height:8px;border-radius:50%;background:var(--line);border:1px solid oklch(.74 .016 270);"></span></span>terminal</div>
+<pre># 1. Generate secrets and configure your environment
+./setup-env.sh
+
+# 2. Start all services
+docker compose up</pre>
+      </div>
+
+      <div class="feature-box">
+        <h3>What starts up</h3>
+        <div class="feature-list">
+          <div class="feature-item">
+            <strong>Canvas — <code style="font-size:13px">localhost:3000</code></strong>
+            <p>The visual workflow editor. Draw your flows here.</p>
+          </div>
+          <div class="feature-item">
+            <strong>API — <code style="font-size:13px">localhost:8000</code></strong>
+            <p>The backend that compiles and runs your flows.</p>
+          </div>
+          <div class="feature-item">
+            <strong>Langfuse — <code style="font-size:13px">localhost:3001</code></strong>
+            <p>Monitoring dashboard. Every run is traced automatically.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <p style="font-size:15px; color:var(--ink-2); margin-top:28px;">
+      Nine services in total. <code style="font-size:13px">setup-env.sh</code> handles all the secrets and configuration automatically — you only need to provide your LLM API key (or skip it and use a free local model instead).
+    </p>
+
+  </div>
+
+</section>
+
+<section class="section" id="models">
+
+  <div class="wrap">
+
+    <div class="section-eyebrow">
+      AI MODELS
+    </div>
+
+    <h2>
+      Use OpenAI, Claude, or run
+      <em>completely free locally.</em>
+    </h2>
+
+    <p class="section-lede">
+      Its Harness routes all AI calls through LiteLLM — a proxy that works with any model provider. You pick the model in your workflow; the rest is handled automatically.
+    </p>
+
+    <div class="runtime-grid">
+
+      <div class="runtime-card">
+        <h3>OpenAI</h3>
+        <p>Add your <code style="font-size:12px">OPENAI_API_KEY</code> and use <code style="font-size:12px">gpt-4o</code> or <code style="font-size:12px">gpt-4o-mini</code> in any flow.</p>
+      </div>
+
+      <div class="runtime-card">
+        <h3>Anthropic</h3>
+        <p>Add your <code style="font-size:12px">ANTHROPIC_API_KEY</code> and use <code style="font-size:12px">claude-sonnet</code>, <code style="font-size:12px">claude-haiku</code>, or <code style="font-size:12px">claude-opus</code>.</p>
+      </div>
+
+      <div class="runtime-card">
+        <h3>Ollama — free &amp; local</h3>
+        <p>Run <code style="font-size:12px">mistral</code>, <code style="font-size:12px">qwen3</code>, or <code style="font-size:12px">qwen2.5-coder</code> locally. No API key, no cost, no data leaving your machine.</p>
+      </div>
+
+      <div class="runtime-card">
+        <h3>Any custom model</h3>
+        <p>Edit one config file to add any OpenAI-compatible model or endpoint — including self-hosted or fine-tuned models.</p>
+      </div>
+
+    </div>
+
+    <div class="obs-box" style="margin-top:28px;">
+      <p class="section-lede" style="margin-bottom:0">
+        <strong style="color:var(--ink)">Want to try it without an API key?</strong> Install <a href="https://ollama.com" style="color:var(--accent-ink);">Ollama</a>, pull a model (<code style="font-size:13px">ollama pull mistral</code>), and run <code style="font-size:13px">./setup-ollama.sh</code> — it tests all four frameworks end-to-end with no paid account needed.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="section alt" id="flowspec">
 
   <div class="wrap">
 
@@ -770,7 +878,7 @@ footer{
 
 </section>
 
-<section class="section alt" id="runtimes">
+<section class="section" id="runtimes">
 
   <div class="wrap">
 
@@ -865,198 +973,6 @@ footer{
 
 </section>
 
-<section class="section" id="observability">
-
-  <div class="wrap">
-
-    <div class="section-eyebrow">
-      MONITORING
-    </div>
-
-    <h2>
-      Know exactly what your AI did —
-      <em>and why.</em>
-    </h2>
-
-    <div class="obs-box">
-
-      <p class="section-lede" style="margin-bottom:0">
-        Every prompt, decision, tool call, failure, and slowdown is tracked automatically. Compare runs across frameworks, spot problems fast, and understand exactly what happened — without digging through logs.
-      </p>
-
-    </div>
-
-  </div>
-
-</section>
-
-<section class="section alt" id="involved">
-
-  <div class="wrap">
-
-    <div class="section-eyebrow">
-      PUBLIC ALPHA
-    </div>
-
-    <h2>
-      Its Harness is in <em>public alpha.</em>
-      We need your flows.
-    </h2>
-
-    <p class="section-lede">
-      All four runtimes are executable and the feature set is complete, but this is alpha software — rough edges exist and your real-world flows will find them faster than any test suite. Two things matter most right now: bugs you hit, and features you wish existed.
-    </p>
-
-    <div style="display:flex;gap:16px;align-items:flex-start;border:1px solid oklch(.78 .090 60);border-left:3px solid oklch(.62 .14 60);border-radius:4px;padding:18px 20px;background:oklch(.96 .030 60);margin-bottom:36px;">
-      <div style="flex-shrink:0;color:oklch(.52 .14 60);margin-top:2px;">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      </div>
-      <div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:oklch(.42 .14 60);margin-bottom:6px;">Public alpha — expect rough edges</div>
-        <p style="font-size:14px;color:oklch(.38 .10 60);line-height:1.6;margin:0;">APIs may shift, Docker Compose behaviour may differ across environments, and edge cases in less-common node combinations are not yet fully covered. Run it, break it, and tell us what happened. Every report directly shapes what gets fixed next.</p>
-      </div>
-    </div>
-
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:4px;overflow:hidden;">
-
-      <div style="padding:26px 24px 24px;background:var(--paper);display:flex;flex-direction:column;gap:12px;border-right:1px solid var(--line);">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.18em;">track <b style="color:var(--accent-ink);font-weight:500;">A</b> · run &amp; report</div>
-        <h3 style="margin:0;font-size:19px;font-weight:500;letter-spacing:-.01em;line-height:1.25;">Run it against your flows</h3>
-        <p style="margin:0;font-size:14.5px;line-height:1.55;color:var(--ink-2);">One <code style="font-size:13px;">docker compose up</code> starts all nine services. Point it at a real flow — your actual use case, not a toy example. When something breaks, crashes silently, or produces wrong output, open a bug report. Include your FlowSpec JSON, the runtime you used, and the full error. The more specific, the faster it gets fixed.</p>
-        <a href="https://github.com/3IVIS/itsharness/issues/new?template=bug_report.md" target="_blank" rel="noopener" style="margin-top:auto;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--accent-ink);text-decoration:none;border-bottom:1px solid currentColor;align-self:flex-start;padding-bottom:1px;">Report a bug →</a>
-      </div>
-
-      <div style="padding:26px 24px 24px;background:var(--paper);display:flex;flex-direction:column;gap:12px;border-right:1px solid var(--line);">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.18em;">track <b style="color:var(--accent-ink);font-weight:500;">B</b> · request</div>
-        <h3 style="margin:0;font-size:19px;font-weight:500;letter-spacing:-.01em;line-height:1.25;">Tell us what's missing</h3>
-        <p style="margin:0;font-size:14.5px;line-height:1.55;color:var(--ink-2);">Missing a node type? A runtime behaviour that doesn't map cleanly? An integration you'd use every day? Open a feature request. Describe what you're trying to build and where Its Harness falls short — concrete use cases carry far more weight than abstract asks. All requests are triaged publicly.</p>
-        <a href="https://github.com/3IVIS/itsharness/issues/new?template=feature_request.md" target="_blank" rel="noopener" style="margin-top:auto;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--accent-ink);text-decoration:none;border-bottom:1px solid currentColor;align-self:flex-start;padding-bottom:1px;">Request a feature →</a>
-      </div>
-
-      <div style="padding:26px 24px 24px;background:var(--paper);display:flex;flex-direction:column;gap:12px;">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.18em;">track <b style="color:var(--accent-ink);font-weight:500;">C</b> · extend</div>
-        <h3 style="margin:0;font-size:19px;font-weight:500;letter-spacing:-.01em;line-height:1.25;">Build a node pack</h3>
-        <p style="margin:0;font-size:14.5px;line-height:1.55;color:var(--ink-2);">FlowSpec is frozen at v0.2.0, semantics codified in ADR-001. Third-party node types as npm packages (<code style="font-size:12px;">@itsharness/nodes/…</code>) are the marketplace target. Six verified seed packages ship today — the spec and canvas package are stable enough to build on.</p>
-        <a href="https://github.com/3IVIS/itsharness/tree/main/spec" target="_blank" rel="noopener" style="margin-top:auto;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--accent-ink);text-decoration:none;border-bottom:1px solid currentColor;align-self:flex-start;padding-bottom:1px;">Read the spec →</a>
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- ═══ QUICK START ═══ -->
-<section class="section alt" id="quickstart">
-
-  <div class="wrap">
-
-    <div class="section-eyebrow">
-      GET STARTED
-    </div>
-
-    <h2>
-      Up and running in
-      <em>two commands.</em>
-    </h2>
-
-    <p class="section-lede">
-      Its Harness runs entirely on your machine via Docker. No cloud account, no sign-up — just clone and run.
-    </p>
-
-    <div class="flow-grid">
-
-      <div class="code-card">
-        <div class="code-bar" style="display:flex;align-items:center;gap:10px;"><span style="display:flex;gap:4px;"><span style="width:8px;height:8px;border-radius:50%;background:var(--accent);"></span><span style="width:8px;height:8px;border-radius:50%;background:var(--line);border:1px solid oklch(.74 .016 270);"></span><span style="width:8px;height:8px;border-radius:50%;background:var(--line);border:1px solid oklch(.74 .016 270);"></span></span>terminal</div>
-<pre># 1. Generate secrets and configure your environment
-./setup-env.sh
-
-# 2. Start all services
-docker compose up</pre>
-      </div>
-
-      <div class="feature-box">
-        <h3>What starts up</h3>
-        <div class="feature-list">
-          <div class="feature-item">
-            <strong>Canvas — <code style="font-size:13px">localhost:3000</code></strong>
-            <p>The visual workflow editor. Draw your flows here.</p>
-          </div>
-          <div class="feature-item">
-            <strong>API — <code style="font-size:13px">localhost:8000</code></strong>
-            <p>The backend that compiles and runs your flows.</p>
-          </div>
-          <div class="feature-item">
-            <strong>Langfuse — <code style="font-size:13px">localhost:3001</code></strong>
-            <p>Monitoring dashboard. Every run is traced automatically.</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <p style="font-size:15px; color:var(--ink-2); margin-top:28px;">
-      Nine services in total. <code style="font-size:13px">setup-env.sh</code> handles all the secrets and configuration automatically — you only need to provide your LLM API key (or skip it and use a free local model instead).
-    </p>
-
-  </div>
-
-</section>
-
-<!-- ═══ AI MODELS ═══ -->
-<section class="section" id="models">
-
-  <div class="wrap">
-
-    <div class="section-eyebrow">
-      AI MODELS
-    </div>
-
-    <h2>
-      Use OpenAI, Claude, or run
-      <em>completely free locally.</em>
-    </h2>
-
-    <p class="section-lede">
-      Its Harness routes all AI calls through LiteLLM — a proxy that works with any model provider. You pick the model in your workflow; the rest is handled automatically.
-    </p>
-
-    <div class="runtime-grid">
-
-      <div class="runtime-card">
-        <h3>OpenAI</h3>
-        <p>Add your <code style="font-size:12px">OPENAI_API_KEY</code> and use <code style="font-size:12px">gpt-4o</code> or <code style="font-size:12px">gpt-4o-mini</code> in any flow.</p>
-      </div>
-
-      <div class="runtime-card">
-        <h3>Anthropic</h3>
-        <p>Add your <code style="font-size:12px">ANTHROPIC_API_KEY</code> and use <code style="font-size:12px">claude-sonnet</code>, <code style="font-size:12px">claude-haiku</code>, or <code style="font-size:12px">claude-opus</code>.</p>
-      </div>
-
-      <div class="runtime-card">
-        <h3>Ollama — free &amp; local</h3>
-        <p>Run <code style="font-size:12px">mistral</code>, <code style="font-size:12px">qwen3</code>, or <code style="font-size:12px">qwen2.5-coder</code> locally. No API key, no cost, no data leaving your machine.</p>
-      </div>
-
-      <div class="runtime-card">
-        <h3>Any custom model</h3>
-        <p>Edit one config file to add any OpenAI-compatible model or endpoint — including self-hosted or fine-tuned models.</p>
-      </div>
-
-    </div>
-
-    <div class="obs-box" style="margin-top:28px;">
-      <p class="section-lede" style="margin-bottom:0">
-        <strong style="color:var(--ink)">Want to try it without an API key?</strong> Install <a href="https://ollama.com" style="color:var(--accent-ink);">Ollama</a>, pull a model (<code style="font-size:13px">ollama pull mistral</code>), and run <code style="font-size:13px">./setup-ollama.sh</code> — it tests all four frameworks end-to-end with no paid account needed.
-      </p>
-    </div>
-
-  </div>
-
-</section>
-
-<!-- ═══ EXAMPLE FLOWS ═══ -->
 <section class="section alt" id="examples">
 
   <div class="wrap">
@@ -1133,8 +1049,32 @@ docker compose up</pre>
 
 </section>
 
-<!-- ═══ DEPLOY + INTEGRATE ═══ -->
-<section class="section" id="deploy">
+<section class="section" id="observability">
+
+  <div class="wrap">
+
+    <div class="section-eyebrow">
+      MONITORING
+    </div>
+
+    <h2>
+      Know exactly what your AI did —
+      <em>and why.</em>
+    </h2>
+
+    <div class="obs-box">
+
+      <p class="section-lede" style="margin-bottom:0">
+        Every prompt, decision, tool call, failure, and slowdown is tracked automatically. Compare runs across frameworks, spot problems fast, and understand exactly what happened — without digging through logs.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="section alt" id="deploy">
 
   <div class="wrap">
 
@@ -1186,6 +1126,63 @@ docker compose up</pre>
   </div>
 
 </section>
+
+<section class="section" id="involved">
+
+  <div class="wrap">
+
+    <div class="section-eyebrow">
+      PUBLIC ALPHA
+    </div>
+
+    <h2>
+      Its Harness is in <em>public alpha.</em>
+      We need your flows.
+    </h2>
+
+    <p class="section-lede">
+      All four runtimes are executable and the feature set is complete, but this is alpha software — rough edges exist and your real-world flows will find them faster than any test suite. Two things matter most right now: bugs you hit, and features you wish existed.
+    </p>
+
+    <div style="display:flex;gap:16px;align-items:flex-start;border:1px solid oklch(.78 .090 60);border-left:3px solid oklch(.62 .14 60);border-radius:4px;padding:18px 20px;background:oklch(.96 .030 60);margin-bottom:36px;">
+      <div style="flex-shrink:0;color:oklch(.52 .14 60);margin-top:2px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:oklch(.42 .14 60);margin-bottom:6px;">Public alpha — expect rough edges</div>
+        <p style="font-size:14px;color:oklch(.38 .10 60);line-height:1.6;margin:0;">APIs may shift, Docker Compose behaviour may differ across environments, and edge cases in less-common node combinations are not yet fully covered. Run it, break it, and tell us what happened. Every report directly shapes what gets fixed next.</p>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:4px;overflow:hidden;">
+
+      <div style="padding:26px 24px 24px;background:var(--paper);display:flex;flex-direction:column;gap:12px;border-right:1px solid var(--line);">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.18em;">track <b style="color:var(--accent-ink);font-weight:500;">A</b> · run &amp; report</div>
+        <h3 style="margin:0;font-size:19px;font-weight:500;letter-spacing:-.01em;line-height:1.25;">Run it against your flows</h3>
+        <p style="margin:0;font-size:14.5px;line-height:1.55;color:var(--ink-2);">One <code style="font-size:13px;">docker compose up</code> starts all nine services. Point it at a real flow — your actual use case, not a toy example. When something breaks, crashes silently, or produces wrong output, open a bug report. Include your FlowSpec JSON, the runtime you used, and the full error. The more specific, the faster it gets fixed.</p>
+        <a href="https://github.com/3IVIS/itsharness/issues/new?template=bug_report.md" target="_blank" rel="noopener" style="margin-top:auto;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--accent-ink);text-decoration:none;border-bottom:1px solid currentColor;align-self:flex-start;padding-bottom:1px;">Report a bug →</a>
+      </div>
+
+      <div style="padding:26px 24px 24px;background:var(--paper);display:flex;flex-direction:column;gap:12px;border-right:1px solid var(--line);">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.18em;">track <b style="color:var(--accent-ink);font-weight:500;">B</b> · request</div>
+        <h3 style="margin:0;font-size:19px;font-weight:500;letter-spacing:-.01em;line-height:1.25;">Tell us what's missing</h3>
+        <p style="margin:0;font-size:14.5px;line-height:1.55;color:var(--ink-2);">Missing a node type? A runtime behaviour that doesn't map cleanly? An integration you'd use every day? Open a feature request. Describe what you're trying to build and where Its Harness falls short — concrete use cases carry far more weight than abstract asks. All requests are triaged publicly.</p>
+        <a href="https://github.com/3IVIS/itsharness/issues/new?template=feature_request.md" target="_blank" rel="noopener" style="margin-top:auto;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--accent-ink);text-decoration:none;border-bottom:1px solid currentColor;align-self:flex-start;padding-bottom:1px;">Request a feature →</a>
+      </div>
+
+      <div style="padding:26px 24px 24px;background:var(--paper);display:flex;flex-direction:column;gap:12px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.18em;">track <b style="color:var(--accent-ink);font-weight:500;">C</b> · extend</div>
+        <h3 style="margin:0;font-size:19px;font-weight:500;letter-spacing:-.01em;line-height:1.25;">Build a node pack</h3>
+        <p style="margin:0;font-size:14.5px;line-height:1.55;color:var(--ink-2);">FlowSpec is frozen at v0.2.0, semantics codified in ADR-001. Third-party node types as npm packages (<code style="font-size:12px;">@itsharness/nodes/…</code>) are the marketplace target. Six verified seed packages ship today — the spec and canvas package are stable enough to build on.</p>
+        <a href="https://github.com/3IVIS/itsharness/tree/main/spec" target="_blank" rel="noopener" style="margin-top:auto;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--accent-ink);text-decoration:none;border-bottom:1px solid currentColor;align-self:flex-start;padding-bottom:1px;">Read the spec →</a>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
 
 <footer>
 
