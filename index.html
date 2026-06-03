@@ -12,9 +12,23 @@
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Its Harness — Build your AI harness using any major ai framework.</title>
+<title>Its Harness — Visual Canvas for AI Agent Harnesses</title>
 
-<meta name="description" content="Visual workflow builder for AI systems. Design workflows once, run them across LangGraph, CrewAI, Mastra, and Microsoft Agent Framework with built-in observability, guardrails, and fast prompt iteration.">
+<meta name="description" content="Open-source visual canvas for production AI agent harnesses. Design workflows once, run on LangGraph, CrewAI, Mastra, or Microsoft Agent Framework with built-in Langfuse observability, HITL controls, and REST/MCP/A2A deployment. Apache 2.0.">
+
+<link rel="canonical" href="https://itsharness.com/">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://itsharness.com/">
+<meta property="og:site_name" content="Its Harness">
+<meta property="og:title" content="Its Harness — Visual Canvas for AI Agent Harnesses">
+<meta property="og:description" content="Open-source visual canvas for production AI agent harnesses. Design workflows once, run on LangGraph, CrewAI, Mastra, or Microsoft Agent Framework with built-in Langfuse observability, HITL controls, and REST/MCP/A2A deployment. Apache 2.0.">
+<meta property="og:image" content="https://itsharness.com/og-image.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Its Harness — Visual Canvas for AI Agent Harnesses">
+<meta name="twitter:description" content="Open-source visual canvas for production AI agent harnesses. Design workflows once, run on LangGraph, CrewAI, Mastra, or Microsoft Agent Framework with built-in Langfuse observability, HITL controls, and REST/MCP/A2A deployment. Apache 2.0.">
+<meta name="twitter:image" content="https://itsharness.com/og-image.png">
 
 <meta name="theme-color" content="#4F46E5">
 
@@ -210,55 +224,249 @@ h1 em{
   letter-spacing:.12em;
 }
 
-/* blueprint */
+/* hero diagram */
 
 .blueprint{
-  background:#0d0d12;
   border-radius:6px;
-  height:500px;
   border:1px solid var(--line);
-  position:relative;
+  background:var(--bg);
   overflow:hidden;
+  height:500px;
 }
 
-.bp-grid{
-  position:absolute;
-  inset:0;
-  background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);
-  background-size:22px 22px;
+.hd-root{
+  display:grid;
+  grid-template-columns:1fr 32px 1fr;
+  height:100%;
+  padding:18px 14px;
 }
 
-.bp-label{
-  position:absolute;
-  top:14px;
-  left:14px;
-  color:rgba(255,255,255,.65);
+.hd-panel{
+  display:flex;
+  flex-direction:column;
+  padding:0 8px;
+  overflow:hidden;
+  min-width:0;
+}
+
+.hd-panel-head{
   font-family:"IBM Plex Mono",monospace;
-  font-size:10px;
+  font-size:9px;
   text-transform:uppercase;
   letter-spacing:.16em;
+  text-align:center;
+  padding:5px 10px;
+  border-radius:4px;
+  margin-bottom:14px;
+  white-space:nowrap;
 }
 
-.bp-label-right{
-  position:absolute;
-  top:14px;
-  right:14px;
-  color:rgba(255,255,255,.5);
-  font-family:"IBM Plex Mono",monospace;
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:.16em;
+.hd-head-simple{
+  color:var(--ink-3);
+  background:var(--bg-2);
+  border:1px solid var(--line);
 }
 
-.bp-bottom{
-  position:absolute;
-  bottom:12px;
-  left:14px;
-  color:rgba(255,255,255,.45);
+.hd-head-harness{
+  color:var(--accent-ink);
+  background:oklch(.94 .02 268);
+  border:1px solid var(--accent);
+}
+
+.hd-nodes{
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  flex:1;
+  justify-content:center;
+}
+
+.hd-node{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 12px;
+  border-radius:5px;
+  border:1px solid var(--line);
+  background:var(--paper);
+  font-family:"IBM Plex Mono",monospace;
+  font-size:11px;
+  color:var(--ink);
+  transition:background .25s,border-color .25s,box-shadow .25s;
+}
+
+.hd-node.hd-active{
+  background:oklch(.94 .02 268);
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px oklch(.94 .02 268 / .5);
+}
+
+.hd-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  flex-shrink:0;
+}
+
+.hd-loop-tag{
+  font-size:9px;
+  color:var(--ink-3);
+  margin-left:auto;
+  letter-spacing:.06em;
+}
+
+.hd-arrow{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  height:16px;
+  flex-shrink:0;
+}
+
+.hd-arrow::before{
+  content:"";
+  flex:1;
+  width:1px;
+  background:var(--line);
+}
+
+.hd-arrow::after{
+  content:"";
+  border-left:3px solid transparent;
+  border-right:3px solid transparent;
+  border-top:4px solid var(--line);
+}
+
+.hd-layers{
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+  flex:1;
+  justify-content:center;
+}
+
+.hd-layer{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:5px 7px 5px 9px;
+  border-radius:4px;
+  border:1px solid var(--line);
+  border-left:3px solid var(--lc,var(--accent));
+  background:var(--paper);
+  transition:background .25s,box-shadow .25s;
+  min-width:0;
+}
+
+.hd-layer.hd-active{
+  background:oklch(.94 .02 268 / .35);
+  box-shadow:0 0 0 2px oklch(.94 .02 268 / .45);
+}
+
+.hd-layer-opt{
+  opacity:.6;
+  border-top-style:dashed;
+  border-right-style:dashed;
+  border-bottom-style:dashed;
+}
+
+.hd-layer-key{
+  border-left-width:4px;
+}
+
+.hd-ln{
   font-family:"IBM Plex Mono",monospace;
   font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:.16em;
+  font-weight:500;
+  color:var(--ink);
+  flex-shrink:0;
+  white-space:nowrap;
+}
+
+.hd-ld{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:7.5px;
+  color:var(--ink-3);
+  margin-left:auto;
+  text-align:right;
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.hd-key-badge{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:7px;
+  padding:1px 5px;
+  border-radius:3px;
+  background:oklch(.92 .04 280);
+  color:var(--accent-ink);
+  border:1px solid oklch(.74 .09 270);
+  flex-shrink:0;
+  margin-left:4px;
+}
+
+.hd-pair{
+  display:flex;
+  gap:3px;
+}
+
+.hd-pair .hd-layer{
+  flex:1;
+  min-width:0;
+}
+
+.hd-vs-col{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding-top:24px;
+  padding-bottom:8px;
+}
+
+.hd-vs-line{
+  flex:1;
+  width:1px;
+  background:var(--line);
+}
+
+.hd-vs-badge{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:9px;
+  color:var(--ink-3);
+  border:1px solid var(--line);
+  border-radius:3px;
+  padding:3px 5px;
+  background:var(--paper);
+  line-height:1;
+}
+
+.hd-footnote{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:8px;
+  color:var(--ink-3);
+  text-align:center;
+  margin-top:10px;
+  line-height:1.65;
+  letter-spacing:.06em;
+}
+
+@keyframes hd-in{
+  from{opacity:0;transform:translateY(5px)}
+  to{opacity:1;transform:none}
+}
+
+.hd-anim{
+  opacity:0;
+  animation:hd-in .4s ease forwards;
+  animation-delay:var(--d,0s);
+}
+
+@media(max-width:980px){
+  .hd-root{grid-template-columns:1fr;height:auto;padding:16px;gap:16px;}
+  .hd-vs-col{display:none;}
+  .blueprint{height:auto;}
 }
 
 /* sections */
@@ -494,6 +702,123 @@ footer{
   font-style:italic;
 }
 
+/* roadmap section */
+
+.roadmap-phases{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-bottom:28px;
+}
+
+.phase-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:7px 13px;
+  border-radius:5px;
+  border:1px solid var(--line);
+  background:var(--paper);
+  font-family:"IBM Plex Mono",monospace;
+  font-size:11px;
+  color:var(--ink-2);
+}
+
+.phase-chip.active{
+  border-color:var(--accent);
+  background:oklch(.94 .02 268);
+  color:var(--accent-ink);
+}
+
+.phase-chip.done{
+  background:var(--green-tint);
+  border-color:oklch(.72 .09 148);
+  color:var(--green);
+}
+
+.phase-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  flex-shrink:0;
+}
+
+.progress-bar-wrap{
+  height:4px;
+  background:var(--line);
+  border-radius:2px;
+  margin-bottom:28px;
+  overflow:hidden;
+}
+
+.progress-bar-fill{
+  height:100%;
+  border-radius:2px;
+  background:linear-gradient(90deg,var(--green),var(--accent));
+}
+
+.vision-box{
+  border:1px solid var(--line);
+  border-left:3px solid var(--accent);
+  border-radius:6px;
+  padding:26px 32px;
+  background:var(--paper);
+  margin-bottom:32px;
+}
+
+.harness-vs{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:24px;
+  align-items:start;
+  margin-top:32px;
+}
+
+.hv-col{
+  border:1px solid var(--line);
+  border-radius:6px;
+  background:var(--paper);
+  padding:22px 24px;
+}
+
+.hv-label{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  color:var(--ink-3);
+  margin-bottom:14px;
+}
+
+.hv-layer{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:7px 10px;
+  border-radius:4px;
+  border:1px solid var(--line);
+  margin-bottom:5px;
+  font-size:12px;
+}
+
+.hv-dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  flex-shrink:0;
+}
+
+.hv-name{
+  font-weight:500;
+  font-size:12px;
+}
+
+.hv-sub{
+  font-size:11px;
+  color:var(--ink-3);
+  margin-left:auto;
+}
+
 /* mobile */
 
 @media(max-width:980px){
@@ -501,7 +826,8 @@ footer{
   .hero-grid,
   .flow-grid,
   .cards,
-  .runtime-grid{
+  .runtime-grid,
+  .harness-vs{
     grid-template-columns:1fr;
   }
 
@@ -534,7 +860,8 @@ footer{
     </a>
 
     <nav class="nav">
-      <a href="#why">Why</a>
+      <a href="#why">Harness</a>
+      <a href="#roadmap">Roadmap</a>
       <a href="#quickstart">Get started</a>
       <a href="#flowspec">How it works</a>
       <a href="#runtimes">Frameworks</a>
@@ -556,7 +883,7 @@ footer{
     <div>
 
       <div class="eyebrow">
-        OPEN SOURCE · PUBLIC ALPHA · BUILD ONCE, RUN ANYWHERE
+        OPEN SOURCE · PUBLIC ALPHA · TOWARDS THE FULL CODING AGENT HARNESS
       </div>
 
       <h1>
@@ -565,11 +892,11 @@ footer{
       </h1>
 
       <p class="hero-sub">
-        Its harness, not just its workflow. One canvas, one spec, any framework.
+        Not just a workflow. A complete reasoning and control architecture for AI agents.
       </p>
 
       <p class="lede">
-        A workflow tells your AI what to do. A harness makes sure it actually does it — reliably, visibly, and in a way your team can own. Its Harness gives your AI a proper harness: draw it on a canvas, run it on whichever framework you use, and see exactly what happens at every step.
+        A workflow tells your AI what to do. A harness makes sure it actually does it — with a world model that tracks beliefs and contradictions, a control layer that knows when to slow down or stop, nine-layer verification before every commit, and recovery strategies when things go wrong. Its Harness is building towards that full architecture: draw it on a canvas, run it on any framework, trace every decision.
       </p>
 
       <div class="runtime-pills">
@@ -584,6 +911,10 @@ footer{
           Star on GitHub<span class="gh-count" data-gh-stars style="padding-left:10px;margin-left:4px;border-left:1px solid rgba(255,255,255,.22);color:rgba(255,255,255,.65);font-size:11px;">&#9733; 0</span>
         </a>
 
+        <a class="btn" href="#roadmap" style="background:transparent;color:var(--ink);border-color:var(--line);">
+          View roadmap →
+        </a>
+
         <span class="cta-note">
           Free &amp; open source · Apache 2.0
         </span>
@@ -592,21 +923,88 @@ footer{
     </div>
 
     <div class="blueprint">
+      <div class="hd-root">
 
-      <div class="bp-grid"></div>
+        <!-- LEFT: simple agent loop -->
+        <div class="hd-panel">
+          <div class="hd-panel-head hd-head-simple hd-anim" style="--d:.05s">Simple Agent Loop</div>
+          <div class="hd-nodes">
+            <div class="hd-node hd-flow-node hd-anim" style="--d:.1s">
+              <span class="hd-dot" style="background:#0891b2"></span>Input / Caller
+            </div>
+            <div class="hd-arrow hd-anim" style="--d:.2s"></div>
+            <div class="hd-node hd-flow-node hd-anim" style="--d:.3s">
+              <span class="hd-dot" style="background:#7c3aed"></span>LLM Call
+            </div>
+            <div class="hd-arrow hd-anim" style="--d:.4s"></div>
+            <div class="hd-node hd-flow-node hd-anim" style="--d:.5s">
+              <span class="hd-dot" style="background:#d97706"></span>Tool Call<span class="hd-loop-tag">↺ loop</span>
+            </div>
+            <div class="hd-arrow hd-anim" style="--d:.6s"></div>
+            <div class="hd-node hd-flow-node hd-anim" style="--d:.7s">
+              <span class="hd-dot" style="background:#059669"></span>Output
+            </div>
+          </div>
+          <div class="hd-footnote hd-anim" style="--d:.9s">
+            prompt in → answer out<br>no world model · no control state · no verification
+          </div>
+        </div>
 
-      <div class="bp-label">
-        WORKFLOW · customer support triage
+        <!-- DIVIDER -->
+        <div class="hd-vs-col">
+          <div class="hd-vs-line"></div>
+          <div class="hd-vs-badge">vs</div>
+          <div class="hd-vs-line"></div>
+        </div>
+
+        <!-- RIGHT: full harness -->
+        <div class="hd-panel">
+          <div class="hd-panel-head hd-head-harness hd-anim" style="--d:.05s">Full Harness — Target</div>
+          <div class="hd-layers">
+            <div class="hd-layer hd-anim" style="--d:.15s;--lc:#0891b2">
+              <span class="hd-ln">Caller State</span><span class="hd-ld">constraints · clarification · propagation</span>
+            </div>
+            <div class="hd-layer hd-anim" style="--d:.28s;--lc:#7c3aed">
+              <span class="hd-ln">World Model</span><span class="hd-ld">beliefs · contradictions · generation_id</span>
+            </div>
+            <div class="hd-layer hd-anim" style="--d:.41s;--lc:#16a34a">
+              <span class="hd-ln">Reasoning</span><span class="hd-ld">evidence · hypotheses (4 sources) · VOI</span>
+            </div>
+            <div class="hd-layer hd-layer-key hd-anim" style="--d:.54s;--lc:#a21caf">
+              <span class="hd-ln">Control</span><span class="hd-ld">5-tier resolver · deadlock detect</span><span class="hd-key-badge">key</span>
+            </div>
+            <div class="hd-layer hd-anim" style="--d:.67s;--lc:#2563eb">
+              <span class="hd-ln">Planning</span><span class="hd-ld">task graph (6-state) · parallel concurrency</span>
+            </div>
+            <div class="hd-pair hd-anim" style="--d:.8s">
+              <div class="hd-layer" style="--lc:#d97706">
+                <span class="hd-ln">Execution</span><span class="hd-ld">VOI · review gate</span>
+              </div>
+              <div class="hd-layer" style="--lc:#dc2626">
+                <span class="hd-ln">Verification</span><span class="hd-ld">9 layers</span>
+              </div>
+            </div>
+            <div class="hd-pair hd-anim" style="--d:.93s">
+              <div class="hd-layer" style="--lc:#ea580c">
+                <span class="hd-ln">Recovery</span><span class="hd-ld">6 strategies</span>
+              </div>
+              <div class="hd-layer" style="--lc:#65a30d">
+                <span class="hd-ln">Memory</span><span class="hd-ld">compression · journal</span>
+              </div>
+            </div>
+            <div class="hd-layer hd-layer-opt hd-anim" style="--d:1.06s;--lc:#64748b">
+              <span class="hd-ln">Learning</span><span class="hd-ld">experience store · warm start (optional)</span>
+            </div>
+            <div class="hd-layer hd-anim" style="--d:1.19s;--lc:#059669">
+              <span class="hd-ln">Output &amp; Reviewer Pass</span><span class="hd-ld">contract · 3-lens review</span>
+            </div>
+          </div>
+          <div class="hd-footnote hd-anim" style="--d:1.35s">
+            22 nodes · 11 layers · world model + 5-tier control · 9-layer verification
+          </div>
+        </div>
+
       </div>
-
-      <div class="bp-label-right">
-        one workflow · runs on any framework
-      </div>
-
-      <div class="bp-bottom">
-        visual canvas · portable · built-in monitoring
-      </div>
-
     </div>
 
   </div>
@@ -618,46 +1016,193 @@ footer{
   <div class="wrap">
 
     <div class="section-eyebrow">
-      WHY TEAMS USE IT
+      WHY A HARNESS, NOT JUST A WORKFLOW
     </div>
 
     <h2>
-      One tool to manage your AI workflows,
-      <em>no matter which framework you use.</em>
+      A harness does what a
+      <em>workflow can't.</em>
     </h2>
 
     <p class="section-lede">
-      Most AI tools lock you into their ecosystem. Its Harness sits above all of them — so your workflows stay portable, visible, and easy to improve as your needs change.
+      A workflow routes prompts from node to node. A harness governs what the AI believes, what it's allowed to do, how it catches its own mistakes, and what it learns for next time. Its Harness is building the full architecture — canvas and framework adapters are the foundation; the full reasoning and control layer is the destination.
     </p>
 
     <div class="cards">
 
       <div class="card">
-        <h3>Draw or code — your call</h3>
+        <h3>Reasoning, not just prompting</h3>
         <p>
-          Design workflows visually on a shared canvas, or work directly with the open JSON spec and adapter code. Both approaches are first-class.
+          The full harness maintains a world model — typed beliefs, contradictions, hypotheses from four generation sources, and a value-of-information gate before every action. Not just "ask the LLM."
         </p>
       </div>
 
       <div class="card">
-        <h3>Use any framework</h3>
+        <h3>Control that holds</h3>
         <p>
-          Run the same workflow on LangGraph, CrewAI, Mastra, or Microsoft Agent Framework — your choice.
+          A five-tier control state resolver (NORMAL → CAUTIOUS → BLOCKED) governs every action. Diagnostic health vectors drive it. Deadlock detection stops it escalating forever. Your AI knows when to slow down.
         </p>
       </div>
 
       <div class="card">
-        <h3>Iterate quickly</h3>
+        <h3>Verification with teeth</h3>
         <p>
-          Test prompts, change routing logic, and update guardrails without rebuilding everything from scratch.
+          Nine verification layers, a pre-execution review gate across five dimensions, an adversarial reviewer pass, and contract validation before every return. Trust, but verify — every time.
         </p>
       </div>
 
       <div class="card">
-        <h3>See everything</h3>
+        <h3>Recovery and learning</h3>
         <p>
-          Monitor every step with Langfuse — prompts, tool calls, failures, latency, and costs, all in one place.
+          Six named recovery strategies, typed failure detection, local vs global replanning, and an optional experience store that reuses successful decompositions — not just success-rate priors — across runs.
         </p>
+      </div>
+
+    </div>
+
+    <p style="font-size:14px;color:var(--ink-3);margin-top:28px;font-family:'IBM Plex Mono',monospace;text-align:center;">
+      Today: canvas + 4 framework adapters + Langfuse observability — a solid foundation. &nbsp;|&nbsp; Target: complete full harness — 11 phases, 22 nodes, 11 layers.
+    </p>
+
+  </div>
+
+</section>
+
+<section class="section" id="roadmap">
+
+  <div class="wrap">
+
+    <div class="section-eyebrow">
+      IMPLEMENTATION ROADMAP
+    </div>
+
+    <h2>
+      11 phases from canvas foundation
+      <em>to full harness.</em>
+    </h2>
+
+    <p class="section-lede">
+      The repository ships today as a working canvas-and-adapters tool. Every subsequent phase adds a layer of the coding-agent harness — each phase independently testable, each one making the system more capable of reasoning reliably rather than just executing quickly.
+    </p>
+
+    <div class="vision-box">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
+        <div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-3);margin-bottom:10px;">Where we are now — v0.8.0</div>
+          <div style="display:flex;flex-direction:column;gap:7px;">
+            <div style="display:flex;align-items:center;gap:9px;font-size:14px;color:var(--ink-2)"><span style="color:var(--green);font-size:13px">✓</span> Canvas with 14 node types</div>
+            <div style="display:flex;align-items:center;gap:9px;font-size:14px;color:var(--ink-2)"><span style="color:var(--green);font-size:13px">✓</span> 4 framework adapters (LangGraph, CrewAI, Mastra, MAF)</div>
+            <div style="display:flex;align-items:center;gap:9px;font-size:14px;color:var(--ink-2)"><span style="color:var(--green);font-size:13px">✓</span> Langfuse observability — all 4 runtimes</div>
+            <div style="display:flex;align-items:center;gap:9px;font-size:14px;color:var(--ink-2)"><span style="color:var(--green);font-size:13px">✓</span> HITL pause/resume, REST/MCP/A2A deploy</div>
+            <div style="display:flex;align-items:center;gap:9px;font-size:14px;color:var(--ink-2)"><span style="color:var(--green);font-size:13px">✓</span> FlowSpec v0.2.0 — open, portable JSON format</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-3);margin-bottom:10px;">Target — full harness</div>
+          <div style="display:flex;flex-direction:column;gap:7px;">
+            <div style="display:flex;align-items:center;gap:9px;font-size:14px;color:var(--ink-2)"><span style="color:var(--accent-ink);font-size:13px">→</span> World model with beliefs, contradictions, generation_id</div>
+            <div style="display:flex;align-items:center;gap:9px;font-size:14px;color:var(--ink-2)"><span style="color:var(--accent-ink);font-size:13px">→</span> 5-tier control state (NORMAL / CAUTIOUS / BLOCKED)</div>
+            <div style="display:flex;align-items:center;gap:9px;font-size:14px;color:var(--ink-2)"><span style="color:var(--accent-ink);font-size:13px">→</span> 9-layer verification + adversarial reviewer pass</div>
+            <div style="display:flex;align-items:center;gap:9px;font-size:14px;color:var(--ink-2)"><span style="color:var(--accent-ink);font-size:13px">→</span> 6 named recovery strategies + typed failure library</div>
+            <div style="display:flex;align-items:center;gap:9px;font-size:14px;color:var(--ink-2)"><span style="color:var(--accent-ink);font-size:13px">→</span> Experience store — cross-run structural reuse</div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--line);">
+        <a href="harness_implementation_plan.html" style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--accent-ink);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px;">Read the full implementation plan →</a>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-3);margin-left:24px;">11 phases · 22 nodes · all harness invariants</span>
+      </div>
+    </div>
+
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-3);margin-bottom:12px;">Phase overview</div>
+
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" style="width:5%"></div>
+    </div>
+
+    <div class="roadmap-phases">
+
+      <div class="phase-chip active">
+        <span class="phase-dot" style="background:var(--accent)"></span>
+        <span><strong>P0</strong> Foundation &amp; State Architecture</span>
+        <span style="margin-left:4px;font-size:9px;background:oklch(.94 .02 268);color:var(--accent-ink);padding:1px 6px;border-radius:3px;">In progress</span>
+      </div>
+
+      <div class="phase-chip">
+        <span class="phase-dot" style="background:#4ade80"></span>
+        <strong>P1</strong> Evidence &amp; Reasoning
+      </div>
+
+      <div class="phase-chip">
+        <span class="phase-dot" style="background:#8b5cf6"></span>
+        <strong>P2</strong> World Model &amp; Contradiction
+      </div>
+
+      <div class="phase-chip">
+        <span class="phase-dot" style="background:#f0abfc"></span>
+        <strong>P3</strong> Diagnostics &amp; Control State
+      </div>
+
+      <div class="phase-chip">
+        <span class="phase-dot" style="background:#60a5fa"></span>
+        <strong>P4</strong> Planning &amp; Task Graph
+      </div>
+
+      <div class="phase-chip">
+        <span class="phase-dot" style="background:#f87171"></span>
+        <strong>P5</strong> Execution &amp; Verification
+      </div>
+
+      <div class="phase-chip">
+        <span class="phase-dot" style="background:#f97316"></span>
+        <strong>P6</strong> Recovery &amp; Memory
+      </div>
+
+      <div class="phase-chip">
+        <span class="phase-dot" style="background:#67e8f9"></span>
+        <strong>P7</strong> Caller State &amp; Escalation
+      </div>
+
+      <div class="phase-chip">
+        <span class="phase-dot" style="background:#94a3b8"></span>
+        <strong>P8</strong> Experience Store
+      </div>
+
+      <div class="phase-chip">
+        <span class="phase-dot" style="background:#34d399"></span>
+        <strong>P9</strong> Reviewer Pass &amp; Output Contract
+      </div>
+
+      <div class="phase-chip">
+        <span class="phase-dot" style="background:#fb7185"></span>
+        <strong>P10</strong> Canvas Integration
+      </div>
+
+      <div class="phase-chip">
+        <span class="phase-dot" style="background:#a3e635"></span>
+        <strong>P11</strong> E2E Integration &amp; Testing
+      </div>
+
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:4px;">
+
+      <div style="border:1px solid var(--line);border-top:2px solid var(--green);border-radius:6px;padding:22px;background:var(--paper);">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-3);margin-bottom:8px;">Phases P0–P4</div>
+        <div style="font-weight:500;font-size:16px;margin-bottom:8px;">State &amp; reasoning infrastructure</div>
+        <p style="font-size:14px;color:var(--ink-2);margin:0;line-height:1.6;">FlowSpec extension, world model, evidence store, hypothesis system, contradiction detection, diagnostic health vectors, control state resolver, task graph — the cognitive substrate of the harness.</p>
+      </div>
+
+      <div style="border:1px solid var(--line);border-top:2px solid var(--accent);border-radius:6px;padding:22px;background:var(--paper);">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-3);margin-bottom:8px;">Phases P5–P9</div>
+        <div style="font-weight:500;font-size:16px;margin-bottom:8px;">Execution hardening &amp; learning</div>
+        <p style="font-size:14px;color:var(--ink-2);margin:0;line-height:1.6;">VOI estimation, 9-layer verification, pre-execution review gate, reversibility strategy, 6 recovery strategies, context compression, experience store, adversarial reviewer pass, output contract validation.</p>
+      </div>
+
+      <div style="border:1px solid var(--line);border-top:2px solid oklch(.62 .14 60);border-radius:6px;padding:22px;background:var(--paper);">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-3);margin-bottom:8px;">Phases P10–P11</div>
+        <div style="font-weight:500;font-size:16px;margin-bottom:8px;">Canvas &amp; full integration</div>
+        <p style="font-size:14px;color:var(--ink-2);margin:0;line-height:1.6;">10 new harness canvas node types, diagnostic health dashboard, updated framework adapters, Langfuse harness tracing, and end-to-end tests covering all 10 architectural invariants on all four frameworks.</p>
       </div>
 
     </div>
@@ -782,12 +1327,12 @@ docker compose up</pre>
     </div>
 
     <h2>
-      One workflow definition.
+      One harness definition.
       <em>Runs on any engine.</em>
     </h2>
 
     <p class="section-lede">
-      Its Harness stores your workflow in an open format called FlowSpec. Think of it as a blueprint — the same blueprint works no matter which AI framework you want to run it on. No rewriting, no rebuilding.
+      Its Harness stores your flow in an open format called FlowSpec. The same spec compiles to LangGraph, CrewAI, Mastra, or MAF — no rewriting. As the harness phases land, FlowSpec gains new node types for world model management, control state, verification gates, and recovery — all backwards-compatible with existing flows.
     </p>
 
     <div class="flow-grid">
@@ -862,7 +1407,7 @@ docker compose up</pre>
 
 
     <div style="margin-top:22px;border:1px solid var(--line);border-radius:4px;padding:20px;background:var(--paper);display:flex;flex-direction:column;gap:14px;">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-3);display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:10px;"><b style="color:var(--ink-2);font-weight:500;">node taxonomy</b><span style="color:var(--accent-ink);font-weight:500;">14 types</span></div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-3);display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:10px;"><b style="color:var(--ink-2);font-weight:500;">node taxonomy · current (v0.8.0)</b><span style="color:var(--accent-ink);font-weight:500;">14 types</span></div>
       <div style="display:flex;flex-direction:column;gap:6px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-3);">i/o</span><div style="display:flex;flex-wrap:wrap;gap:5px;"><span style="display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border:1px solid var(--line);border-radius:2px;background:var(--bg);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink);"><span style="width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;display:inline-block;"></span>input</span><span style="display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border:1px solid var(--line);border-radius:2px;background:var(--bg);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink);"><span style="width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;display:inline-block;"></span>output</span></div></div>
       <div style="display:flex;flex-direction:column;gap:6px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-3);">llm</span><div style="display:flex;flex-wrap:wrap;gap:5px;"><span style="display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border:1px solid var(--line);border-radius:2px;background:var(--bg);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink);"><span style="width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;display:inline-block;"></span>llm_call</span></div></div>
       <div style="display:flex;flex-direction:column;gap:6px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-3);">tools</span><div style="display:flex;flex-wrap:wrap;gap:5px;"><span style="display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border:1px solid var(--line);border-radius:2px;background:var(--bg);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink);"><span style="width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;display:inline-block;"></span>tool_invoke</span></div></div>
@@ -871,6 +1416,22 @@ docker compose up</pre>
       <div style="display:flex;flex-direction:column;gap:6px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-3);">human</span><div style="display:flex;flex-wrap:wrap;gap:5px;"><span style="display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border:1px solid var(--line);border-radius:2px;background:var(--bg);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink);"><span style="width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;display:inline-block;"></span>hitl_breakpoint</span></div></div>
       <div style="display:flex;flex-direction:column;gap:6px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-3);">memory</span><div style="display:flex;flex-wrap:wrap;gap:5px;"><span style="display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border:1px solid var(--line);border-radius:2px;background:var(--bg);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink);"><span style="width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;display:inline-block;"></span>memory_read</span><span style="display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border:1px solid var(--line);border-radius:2px;background:var(--bg);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink);"><span style="width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;display:inline-block;"></span>memory_write</span></div></div>
       <div style="display:flex;flex-direction:column;gap:6px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-3);">composition</span><div style="display:flex;flex-wrap:wrap;gap:5px;"><span style="display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border:1px solid var(--line);border-radius:2px;background:var(--bg);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink);"><span style="width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;display:inline-block;"></span>subgraph</span><span style="display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border:1px solid var(--line);border-radius:2px;background:var(--bg);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink);"><span style="width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;display:inline-block;"></span>transform</span></div></div>
+    </div>
+
+    <div style="margin-top:16px;border:1px solid oklch(.85 .03 268);border-left:3px solid var(--accent);border-radius:4px;padding:16px 20px;background:oklch(.96 .008 268);">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--accent-ink);margin-bottom:8px;">Coming in Phase P10 — 10 new harness node types</div>
+      <div style="display:flex;flex-wrap:wrap;gap:5px;">
+        <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid oklch(.82 .04 268);border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent-ink);background:oklch(.94 .015 268);"><span style="width:5px;height:5px;border-radius:50%;background:#8b5cf6;flex-shrink:0;display:inline-block;"></span>world_model</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid oklch(.82 .04 268);border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent-ink);background:oklch(.94 .015 268);"><span style="width:5px;height:5px;border-radius:50%;background:#f59e0b;flex-shrink:0;display:inline-block;"></span>hypothesis_set</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid oklch(.82 .04 268);border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent-ink);background:oklch(.94 .015 268);"><span style="width:5px;height:5px;border-radius:50%;background:#f0abfc;flex-shrink:0;display:inline-block;"></span>control_state</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid oklch(.82 .04 268);border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent-ink);background:oklch(.94 .015 268);"><span style="width:5px;height:5px;border-radius:50%;background:#60a5fa;flex-shrink:0;display:inline-block;"></span>task_graph</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid oklch(.82 .04 268);border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent-ink);background:oklch(.94 .015 268);"><span style="width:5px;height:5px;border-radius:50%;background:#f87171;flex-shrink:0;display:inline-block;"></span>verification_gate</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid oklch(.82 .04 268);border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent-ink);background:oklch(.94 .015 268);"><span style="width:5px;height:5px;border-radius:50%;background:#f97316;flex-shrink:0;display:inline-block;"></span>recovery_node</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid oklch(.82 .04 268);border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent-ink);background:oklch(.94 .015 268);"><span style="width:5px;height:5px;border-radius:50%;background:#4ade80;flex-shrink:0;display:inline-block;"></span>evidence_store</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid oklch(.82 .04 268);border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent-ink);background:oklch(.94 .015 268);"><span style="width:5px;height:5px;border-radius:50%;background:#94a3b8;flex-shrink:0;display:inline-block;"></span>experience_store</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid oklch(.82 .04 268);border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent-ink);background:oklch(.94 .015 268);"><span style="width:5px;height:5px;border-radius:50%;background:#34d399;flex-shrink:0;display:inline-block;"></span>reviewer_pass</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid oklch(.82 .04 268);border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent-ink);background:oklch(.94 .015 268);"><span style="width:5px;height:5px;border-radius:50%;background:#67e8f9;flex-shrink:0;display:inline-block;"></span>gather_evidence</span>
+      </div>
     </div>
 
   </div>
@@ -1058,13 +1619,17 @@ docker compose up</pre>
 
     <h2>
       Know exactly what your AI did —
-      <em>and why.</em>
+      <em>and why it did it.</em>
     </h2>
 
     <div class="obs-box">
 
-      <p class="section-lede" style="margin-bottom:0">
-        Every prompt, decision, tool call, failure, and slowdown is tracked automatically. Compare runs across frameworks, spot problems fast, and understand exactly what happened — without digging through logs.
+      <p class="section-lede" style="margin-bottom:16px">
+        Every prompt, decision, tool call, failure, and slowdown is tracked automatically via Langfuse. Compare runs across frameworks, spot problems fast, and understand exactly what happened — without digging through logs.
+      </p>
+
+      <p style="font-size:15px;color:var(--green);line-height:1.6;margin:0">
+        <strong style="color:var(--ink)">As the harness phases land:</strong> traces will extend to harness-specific spans — world model generation_id per step, control state transitions (NORMAL → CAUTIOUS → BLOCKED), diagnostic health vectors, recovery strategy changes, and reviewer-pass findings — giving you a complete audit trail of every reasoning decision the agent made.
       </p>
 
     </div>
@@ -1135,12 +1700,12 @@ docker compose up</pre>
     </div>
 
     <h2>
-      Its Harness is in <em>public alpha.</em>
-      We need your flows.
+      Its Harness is in <em>public alpha.</em><br>
+      The full harness is the goal.
     </h2>
 
     <p class="section-lede">
-      All four runtimes are executable and the feature set is complete, but this is alpha software — rough edges exist and your real-world flows will find them faster than any test suite. Two things matter most right now: bugs you hit, and features you wish existed.
+      The canvas, adapters, and observability layer are working and ready to use. The full reasoning and control architecture — world model, control state, nine-layer verification, recovery, experience store — is the destination. We're building it in 11 public phases. Your real flows, bug reports, and contributions directly shape both what gets fixed and what gets built next.
     </p>
 
     <div style="display:flex;gap:16px;align-items:flex-start;border:1px solid oklch(.78 .090 60);border-left:3px solid oklch(.62 .14 60);border-radius:4px;padding:18px 20px;background:oklch(.96 .030 60);margin-bottom:36px;">
@@ -1148,8 +1713,8 @@ docker compose up</pre>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
       </div>
       <div>
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:oklch(.42 .14 60);margin-bottom:6px;">Public alpha — expect rough edges</div>
-        <p style="font-size:14px;color:oklch(.38 .10 60);line-height:1.6;margin:0;">APIs may shift, Docker Compose behaviour may differ across environments, and edge cases in less-common node combinations are not yet fully covered. Run it, break it, and tell us what happened. Every report directly shapes what gets fixed next.</p>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:oklch(.42 .14 60);margin-bottom:6px;">Public alpha — current and planned work is in the open</div>
+        <p style="font-size:14px;color:oklch(.38 .10 60);line-height:1.6;margin:0;">The canvas-and-adapters layer is stable but alpha — APIs may shift, Docker Compose behaviour may vary, and edge cases in less-common node combinations aren't fully covered yet. The harness phases are on the roadmap and tracked publicly. Run what's here, break it, and tell us what you need. Every report shapes what gets prioritised.</p>
       </div>
     </div>
 
@@ -1157,23 +1722,26 @@ docker compose up</pre>
 
       <div style="padding:26px 24px 24px;background:var(--paper);display:flex;flex-direction:column;gap:12px;border-right:1px solid var(--line);">
         <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.18em;">track <b style="color:var(--accent-ink);font-weight:500;">A</b> · run &amp; report</div>
-        <h3 style="margin:0;font-size:19px;font-weight:500;letter-spacing:-.01em;line-height:1.25;">Run it against your flows</h3>
-        <p style="margin:0;font-size:14.5px;line-height:1.55;color:var(--ink-2);">One <code style="font-size:13px;">docker compose up</code> starts all nine services. Point it at a real flow — your actual use case, not a toy example. When something breaks, crashes silently, or produces wrong output, open a bug report. Include your FlowSpec JSON, the runtime you used, and the full error. The more specific, the faster it gets fixed.</p>
+        <h3 style="margin:0;font-size:19px;font-weight:500;letter-spacing:-.01em;line-height:1.25;">Run it against real flows</h3>
+        <p style="margin:0;font-size:14.5px;line-height:1.55;color:var(--ink-2);">One <code style="font-size:13px;">docker compose up</code> starts all nine services. Point it at a real flow — your actual use case, not a toy example. When something breaks, crashes silently, or produces wrong output, open a bug report with your FlowSpec JSON, the runtime you used, and the full error. The more specific, the faster it gets fixed.</p>
         <a href="https://github.com/3IVIS/itsharness/issues/new?template=bug_report.md" target="_blank" rel="noopener" style="margin-top:auto;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--accent-ink);text-decoration:none;border-bottom:1px solid currentColor;align-self:flex-start;padding-bottom:1px;">Report a bug →</a>
       </div>
 
       <div style="padding:26px 24px 24px;background:var(--paper);display:flex;flex-direction:column;gap:12px;border-right:1px solid var(--line);">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.18em;">track <b style="color:var(--accent-ink);font-weight:500;">B</b> · request</div>
-        <h3 style="margin:0;font-size:19px;font-weight:500;letter-spacing:-.01em;line-height:1.25;">Tell us what's missing</h3>
-        <p style="margin:0;font-size:14.5px;line-height:1.55;color:var(--ink-2);">Missing a node type? A runtime behaviour that doesn't map cleanly? An integration you'd use every day? Open a feature request. Describe what you're trying to build and where Its Harness falls short — concrete use cases carry far more weight than abstract asks. All requests are triaged publicly.</p>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.18em;">track <b style="color:var(--accent-ink);font-weight:500;">B</b> · shape the roadmap</div>
+        <h3 style="margin:0;font-size:19px;font-weight:500;letter-spacing:-.01em;line-height:1.25;">Tell us what you need</h3>
+        <p style="margin:0;font-size:14.5px;line-height:1.55;color:var(--ink-2);">Missing a node type? A harness feature that would change how you build? A runtime behaviour that doesn't map cleanly? Open a feature request. Describe what you're building and where Its Harness falls short — concrete use cases carry far more weight than abstract asks. Phase priority is influenced by community demand.</p>
         <a href="https://github.com/3IVIS/itsharness/issues/new?template=feature_request.md" target="_blank" rel="noopener" style="margin-top:auto;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--accent-ink);text-decoration:none;border-bottom:1px solid currentColor;align-self:flex-start;padding-bottom:1px;">Request a feature →</a>
       </div>
 
       <div style="padding:26px 24px 24px;background:var(--paper);display:flex;flex-direction:column;gap:12px;">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.18em;">track <b style="color:var(--accent-ink);font-weight:500;">C</b> · extend</div>
-        <h3 style="margin:0;font-size:19px;font-weight:500;letter-spacing:-.01em;line-height:1.25;">Build a node pack</h3>
-        <p style="margin:0;font-size:14.5px;line-height:1.55;color:var(--ink-2);">FlowSpec is frozen at v0.2.0, semantics codified in ADR-001. Third-party node types as npm packages (<code style="font-size:12px;">@itsharness/nodes/…</code>) are the marketplace target. Six verified seed packages ship today — the spec and canvas package are stable enough to build on.</p>
-        <a href="https://github.com/3IVIS/itsharness/tree/main/spec" target="_blank" rel="noopener" style="margin-top:auto;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--accent-ink);text-decoration:none;border-bottom:1px solid currentColor;align-self:flex-start;padding-bottom:1px;">Read the spec →</a>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.18em;">track <b style="color:var(--accent-ink);font-weight:500;">C</b> · build with it</div>
+        <h3 style="margin:0;font-size:19px;font-weight:500;letter-spacing:-.01em;line-height:1.25;">Build a node pack or contribute a phase</h3>
+        <p style="margin:0;font-size:14.5px;line-height:1.55;color:var(--ink-2);">FlowSpec v0.2.0 is stable for third-party node packs (<code style="font-size:12px;">@itsharness/nodes/…</code>). The implementation plan is public — harness phases are open for community contribution. The spec, adapter interface, and canvas package are all stable enough to build on today.</p>
+        <div style="display:flex;gap:12px;margin-top:auto;flex-wrap:wrap;">
+          <a href="https://github.com/3IVIS/itsharness/tree/main/spec" target="_blank" rel="noopener" style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--accent-ink);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px;">Read the spec →</a>
+          <a href="harness_implementation_plan.html" style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--accent-ink);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px;">View the plan →</a>
+        </div>
       </div>
 
     </div>
@@ -1195,7 +1763,7 @@ docker compose up</pre>
     </div>
 
     <div class="footer-tag">
-      Build once. Run anywhere.
+      Canvas today. Full harness tomorrow.
     </div>
 
   </div>
@@ -1205,162 +1773,39 @@ docker compose up</pre>
 
 <script>
 (function(){
-  const frame=document.querySelector('.blueprint'),svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
-  if(!frame)return;
-  svg.style.cssText='position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;overflow:visible';
-  svg.id='hgraph-svg';
-  frame.appendChild(svg);
+  function ready(fn){document.readyState!=='loading'?fn():document.addEventListener('DOMContentLoaded',fn);}
+  ready(function(){
+    var flowNodes=document.querySelectorAll('.hd-flow-node');
+    var layers=document.querySelectorAll('.hd-layer');
+    if(!flowNodes.length)return;
 
-  const W=160,H=30,HEAD_CY=15;
-  const ICONS={
-    input:'<path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/>',
-    llm_call:'<path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.582a.5.5 0 0 1 0 .962L15.5 14.063a2 2 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/>',
-    condition:'<line x1="6" x2="6" y1="3" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/>',
-    hitl_breakpoint:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/>',
-    output:'<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/>'
-  };
-  const ACCENT={input:'#3b82f6',llm_call:'#8b5cf6',condition:'#f59e0b',hitl_breakpoint:'#f97316',output:'#6b7280'};
-  const ADAPTER_LBL=['LG','CR','MA','MS'],PINNED_IDX=0;
+    // Simple loop: INPUT → LLM → TOOL → LLM (loop back) → OUTPUT, repeat
+    var loopSeq=[0,1,2,1,3];
+    var fi=0;
+    function tickFlow(){
+      flowNodes.forEach(function(n){n.classList.remove('hd-active');});
+      flowNodes[loopSeq[fi]].classList.add('hd-active');
+      fi=(fi+1)%loopSeq.length;
+    }
 
-  const nodes=[
-    {id:'in',       type:'input',           label:'user_query', x:15,  y:230, compat:['full','full','full','full']},
-    {id:'classify', type:'llm_call',        label:'classify',   x:205, y:230, compat:['full','full','full','full']},
-    {id:'route',    type:'condition',       label:'route',      x:395, y:230, compat:['full','full','full','full']},
-    {id:'escalate', type:'hitl_breakpoint', label:'escalate',   x:395, y:80,  compat:['full','part','full','full']},
-    {id:'answer',   type:'llm_call',        label:'answer',     x:205, y:380, compat:['full','full','full','full']},
-    {id:'out',      type:'output',          label:'reply',      x:395, y:380, compat:['full','full','full','full']}
-  ];
-  const edges=[
-    {from:'in',       to:'classify'},
-    {from:'classify', to:'route'},
-    {from:'route',    to:'escalate', srcSide:'T', tgtSide:'B'},
-    {from:'route',    to:'answer',   srcSide:'B', tgtSide:'T'},
-    {from:'answer',   to:'out'}
-  ];
+    // Harness: cycle through all layers
+    var li=0;
+    function tickLayers(){
+      layers.forEach(function(l){l.classList.remove('hd-active');});
+      layers[li%layers.length].classList.add('hd-active');
+      li++;
+    }
 
-  const nodeStyle=`
-    position:absolute;z-index:3;width:160px;
-    background:#16161f;border:.5px solid #2d2d42;
-    border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.5);
-    cursor:grab;user-select:none;font-family:"IBM Plex Sans",sans-serif;
-    color:#e2e2ec;overflow:hidden;transition:box-shadow .14s ease;
-  `;
-
-  function renderNodes(){
-    nodes.forEach(n=>{
-      const accent=ACCENT[n.type]||'#6366f1';
-      const compatHtml=n.compat.map((lvl,i)=>{
-        const cls=lvl==='full'?'full':lvl==='part'?'part':'miss';
-        const bg=lvl==='full'?'rgba(34,197,94,.16)':lvl==='part'?'rgba(245,158,11,.18)':'rgba(239,68,68,.18)';
-        const col=lvl==='full'?'#4ade80':lvl==='part'?'#fbbf24':'#f87171';
-        const fw=i===PINNED_IDX?'700':'500';
-        const outline=i===PINNED_IDX?'outline:.5px solid rgba(255,255,255,.22);':'';
-        return `<span style="flex:1;font-family:'IBM Plex Mono',monospace;font-size:8px;font-weight:${fw};text-align:center;padding:2px 0;border-radius:2px;letter-spacing:.05em;background:${bg};color:${col};${outline}">${ADAPTER_LBL[i]}</span>`;
-      }).join('');
-
-      const pinLvl=n.compat[PINNED_IDX];
-      const pinBg=pinLvl==='full'?'rgba(74,222,128,.10)':pinLvl==='part'?'rgba(251,191,36,.10)':'rgba(239,68,68,.10)';
-      const pinCol=pinLvl==='full'?'#4ade80':pinLvl==='part'?'#fbbf24':'#f87171';
-      const pinBorder=pinLvl==='full'?'rgba(74,222,128,.22)':pinLvl==='part'?'rgba(251,191,36,.28)':'rgba(239,68,68,.28)';
-
-      const el=document.createElement('div');
-      el.style.cssText=nodeStyle+`border-left:3px solid ${accent};left:${n.x}px;top:${n.y}px;`;
-      el.innerHTML=`
-        <div style="display:flex;align-items:center;gap:7px;padding:8px 9px 7px;">
-          <span style="display:inline-flex;color:${accent};opacity:.88;flex-shrink:0;">
-            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round">${ICONS[n.type]||''}</svg>
-          </span>
-          <span style="flex:1;font-size:12px;font-weight:500;color:#e2e2ec;letter-spacing:-.01em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${n.label}</span>
-          <span style="display:inline-flex;align-items:center;gap:3px;font-family:'IBM Plex Mono',monospace;font-size:8.5px;font-weight:600;padding:1.5px 4px;border-radius:3px;flex-shrink:0;background:${pinBg};color:${pinCol};border:.5px solid ${pinBorder};">${ADAPTER_LBL[PINNED_IDX]}</span>
-        </div>
-        <div class="compat-row" style="display:flex;gap:3px;padding:0 8px;max-height:0;opacity:0;overflow:hidden;transition:max-height .18s ease,opacity .14s ease,padding .18s ease;">${compatHtml}</div>
-        <span style="position:absolute;width:7px;height:7px;border-radius:50%;background:#1d1d28;border:1.5px solid ${accent};top:14px;left:-4px;z-index:4;"></span>
-        <span style="position:absolute;width:7px;height:7px;border-radius:50%;background:#1d1d28;border:1.5px solid ${accent};top:14px;right:-4px;z-index:4;"></span>
-      `;
-
-      el.addEventListener('mouseenter',()=>{
-        const r=el.querySelector('.compat-row');
-        r.style.maxHeight='22px';r.style.opacity='1';r.style.padding='2px 8px 6px';
-      });
-      el.addEventListener('mouseleave',()=>{
-        const r=el.querySelector('.compat-row');
-        r.style.maxHeight='0';r.style.opacity='0';r.style.padding='0 8px';
-      });
-
-      frame.appendChild(el);
-      n.el=el;
-      attachDrag(n);
-    });
-  }
-
-  function endpoint(node,side){
-    const HOFF=7;
-    if(side==='R') return{x:node.x+W+HOFF, y:node.y+HEAD_CY, dx:1,  dy:0};
-    if(side==='L') return{x:node.x-HOFF,   y:node.y+HEAD_CY, dx:-1, dy:0};
-    if(side==='T') return{x:node.x+W/2,    y:node.y-HOFF,    dx:0,  dy:-1};
-                   return{x:node.x+W/2,    y:node.y+H+HOFF,  dx:0,  dy:1};
-  }
-
-  function pathFor(s,t){
-    const d=Math.max(Math.max(Math.abs(t.x-s.x),Math.abs(t.y-s.y))*.5,18);
-    return`M ${s.x} ${s.y} C ${s.x+s.dx*d} ${s.y+s.dy*d}, ${t.x+t.dx*d} ${t.y+t.dy*d}, ${t.x} ${t.y}`;
-  }
-
-  function syncSvg(){
-    const w=frame.clientWidth,h=frame.clientHeight;
-    svg.setAttribute('width',w);svg.setAttribute('height',h);svg.setAttribute('viewBox',`0 0 ${w} ${h}`);
-  }
-
-  function drawEdges(){
-    syncSvg();
-    const ns='http://www.w3.org/2000/svg';
-    while(svg.firstChild)svg.removeChild(svg.firstChild);
-    const defs=document.createElementNS(ns,'defs');
-    defs.innerHTML='<marker id="arrEdge" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#a0a0c8"/></marker>';
-    svg.appendChild(defs);
-    edges.forEach(e=>{
-      const A=nodes.find(n=>n.id===e.from),B=nodes.find(n=>n.id===e.to);
-      if(!A||!B)return;
-      const path=document.createElementNS(ns,'path');
-      path.setAttribute('stroke','#a0a0c8');
-      path.setAttribute('stroke-width','2');
-      path.setAttribute('fill','none');
-      path.setAttribute('d',pathFor(endpoint(A,e.srcSide||'R'),endpoint(B,e.tgtSide||'L')));
-      path.setAttribute('marker-end','url(#arrEdge)');
-      svg.appendChild(path);
-    });
-  }
-
-  function attachDrag(n){
-    let sx,sy,ox,oy,dragging=false;
-    n.el.addEventListener('pointerdown',e=>{
-      e.preventDefault();dragging=true;
-      n.el.style.cursor='grabbing';
-      n.el.style.borderColor='#6366f1';
-      n.el.style.boxShadow='0 0 0 1px #6366f1,0 10px 28px -6px rgba(99,102,241,.4)';
-      n.el.setPointerCapture(e.pointerId);
-      sx=e.clientX;sy=e.clientY;ox=n.x;oy=n.y;
-    });
-    n.el.addEventListener('pointermove',e=>{
-      if(!dragging)return;
-      const fw=frame.clientWidth,fh=frame.clientHeight;
-      n.x=Math.max(4,Math.min(fw-W-4,ox+(e.clientX-sx)));
-      n.y=Math.max(40,Math.min(fh-H-30,oy+(e.clientY-sy)));
-      n.el.style.left=n.x+'px';n.el.style.top=n.y+'px';
-      drawEdges();
-    });
-    n.el.addEventListener('pointerup',()=>{
-      dragging=false;
-      n.el.style.cursor='grab';
-      n.el.style.borderColor='';
-      n.el.style.boxShadow='0 2px 8px rgba(0,0,0,.5)';
-    });
-    n.el.addEventListener('pointercancel',()=>{dragging=false;});
-  }
-
-  renderNodes();
-  requestAnimationFrame(drawEdges);
-  window.addEventListener('resize',drawEdges);
+    // Start after initial fade-in completes
+    setTimeout(function(){
+      tickFlow();
+      setInterval(tickFlow,750);
+    },2000);
+    setTimeout(function(){
+      tickLayers();
+      setInterval(tickLayers,550);
+    },2300);
+  });
 })();
 </script>
 

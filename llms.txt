@@ -1,37 +1,41 @@
 # Its Harness
 
-> Open-source visual builder for production AI agent harnesses. One canvas, one runtime-neutral FlowSpec, four runtime adapters plus the A2A protocol. Apache 2.0. Currently in design stage.
+> Open-source visual canvas for production AI agent harnesses. Draw workflows on a canvas, compile to any major AI framework, trace every decision. Apache 2.0.
 
-Its Harness is in **Phase 0 of 5** — the FlowSpec v0.1.0 is frozen and a public design log of 36 questions is open. Public release is targeted for week 20. The project is recruiting collaborators on the design, not yet on the code.
+Its Harness is a **working tool** (v0.8.0) — a visual canvas plus four framework adapters plus built-in Langfuse observability. It is building toward a complete AI agent harness architecture: a system that goes beyond simple prompt routing to give agents a world model, multi-tier control state, structured verification, recovery strategies, and cross-run learning.
 
 ## Key facts
 
 - **License**: Apache 2.0
-- **Current version**: FlowSpec v0.1.0 (specification only; no runtime code yet)
-- **Stage**: Design — Phase 0 of a 5-phase roadmap
-- **Repository**: https://github.com/itsharness/itsharness (placeholder; update with real URL)
-- **Homepage**: https://itsharness.github.io/itsharness/
+- **Current version**: v0.8.0
+- **Repository**: https://github.com/3IVIS/itsharness
+- **Homepage**: https://itsharness.com
+- **Status**: Public alpha — canvas, 4 framework adapters, and Langfuse observability are working and ready to use
+- **Deployment**: fully local via Docker (`./setup-env.sh && docker compose up`); no cloud account required
 
-## What it does
+## What ships today (v0.8.0)
 
-Its Harness lets you author AI agent workflows visually on a canvas. The canvas emits a runtime-neutral JSON specification called FlowSpec. Runtime adapters then translate FlowSpec into native code for the agent framework you target. Swap runtimes without rewriting the flow.
+- **Visual canvas** with 14 node types for designing AI agent workflows
+- **FlowSpec v0.2.0** — open, portable JSON format; the runtime-neutral intermediate representation
+- **4 framework adapters**: a single FlowSpec compiles to LangGraph, CrewAI, Mastra, or Microsoft Agent Framework without rewriting
+- **Langfuse observability** built in — every run is traced automatically across all 4 runtimes
+- **HITL** (human-in-the-loop) pause and resume
+- **Deployment options**: REST API, MCP server, A2A protocol
+- 9 services start from a single `docker compose up`
 
 ## Supported runtimes
 
-Four first-class runtime adapters with dedicated code generators:
+- **LangGraph** (Python / JS, MIT) — production standard for stateful agent orchestration
+- **CrewAI** (Python, MIT) — multi-agent teams
+- **Mastra** (TypeScript, Apache 2.0) — TypeScript-native orchestrator
+- **Microsoft Agent Framework** (C# / Python / Java, MIT) — covers Semantic Kernel and AutoGen users (Microsoft merged both into one SDK)
+- **A2A protocol** — framework-agnostic invocation interop with Google ADK, OpenAI Agents SDK, Claude Agent SDK, and any A2A-compatible runtime; no custom adapter required
 
-- **LangGraph** (Python / JS, MIT) — Phase 1
-- **CrewAI** (Python, MIT) — Phase 3
-- **Mastra** (TypeScript, Apache 2.0) — Phase 3
-- **Microsoft Agent Framework** (C# / Python / Java, MIT) — Phase 4. Covers users from both Semantic Kernel and AutoGen, which Microsoft merged into one SDK that reached GA in April 2026.
+## FlowSpec v0.2.0
 
-Plus the **A2A protocol** as a Phase 2 invocation layer, providing framework-agnostic interop with Google ADK, OpenAI Agents SDK, Claude Agent SDK, and any other A2A-compatible runtime — no custom adapter required.
+The runtime-neutral intermediate representation. A single FlowSpec compiles to any supported adapter. Key fields: `spec_version`, `id`, `name`, `description`, `runtime_hints`, `state_schema`, `nodes`, `edges`, `tools`, `agents`, `memory_stores`, `model_defaults`, `flow_config`.
 
-## FlowSpec v0.1.0
-
-The neutral intermediate representation. Two required top-level fields (`spec_version`, `id`) and these optional sections: `name`, `description`, `runtime_hints`, `state_schema`, `nodes`, `edges`, `tools`, `agents`, `memory_stores`, `model_defaults`, `flow_config`.
-
-### Node taxonomy (14 types in v0.1.0)
+### Node types (14)
 
 - **i/o**: `input`, `output`
 - **llm**: `llm_call`
@@ -42,61 +46,80 @@ The neutral intermediate representation. Two required top-level fields (`spec_ve
 - **memory**: `memory_read`, `memory_write`
 - **composition**: `subgraph`, `transform`
 
-### Edge model
+## What a harness is (and why it matters)
 
-Two edge types discriminated on `type`: `direct` (simple from→to) and `conditional` (branches with conditions plus a default target). Conditions support either a JSONPath expression (`type: "expr"`) or a named function reference (`type: "fn_ref"`).
+A workflow routes prompts from node to node. A harness governs what the AI believes, what it is allowed to do, how it catches its own mistakes, and what it learns for next time.
 
-### Flow config
+The full harness target has 11 layers across 22 nodes:
 
-Three optional subsections, all disabled by default: `checkpoint`, `streaming`, `telemetry`. Plus `a2a_config` for exposing flows as A2A agents.
+1. **Caller State** — constraints, clarification requests, escalation propagation
+2. **World Model** — typed beliefs, contradictions, generation_id tracking
+3. **Reasoning** — evidence store, hypotheses from 4 generation sources, value-of-information gate before every action
+4. **Control** — 5-tier state resolver (NORMAL → CAUTIOUS → BLOCKED), diagnostic health vectors, deadlock detection
+5. **Planning** — task graph with 6 task states, parallel concurrency management
+6. **Execution** — VOI-gated actions, pre-execution review gate across 5 dimensions, reversibility strategy
+7. **Verification** — 9 verification layers, adequacy critic, adversarial reviewer pass
+8. **Recovery** — 6 named strategies, typed failure library, local vs global replanning scope
+9. **Memory** — context compression, execution journal, budget management
+10. **Learning** — experience store for cross-run structural reuse (optional)
+11. **Output & Reviewer Pass** — output contract validation, 3-lens review
 
-## Roadmap
+## Roadmap (11 phases)
 
-Five phases. Each phase is independently deployable.
+- **P0** (active) — Foundation & State Architecture
+- **P1** — Evidence & Reasoning
+- **P2** — World Model & Contradiction Detection
+- **P3** — Diagnostics & Control State
+- **P4** — Planning & Task Graph
+- **P5** — Execution & Verification
+- **P6** — Recovery & Memory
+- **P7** — Caller State & Escalation
+- **P8** — Experience Store
+- **P9** — Reviewer Pass & Output Contract
+- **P10** — Canvas Integration (10 new harness node types, diagnostic health dashboard)
+- **P11** — E2E Integration & Testing (all architectural invariants across all 4 frameworks)
 
-1. **Phase 0 — Spec design** (W1–3, in progress). Neutral IR, 14 node types, 4 runtime maps + A2A, 5 example flows, public RFC.
-2. **Phase 1 — Canvas + LangGraph** (W4–11). XYFlow canvas, 12 core nodes, LangGraph adapter. First alpha.
-3. **Phase 2 — Observability + A2A** (W12–20). Langfuse traces, HITL UI, LiteLLM gateway, REST + MCP + A2A deployment. Public v0.1 release.
-4. **Phase 3 — Teams + CrewAI + Mastra** (W21–32). CrewAI adapter, Mastra adapter, RBAC, version diff, eval integration, marketplace. v1.0.
-5. **Phase 4 — Enterprise + Microsoft** (W33+). Real-time collab (Yjs), Microsoft Agent Framework adapter, SSO, on-prem Helm, embeddable canvas.
+Each phase is independently deployable. All flows drawn today are forward-compatible with new harness node types.
 
-## Design log
+## Quick start
 
-- 36 design questions tracked
-- 18 decided in Phase 0 (still open to challenge on Discussions)
-- 8 parked as adapter-level concerns (revisit when each adapter is built)
-- 2 deferred to v2
+```sh
+# 1. Generate secrets and configure environment
+./setup-env.sh
+
+# 2. Start all services
+docker compose up
+```
+
+Services that start:
+- **Canvas** — `localhost:3000` (visual workflow editor)
+- **API** — `localhost:8000` (compiles and runs flows)
+- **Langfuse** — `localhost:3001` (observability dashboard)
+
+Nine services total. `setup-env.sh` handles all secrets automatically. You only need to provide an LLM API key (or skip it and use a local model).
 
 ## How to contribute
 
-Three lanes:
-
-- **Shape**: argue with the FlowSpec on GitHub Discussions. Read the RFC, push back, propose alternatives. This is the highest-leverage contribution at the design stage.
-- **Build**: claim a scoped module — an adapter, a node pack, the IR validator, or the diff viewer — from the good-first-issues list.
-- **Try**: subscribe for the alpha. The first runnable canvas is being stitched together; you'll get it as soon as it's stable enough to point at a real flow.
+- **Run it**: `docker compose up`, point it at a real flow, open a bug report with your FlowSpec JSON, the runtime, and the full error
+- **Shape it**: open feature requests on GitHub — concrete use cases carry more weight than abstract asks; phase priority is shaped by community demand
+- **Build with it**: FlowSpec v0.2.0 is stable for third-party node packs (`@itsharness/nodes/…`); harness phases are open for community contribution
 
 ## Frequently asked questions
 
-**What is Its Harness?**  
-An open-source visual builder for production AI agent harnesses. You draw flows on a canvas; Its Harness compiles them into a runtime-neutral FlowSpec, then adapters translate that into LangGraph, CrewAI, Mastra, or Microsoft Agent Framework code. The A2A protocol layer covers everything else.
+**What is Its Harness?**
+An open-source visual canvas for designing AI agent workflows that compile to production-ready code on LangGraph, CrewAI, Mastra, or Microsoft Agent Framework. Today: canvas + 4 adapters + Langfuse observability. Building toward: a complete harness with world model, multi-tier control state, 9-layer verification, recovery strategies, and cross-run learning.
 
-**Why a neutral spec instead of building on one framework?**  
-The neutral IR decouples the canvas from any runtime. Adding a new runtime means writing one adapter file. Canvas features (versioning, RBAC, evals, collab) are completely decoupled from runtime choice.
+**What is a harness vs a workflow?**
+A workflow routes prompts from node to node. A harness governs what the AI believes, what it is allowed to do, how it catches its own mistakes, and what it learns for next time. The 5-tier control state resolver knows when to slow down or stop. Nine verification layers check outputs before they land. Recovery strategies handle failures systematically rather than crashing.
 
-**Why these four runtimes?**  
-LangGraph (34M+ monthly downloads, production standard for stateful agents). CrewAI (largest unaddressed audience, 44K+ stars). Mastra (only TypeScript-native orchestrator). Microsoft Agent Framework (merged SK + AutoGen, covers enterprise .NET and Python).
+**Why runtime-neutral FlowSpec?**
+Decouples the canvas from any runtime. Adding a new runtime means one adapter file. Canvas features — HITL, observability, versioning — are independent of runtime choice. One flow works across all 4 supported runtimes without rewriting.
 
-**What about Google ADK, OpenAI Agents SDK, Claude Agent SDK?**  
-Covered by the A2A protocol layer in Phase 2 — invocation-level interop without a custom adapter.
+**Why these four runtimes?**
+LangGraph is the production standard for stateful agents. CrewAI has the largest audience for multi-agent team patterns. Mastra is the only TypeScript-native orchestrator with first-class support. Microsoft Agent Framework merged Semantic Kernel and AutoGen, covering enterprise .NET and Python users.
 
-**Is the canvas open source?**  
-Yes. Built on XYFlow (MIT). TypeScript-native. Will be shippable as an embeddable npm package in Phase 4.
+**Is it open source?**
+Yes. Apache 2.0. Canvas, adapters, FlowSpec, and all harness phases.
 
-**What's the license?**  
-Apache 2.0.
-
-## Optional: deeper material
-
-- Full spec schema (TypeScript Zod + JSON Schema): published with the RFC
-- Roadmap explorer (5 phases, 48-week timeline): published with the RFC
-- Open questions tracker (all 36 questions with decisions): published with the RFC
+**Does it require a cloud account?**
+No. Everything runs locally via Docker.
