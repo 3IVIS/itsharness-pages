@@ -1139,7 +1139,7 @@ footer{
       </p>
 
       <p class="lede">
-        A workflow routes prompts. A harness governs what your agent believes, what it's allowed to do, and how it recovers. Build one on a canvas — compile to any framework.
+        A workflow routes prompts. A harness governs what your agent believes, what it's allowed to do, and how it recovers. Build one on a canvas, compile to any framework, trace every decision with Langfuse, and deploy as a REST endpoint, MCP tool, or A2A agent.
       </p>
 
       <div class="runtime-pills">
@@ -1547,15 +1547,15 @@ docker compose up</pre>
         <div class="feature-list">
           <div class="feature-item">
             <strong>Canvas — <code style="font-size:13px">localhost:3000</code></strong>
-            <p>The visual workflow editor. Draw your flows here.</p>
+            <p>The visual harness editor. Design with 27 node types — 14 execution nodes and 13 harness nodes including world model, control state, verify gate, and recovery.</p>
           </div>
           <div class="feature-item">
             <strong>API — <code style="font-size:13px">localhost:8000</code></strong>
-            <p>The backend that compiles and runs your flows.</p>
+            <p>Compiles FlowSpec to LangGraph, CrewAI, Mastra, or Microsoft Agent Framework and runs your harnesses. Publishes each harness simultaneously as a REST endpoint, MCP tool, and A2A agent.</p>
           </div>
           <div class="feature-item">
             <strong>Langfuse — <code style="font-size:13px">localhost:3001</code></strong>
-            <p>Monitoring dashboard. Every run is traced automatically.</p>
+            <p>Harness-aware observability dashboard. Every run traced automatically across all 4 frameworks — including world model transitions, control state changes, and recovery strategy activations.</p>
           </div>
         </div>
       </div>
@@ -1758,7 +1758,7 @@ docker compose up</pre>
     </h2>
 
     <p class="section-lede">
-      Most workflow tools are tied to one framework. Its Harness separates the workflow design from the execution — so you can experiment, migrate, or compare frameworks without rebuilding your flows each time.
+      Every other visual canvas is tied to one runtime. Its Harness separates harness design from execution via FlowSpec — so you can experiment, migrate, or compare runtimes without rebuilding your architecture each time.
     </p>
 
     <div class="runtime-grid">
@@ -1766,28 +1766,28 @@ docker compose up</pre>
       <div class="runtime-card">
         <h3>LangGraph</h3>
         <p>
-          Graph-based orchestration for complex, stateful AI pipelines.
+          Python / JS · MIT. The production standard for stateful agent orchestration — precise cycle control, conditional edges, and persistent state across steps.
         </p>
       </div>
 
       <div class="runtime-card">
         <h3>CrewAI</h3>
         <p>
-          Multi-agent workflows where AI "crew members" collaborate on tasks.
+          Python · MIT. The largest audience for multi-agent team patterns — role-based agents, task delegation, and built-in inter-agent communication.
         </p>
       </div>
 
       <div class="runtime-card">
         <h3>Mastra</h3>
         <p>
-          TypeScript-native AI workflows, built for modern JS teams.
+          TypeScript · Apache 2.0. The only TypeScript-native orchestrator with first-class harness support — built for teams who live in JS/TS.
         </p>
       </div>
 
       <div class="runtime-card">
         <h3>Microsoft Agent Framework</h3>
         <p>
-          Enterprise AI workflows powered by Semantic Kernel.
+          C# / Python / Java · MIT. Merged Semantic Kernel and AutoGen into one SDK — covers enterprise .NET, Python, and Java teams in one adapter.
         </p>
       </div>
 

@@ -111,7 +111,7 @@
         {
           "@type": "Question",
           "name": "How do I get started with harness engineering?",
-          "acceptedAnswer": { "@type": "Answer", "text": "The fastest path is Its Harness: run ./scripts/setup-env.sh && docker compose up to start all nine services (canvas on localhost:3000, API on localhost:8000, Langfuse on localhost:3001). Draw your agent architecture on the visual canvas using 27 node types, compile to FlowSpec, and run on any supported framework. No cloud account required. Apache 2.0." }
+          "acceptedAnswer": { "@type": "Answer", "text": "The fastest path is Its Harness: run ./scripts/setup-env.sh && docker compose up to start all nine services (canvas on localhost:3000, API on localhost:8000, Langfuse on localhost:3001). Five ready-made harnesses are included to fork: RAG Agent, Content Moderation + Human Review, Parallel Risk Assessment, Research Crew, and Debate Agent. Draw your architecture on the canvas, compile to FlowSpec, and run on any supported framework. No cloud account required. Apache 2.0." }
         },
         {
           "@type": "Question",
@@ -815,7 +815,7 @@ docker compose up</pre>
 
       <div class="faq-item">
         <h3>How do I get started with harness engineering?</h3>
-        <p>Clone <a href="https://github.com/3IVIS/itsharness" style="color:var(--accent-ink);">github.com/3IVIS/itsharness</a>, run <code style="font-size:13px">./scripts/setup-env.sh &amp;&amp; docker compose up</code>, and open the canvas on <code style="font-size:13px">localhost:3000</code>. Five ready-made harnesses are included to fork and build on. No cloud account required.</p>
+        <p>Clone <a href="https://github.com/3IVIS/itsharness" style="color:var(--accent-ink);">github.com/3IVIS/itsharness</a>, run <code style="font-size:13px">./scripts/setup-env.sh &amp;&amp; docker compose up</code>, and open the canvas on <code style="font-size:13px">localhost:3000</code>. Five ready-made harnesses are included to fork and build on: <strong>RAG Agent</strong> (memory read + semantic search), <strong>Content Moderation + Human Review</strong> (HITL pause on high-risk items), <strong>Parallel Risk Assessment</strong> (three specialist agents, fan-out/merge), <strong>Research Crew</strong> (multi-agent with tool approval), and <strong>Debate Agent</strong> (multi-agent debate exposed as an A2A agent). No cloud account required.</p>
       </div>
 
     </div>
@@ -830,7 +830,7 @@ docker compose up</pre>
       <div class="cta-text">
         <div class="section-label">ITS HARNESS · v0.8.0 · PUBLIC ALPHA</div>
         <h2>The open-source tool<br>for <em>harness engineering.</em></h2>
-        <p>Visual canvas, 27 node types, 4 framework adapters, built-in Langfuse observability, HITL controls, and the full 11-layer harness architecture — implemented and tested. Apache 2.0. Runs locally.</p>
+        <p>Visual canvas, 27 node types, 4 framework adapters, built-in Langfuse observability, HITL controls, REST/MCP/A2A deployment, and the full 11-layer harness architecture — implemented and tested (379 tests). Apache 2.0. Runs locally via Docker.</p>
       </div>
       <div class="cta-actions">
         <a class="btn" href="https://github.com/3IVIS/itsharness">Star on GitHub</a>
