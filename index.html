@@ -14,7 +14,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Its Harness — Visual Canvas for AI Agent Harnesses</title>
 
-<meta name="description" content="Open-source visual canvas for production AI agent harnesses. Design workflows once, run on LangGraph, CrewAI, Mastra, or Microsoft Agent Framework with built-in Langfuse observability, HITL controls, and REST/MCP/A2A deployment. Apache 2.0.">
+<meta name="description" content="Apache 2.0 visual canvas for AI agent harnesses. Draw once, run on LangGraph, CrewAI, Mastra, or MS Agent Framework. Langfuse observability, HITL, REST/MCP/A2A.">
 
 <link rel="canonical" href="https://itsharness.com/">
 
@@ -22,12 +22,12 @@
 <meta property="og:url" content="https://itsharness.com/">
 <meta property="og:site_name" content="Its Harness">
 <meta property="og:title" content="Its Harness — Visual Canvas for AI Agent Harnesses">
-<meta property="og:description" content="Open-source visual canvas for production AI agent harnesses. Design workflows once, run on LangGraph, CrewAI, Mastra, or Microsoft Agent Framework with built-in Langfuse observability, HITL controls, and REST/MCP/A2A deployment. Apache 2.0.">
+<meta property="og:description" content="Apache 2.0 visual canvas for AI agent harnesses. Draw once, run on LangGraph, CrewAI, Mastra, or MS Agent Framework. Langfuse observability, HITL, REST/MCP/A2A.">
 <meta property="og:image" content="https://itsharness.com/og-image.png">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Its Harness — Visual Canvas for AI Agent Harnesses">
-<meta name="twitter:description" content="Open-source visual canvas for production AI agent harnesses. Design workflows once, run on LangGraph, CrewAI, Mastra, or Microsoft Agent Framework with built-in Langfuse observability, HITL controls, and REST/MCP/A2A deployment. Apache 2.0.">
+<meta name="twitter:description" content="Apache 2.0 visual canvas for AI agent harnesses. Draw once, run on LangGraph, CrewAI, Mastra, or MS Agent Framework. Langfuse observability, HITL, REST/MCP/A2A.">
 <meta name="twitter:image" content="https://itsharness.com/og-image.png">
 <meta name="twitter:image:alt" content="Its Harness — visual canvas comparing a simple agent loop with a full 11-layer AI agent harness.">
 
@@ -41,6 +41,7 @@
 <meta name="keywords" content="AI agent harness, agent orchestration, visual canvas, LangGraph, CrewAI, Mastra, Microsoft Agent Framework, Langfuse, MCP, A2A, FlowSpec, open source">
 
 <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt — structured summary for LLMs">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
 
 <meta name="theme-color" content="#4F46E5">
 
@@ -62,6 +63,9 @@
       "operatingSystem": "Docker (Linux, macOS, Windows)",
       "softwareVersion": "0.8.0",
       "releaseNotes": "Public alpha: visual canvas, 4 framework adapters, and Langfuse observability.",
+      "datePublished": "2025-01-01",
+      "dateModified": "2026-06-21",
+      "image": "https://itsharness.com/og-image.png",
       "url": "https://itsharness.com/",
       "downloadUrl": "https://github.com/3IVIS/itsharness",
       "softwareRequirements": "Docker",
@@ -75,6 +79,7 @@
     },
     {
       "@type": "SoftwareSourceCode",
+      "@id": "https://itsharness.com/#sourcecode",
       "name": "Its Harness",
       "codeRepository": "https://github.com/3IVIS/itsharness",
       "programmingLanguage": ["Python", "TypeScript"],
@@ -93,6 +98,7 @@
       "@id": "https://itsharness.com/#website",
       "name": "Its Harness",
       "url": "https://itsharness.com/",
+      "dateModified": "2026-06-21",
       "publisher": { "@id": "https://itsharness.com/#org" },
       "description": "Open-source visual canvas for production AI agent harnesses."
     }
@@ -2074,6 +2080,11 @@ docker compose up</pre>
       </div>
 
       <div style="padding:24px 26px;border-bottom:1px solid var(--line);background:var(--paper);">
+        <h3 style="margin:0 0 8px;font-size:18px;font-weight:500;letter-spacing:-.01em;color:var(--ink);">What is FlowSpec?</h3>
+        <p style="margin:0;font-size:15px;color:var(--ink-2);line-height:1.6;">FlowSpec is Its Harness's open, runtime-neutral JSON format for describing AI agent workflows. It is the intermediate representation that sits between the visual canvas and any execution runtime. A single FlowSpec file compiles to LangGraph, CrewAI, Mastra, or Microsoft Agent Framework without rewriting. FlowSpec v0.2.0 is stable and open for third-party node packs (<code style="font-size:13px">@itsharness/nodes/…</code>).</p>
+      </div>
+
+      <div style="padding:24px 26px;border-bottom:1px solid var(--line);background:var(--paper);">
         <h3 style="margin:0 0 8px;font-size:18px;font-weight:500;letter-spacing:-.01em;color:var(--ink);">Why a runtime-neutral FlowSpec?</h3>
         <p style="margin:0;font-size:15px;color:var(--ink-2);line-height:1.6;">It decouples the canvas from any single runtime. Adding a new runtime is one adapter file, and canvas features — HITL, observability, versioning — stay independent of your runtime choice. One flow runs across all four supported runtimes without rewriting.</p>
       </div>
@@ -2113,6 +2124,11 @@ docker compose up</pre>
       "@type": "Question",
       "name": "What's the difference between a harness and a workflow?",
       "acceptedAnswer": { "@type": "Answer", "text": "A workflow routes prompts from node to node. A harness governs what the agent believes, what it's allowed to do, how it catches its own mistakes, and what it learns for next time. The 5-tier control state knows when to slow down or stop; nine verification layers check outputs before they land; recovery strategies handle failures systematically instead of crashing." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is FlowSpec?",
+      "acceptedAnswer": { "@type": "Answer", "text": "FlowSpec is Its Harness's open, runtime-neutral JSON format for describing AI agent workflows. It is the intermediate representation that sits between the visual canvas and any execution runtime. A single FlowSpec file compiles to LangGraph, CrewAI, Mastra, or Microsoft Agent Framework without rewriting. FlowSpec v0.2.0 is stable and open for third-party node packs (@itsharness/nodes/…)." }
     },
     {
       "@type": "Question",
