@@ -1,4 +1,4 @@
-# Its Harness — https://buildaharness.com
+# Build A Harness — https://buildaharness.com
 # All crawlers, including AI/LLM agents, are welcome.
 
 User-agent: *

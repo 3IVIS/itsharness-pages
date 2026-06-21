@@ -1,4 +1,4 @@
-# Its Harness
+# Build A Harness
 
 Open-source visual canvas for production AI agent harnesses. Draw workflows on a canvas, compile to any major AI framework, trace every decision. Apache 2.0.
 
