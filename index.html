@@ -98,6 +98,7 @@ header{
 .brand .name{
   font-family:"IBM Plex Mono",monospace;
   font-size:15px;
+  white-space:nowrap;
 }
 
 .nav{
@@ -819,6 +820,170 @@ footer{
   margin-left:auto;
 }
 
+/* composability diagram */
+
+.compose-diagram{
+  margin-bottom:36px;
+  border:1px solid var(--line);
+  border-radius:6px;
+  overflow:hidden;
+}
+
+.compose-top{
+  padding:11px 20px;
+  background:var(--bg-2);
+  border-bottom:1px solid var(--line);
+  font-family:"IBM Plex Mono",monospace;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  color:var(--ink-3);
+  text-align:center;
+}
+
+.compose-top b{
+  color:var(--ink-2);
+}
+
+.compose-cols{
+  display:grid;
+  grid-template-columns:1fr 28px 1fr;
+}
+
+.compose-col{
+  padding:16px 16px 18px;
+  background:var(--paper);
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+}
+
+.compose-col-label{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  color:var(--ink-3);
+  text-align:center;
+  padding:4px 8px;
+  border-radius:3px;
+  background:var(--bg-2);
+  border:1px solid var(--line);
+  margin-bottom:10px;
+}
+
+.compose-col-label.full{
+  color:var(--accent-ink);
+  background:oklch(.94 .02 268);
+  border-color:oklch(.82 .04 268);
+}
+
+.cnode{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:5px 10px;
+  border-radius:4px;
+  border:1px solid var(--line);
+  background:var(--bg);
+  font-family:"IBM Plex Mono",monospace;
+  font-size:10px;
+  color:var(--ink);
+  flex-shrink:0;
+}
+
+.cnode-dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  flex-shrink:0;
+}
+
+.cnode-tag{
+  margin-left:auto;
+  font-size:8px;
+  color:var(--ink-3);
+  letter-spacing:.04em;
+  white-space:nowrap;
+}
+
+.cnode-opt{
+  opacity:.55;
+  border-style:dashed;
+}
+
+.cnode-pair{
+  display:flex;
+  gap:4px;
+}
+
+.cnode-pair .cnode{
+  flex:1;
+  min-width:0;
+}
+
+.carrow{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  height:11px;
+  flex-shrink:0;
+  margin:1px 0;
+}
+
+.carrow::before{
+  content:"";
+  flex:1;
+  width:1px;
+  background:var(--line);
+}
+
+.carrow::after{
+  content:"";
+  border-left:3px solid transparent;
+  border-right:3px solid transparent;
+  border-top:4px solid var(--line);
+}
+
+.compose-sep{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  background:var(--bg-2);
+  border-left:1px solid var(--line);
+  border-right:1px solid var(--line);
+  padding:12px 0;
+}
+
+.compose-sep-line{
+  flex:1;
+  width:1px;
+  background:var(--line);
+}
+
+.compose-sep-badge{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:8px;
+  color:var(--ink-3);
+  border:1px solid var(--line);
+  border-radius:3px;
+  padding:3px 5px;
+  background:var(--paper);
+  line-height:1;
+  margin:4px 0;
+}
+
+.compose-bottom{
+  padding:9px 20px;
+  background:var(--bg-2);
+  border-top:1px solid var(--line);
+  font-family:"IBM Plex Mono",monospace;
+  font-size:9.5px;
+  color:var(--ink-3);
+  text-align:center;
+  letter-spacing:.05em;
+}
+
 /* mobile */
 
 @media(max-width:980px){
@@ -827,8 +992,13 @@ footer{
   .flow-grid,
   .cards,
   .runtime-grid,
-  .harness-vs{
+  .harness-vs,
+  .compose-cols{
     grid-template-columns:1fr;
+  }
+
+  .compose-sep{
+    display:none;
   }
 
   h1{
@@ -861,7 +1031,7 @@ footer{
 
     <nav class="nav">
       <a href="#why">Harness</a>
-      <a href="#roadmap">Roadmap</a>
+      <a href="#roadmap">Node library</a>
       <a href="#quickstart">Get started</a>
       <a href="#flowspec">How it works</a>
       <a href="#runtimes">Frameworks</a>
@@ -883,20 +1053,20 @@ footer{
     <div>
 
       <div class="eyebrow">
-        OPEN SOURCE · FULL HARNESS IMPLEMENTED · APACHE 2.0
+        OPEN SOURCE · VISUAL CANVAS · APACHE 2.0
       </div>
 
       <h1>
-        It's all about the <em>harness.</em><br>
-        It's <em>AI's</em> harness.
+        Design, test, and deploy<br>
+        <em>AI agent harnesses.</em>
       </h1>
 
       <p class="hero-sub">
-        Not just a workflow. A complete reasoning and control architecture for AI agents.
+        Pick the nodes your agent needs. Draw the graph. Run on any framework.
       </p>
 
       <p class="lede">
-        A workflow tells your AI what to do. A harness makes sure it actually does it — with a world model that tracks beliefs and contradictions, a control layer that knows when to slow down or stop, nine-layer verification before every action, and recovery strategies when things go wrong. Its Harness has delivered the full architecture: draw it on a canvas, run it on any framework, trace every decision.
+        A workflow routes prompts. A harness governs what your agent believes, what it's allowed to do, and how it recovers. Build one on a canvas — compile to any framework.
       </p>
 
       <div class="runtime-pills">
@@ -911,13 +1081,10 @@ footer{
           Star on GitHub<span class="gh-count" data-gh-stars style="padding-left:10px;margin-left:4px;border-left:1px solid rgba(255,255,255,.22);color:rgba(255,255,255,.65);font-size:11px;">&#9733; 0</span>
         </a>
 
-        <a class="btn" href="#roadmap" style="background:transparent;color:var(--ink);border-color:var(--line);">
-          View roadmap →
+        <a class="btn" href="#examples" style="background:transparent;color:var(--ink);border-color:var(--line);">
+          See what you can build →
         </a>
 
-        <span class="cta-note">
-          Free &amp; open source · Apache 2.0
-        </span>
       </div>
 
     </div>
@@ -1025,7 +1192,7 @@ footer{
     </h2>
 
     <p class="section-lede">
-      A workflow routes prompts from node to node. A harness governs what the AI believes, what it's allowed to do, how it catches its own mistakes, and what it learns for next time. Its Harness delivers the full architecture — canvas and framework adapters as the foundation, and the complete reasoning and control layer on top.
+      A workflow routes prompts from node to node. A harness governs what the AI believes, what it's allowed to do, how it catches its own mistakes, and what it learns for next time. Use three nodes or eleven — the same FlowSpec runs either.
     </p>
 
     <div class="cards">
@@ -1033,35 +1200,35 @@ footer{
       <div class="card">
         <h3>Reasoning, not just prompting</h3>
         <p>
-          The full harness maintains a world model — typed beliefs, contradictions, hypotheses from four generation sources, and a value-of-information gate before every action. Not just "ask the LLM."
+          Add a <code style="font-size:13px">world_model</code> node and your agent tracks typed beliefs, detects contradictions, and evaluates hypotheses from four generation sources before acting — instead of just asking the LLM and hoping.
         </p>
       </div>
 
       <div class="card">
         <h3>Control that holds</h3>
         <p>
-          A five-tier control state resolver (NORMAL → CAUTIOUS → BLOCKED) governs every action. Diagnostic health vectors drive it. Deadlock detection stops it escalating forever. Your AI knows when to slow down.
+          Drop in a <code style="font-size:13px">control_state</code> node and your agent gains a five-tier resolver that governs every action — NORMAL → CAUTIOUS → BLOCKED. Diagnostic health vectors drive it; deadlock detection stops it escalating forever.
         </p>
       </div>
 
       <div class="card">
         <h3>Verification with teeth</h3>
         <p>
-          Nine verification layers, a pre-execution review gate across five dimensions, an adversarial reviewer pass, and contract validation before every return. Trust, but verify — every time.
+          A <code style="font-size:13px">verify_gate</code> runs nine checks before every action. Pair it with <code style="font-size:13px">reviewer_pass</code> for adversarial review and contract validation before every return. Trust, but verify — and actually enforce it.
         </p>
       </div>
 
       <div class="card">
         <h3>Recovery and learning</h3>
         <p>
-          Six named recovery strategies, typed failure detection, local vs global replanning, and an optional experience store that reuses successful decompositions — not just success-rate priors — across runs.
+          Add <code style="font-size:13px">recovery</code> for six named strategies, typed failure detection, and local vs global replanning. Attach <code style="font-size:13px">exp_store</code> and your agent reuses successful decompositions across future runs.
         </p>
       </div>
 
     </div>
 
     <p style="font-size:14px;color:var(--ink-3);margin-top:28px;font-family:'IBM Plex Mono',monospace;text-align:center;">
-      Canvas + 4 framework adapters + Langfuse observability + full harness: world model, control state resolver, 9-layer verification, recovery, experience store, reviewer pass — 22 harness nodes · 379 tests passing.
+      27 node types · 14 execution + 13 harness · 4 framework adapters · Langfuse observability
     </p>
 
   </div>
@@ -1073,25 +1240,90 @@ footer{
   <div class="wrap">
 
     <div class="section-eyebrow">
-      FULL HARNESS ARCHITECTURE
+      HARNESS NODE LIBRARY
     </div>
 
     <h2>
-      Canvas foundation to
-      <em>full reasoning and control.</em>
+      <em>Every layer you need.</em> Use one or all.
     </h2>
 
     <p class="section-lede">
-      Its Harness is a complete reasoning and control architecture for AI agents. The canvas and framework adapters are the visible surface — below them sit world model management, diagnostic health vectors, a five-tier control state resolver, nine-layer verification, named recovery strategies, an experience store, and a three-lens reviewer pass. 379 acceptance tests across all four frameworks.
+      27 node types — 14 execution, 13 harness. Use what your agent needs: a minimal harness might be three nodes, the full stack runs to eleven layers. Both are valid FlowSpec.
     </p>
+
+    <!-- composability diagram: two valid harness graphs side by side -->
+    <div class="compose-diagram">
+
+      <div class="compose-top"><b>Same bricks. Different graphs.</b> · Compose exactly the harness your agent needs — minimal or full.</div>
+
+      <div class="compose-cols">
+
+        <!-- MINIMAL HARNESS -->
+        <div class="compose-col">
+          <div class="compose-col-label">Minimal · just verification + recovery</div>
+
+          <div class="cnode"><span class="cnode-dot" style="background:#0891b2"></span>input</div>
+          <div class="carrow"></div>
+          <div class="cnode"><span class="cnode-dot" style="background:#7c3aed"></span>llm_call</div>
+          <div class="carrow"></div>
+          <div class="cnode" style="border-color:#f87171;background:oklch(.99 .008 15);"><span class="cnode-dot" style="background:#f87171"></span>verify_gate<span class="cnode-tag">9 layers</span></div>
+          <div class="carrow"></div>
+          <div class="cnode" style="border-color:#f97316;background:oklch(.99 .008 40);"><span class="cnode-dot" style="background:#f97316"></span>recovery<span class="cnode-tag">6 strategies</span></div>
+          <div class="carrow"></div>
+          <div class="cnode"><span class="cnode-dot" style="background:#059669"></span>output</div>
+        </div>
+
+        <!-- SEPARATOR -->
+        <div class="compose-sep">
+          <div class="compose-sep-line"></div>
+          <div class="compose-sep-badge">or</div>
+          <div class="compose-sep-line"></div>
+        </div>
+
+        <!-- FULL HARNESS -->
+        <div class="compose-col">
+          <div class="compose-col-label full">Full Harness · all 11 layers</div>
+
+          <div class="cnode"><span class="cnode-dot" style="background:#0891b2"></span>caller_state<span class="cnode-tag">constraints · escalation</span></div>
+          <div class="carrow"></div>
+          <div class="cnode"><span class="cnode-dot" style="background:#7c3aed"></span>world_model<span class="cnode-tag">beliefs · contradictions</span></div>
+          <div class="carrow"></div>
+          <div class="cnode"><span class="cnode-dot" style="background:#16a34a"></span>reasoning<span class="cnode-tag">hypotheses · VOI</span></div>
+          <div class="carrow"></div>
+          <div class="cnode" style="border-left:3px solid #a21caf;"><span class="cnode-dot" style="background:#a21caf"></span>control_state<span class="cnode-tag">5-tier resolver</span></div>
+          <div class="carrow"></div>
+          <div class="cnode"><span class="cnode-dot" style="background:#2563eb"></span>task_graph<span class="cnode-tag">6-state planning</span></div>
+          <div class="carrow"></div>
+          <div class="cnode-pair">
+            <div class="cnode"><span class="cnode-dot" style="background:#d97706"></span>execution</div>
+            <div class="cnode" style="border-color:#f87171;background:oklch(.99 .008 15);"><span class="cnode-dot" style="background:#f87171"></span>verify_gate</div>
+          </div>
+          <div class="carrow"></div>
+          <div class="cnode-pair">
+            <div class="cnode" style="border-color:#f97316;background:oklch(.99 .008 40);"><span class="cnode-dot" style="background:#f97316"></span>recovery</div>
+            <div class="cnode"><span class="cnode-dot" style="background:#65a30d"></span>memory</div>
+          </div>
+          <div class="carrow"></div>
+          <div class="cnode cnode-opt"><span class="cnode-dot" style="background:#64748b"></span>learning<span class="cnode-tag">optional</span></div>
+          <div class="carrow"></div>
+          <div class="cnode"><span class="cnode-dot" style="background:#34d399"></span>reviewer_pass<span class="cnode-tag">3-lens · adversarial</span></div>
+          <div class="carrow"></div>
+          <div class="cnode"><span class="cnode-dot" style="background:#059669"></span>output<span class="cnode-tag">contract validated</span></div>
+        </div>
+
+      </div>
+
+      <div class="compose-bottom">verify_gate and recovery appear in both graphs — same brick, any config · draw on the canvas · FlowSpec compiles to LangGraph, CrewAI, Mastra, or MAF</div>
+
+    </div>
 
     <div class="vision-box">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
         <div>
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-3);margin-bottom:10px;">Canvas &amp; execution layer</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-3);margin-bottom:10px;">Execution layer · 14 node types</div>
           <div style="display:flex;flex-direction:column;gap:7px;">
-            <div style="display:flex;align-items:center;gap:9px;font-size:14px;color:var(--ink-2)"><span style="color:var(--green);font-size:13px">✓</span> Canvas with 24 node types (14 execution + 10 harness)</div>
-            <div style="display:flex;align-items:center;gap:9px;font-size:14px;color:var(--ink-2)"><span style="color:var(--green);font-size:13px">✓</span> 4 framework adapters (LangGraph, CrewAI, Mastra, MAF)</div>
+            <div style="display:flex;align-items:center;gap:9px;font-size:14px;color:var(--ink-2)"><span style="color:var(--green);font-size:13px">✓</span> Mix and match — any subset of nodes is valid FlowSpec</div>
+            <div style="display:flex;align-items:center;gap:9px;font-size:14px;color:var(--ink-2)"><span style="color:var(--green);font-size:13px">✓</span> 4 framework adapters — same spec, any runtime</div>
             <div style="display:flex;align-items:center;gap:9px;font-size:14px;color:var(--ink-2)"><span style="color:var(--green);font-size:13px">✓</span> Langfuse observability — harness traces, all 4 runtimes</div>
             <div style="display:flex;align-items:center;gap:9px;font-size:14px;color:var(--ink-2)"><span style="color:var(--green);font-size:13px">✓</span> HITL pause/resume · REST/MCP/A2A deploy</div>
             <div style="display:flex;align-items:center;gap:9px;font-size:14px;color:var(--ink-2)"><span style="color:var(--green);font-size:13px">✓</span> FlowSpec v0.2.0 — open, portable JSON format</div>
@@ -1099,7 +1331,7 @@ footer{
           </div>
         </div>
         <div>
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-3);margin-bottom:10px;">Reasoning &amp; control layer</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-3);margin-bottom:10px;">Harness layer · 13 node types</div>
           <div style="display:flex;flex-direction:column;gap:7px;">
             <div style="display:flex;align-items:center;gap:9px;font-size:14px;color:var(--ink-2)"><span style="color:var(--green);font-size:13px">✓</span> World model · typed beliefs · contradiction detection</div>
             <div style="display:flex;align-items:center;gap:9px;font-size:14px;color:var(--ink-2)"><span style="color:var(--green);font-size:13px">✓</span> 5-tier control state resolver · deadlock detection</div>
@@ -1111,8 +1343,7 @@ footer{
         </div>
       </div>
       <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--line);">
-        <a href="harness_implementation_plan.html" style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--accent-ink);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px;">Read the full implementation plan →</a>
-        <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-3);margin-left:24px;">22 nodes · 11 layers · 379 tests · all harness invariants</span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-3);">22 nodes · 11 layers · 379 tests passing</span>
       </div>
     </div>
 
@@ -1187,18 +1418,18 @@ footer{
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:4px;">
 
       <div style="border:1px solid var(--line);border-top:2px solid var(--green);border-radius:6px;padding:22px;background:var(--paper);">
-        <div style="font-weight:500;font-size:16px;margin-bottom:8px;">State &amp; reasoning infrastructure</div>
-        <p style="font-size:14px;color:var(--ink-2);margin:0;line-height:1.6;">World model with typed beliefs and generation_id tracking, evidence store, hypothesis system with diversity enforcement, contradiction detection, diagnostic health vectors, five-tier control state resolver, and a six-state task graph.</p>
+        <div style="font-weight:500;font-size:16px;margin-bottom:8px;">Start with state and reasoning</div>
+        <p style="font-size:14px;color:var(--ink-2);margin:0;line-height:1.6;"><code style="font-size:12px">world_model</code>, <code style="font-size:12px">hypothesis_set</code>, <code style="font-size:12px">evidence_store</code>, <code style="font-size:12px">control_state</code>, and a six-state <code style="font-size:12px">task_graph</code> — the infrastructure for an agent that thinks before it acts.</p>
       </div>
 
       <div style="border:1px solid var(--line);border-top:2px solid var(--accent);border-radius:6px;padding:22px;background:var(--paper);">
-        <div style="font-weight:500;font-size:16px;margin-bottom:8px;">Execution hardening &amp; learning</div>
-        <p style="font-size:14px;color:var(--ink-2);margin:0;line-height:1.6;">VOI estimation, nine-layer verification, pre-execution review gate, reversibility strategy, six named recovery strategies, context compression, experience store for cross-run structural reuse, adversarial reviewer pass, and output contract validation.</p>
+        <div style="font-weight:500;font-size:16px;margin-bottom:8px;">Add verification and recovery</div>
+        <p style="font-size:14px;color:var(--ink-2);margin:0;line-height:1.6;"><code style="font-size:12px">verify_gate</code> with nine layers, pre-execution review gate, six named recovery strategies via <code style="font-size:12px">recovery</code>, context compression, <code style="font-size:12px">exp_store</code> for cross-run reuse, and adversarial <code style="font-size:12px">reviewer_pass</code>.</p>
       </div>
 
       <div style="border:1px solid var(--line);border-top:2px solid oklch(.62 .14 60);border-radius:6px;padding:22px;background:var(--paper);">
-        <div style="font-weight:500;font-size:16px;margin-bottom:8px;">Canvas &amp; full integration</div>
-        <p style="font-size:14px;color:var(--ink-2);margin:0;line-height:1.6;">Ten harness canvas node types, diagnostic health dashboard, updated framework adapters with harness-aware tracing in Langfuse, caller state and escalation, process concepts, and end-to-end tests across all four frameworks.</p>
+        <div style="font-weight:500;font-size:16px;margin-bottom:8px;">Draw, compile, and deploy</div>
+        <p style="font-size:14px;color:var(--ink-2);margin:0;line-height:1.6;">Thirteen harness node types on the canvas, Langfuse tracing with harness-specific spans, framework adapters for all four runtimes, and end-to-end tests across every combination.</p>
       </div>
 
     </div>
@@ -1221,7 +1452,7 @@ footer{
     </h2>
 
     <p class="section-lede">
-      Its Harness runs entirely on your machine via Docker. No cloud account, no sign-up — just clone and run.
+      Its Harness runs entirely on your machine via Docker. No cloud account, no sign-up — clone the repo, run two commands, and you're drawing harnesses in minutes.
     </p>
 
     <div class="flow-grid">
@@ -1229,7 +1460,7 @@ footer{
       <div class="code-card">
         <div class="code-bar" style="display:flex;align-items:center;gap:10px;"><span style="display:flex;gap:4px;"><span style="width:8px;height:8px;border-radius:50%;background:var(--accent);"></span><span style="width:8px;height:8px;border-radius:50%;background:var(--line);border:1px solid oklch(.74 .016 270);"></span><span style="width:8px;height:8px;border-radius:50%;background:var(--line);border:1px solid oklch(.74 .016 270);"></span></span>terminal</div>
 <pre># 1. Generate secrets and configure your environment
-./setup-env.sh
+./scripts/setup-env.sh
 
 # 2. Start all services
 docker compose up</pre>
@@ -1256,7 +1487,7 @@ docker compose up</pre>
     </div>
 
     <p style="font-size:15px; color:var(--ink-2); margin-top:28px;">
-      Nine services in total. <code style="font-size:13px">setup-env.sh</code> handles all the secrets and configuration automatically — you only need to provide your LLM API key (or skip it and use a free local model instead).
+      Nine services in total. <code style="font-size:13px">scripts/setup-env.sh</code> handles all the secrets and configuration automatically — you only need to provide your LLM API key (or skip it and use a free local model instead).
     </p>
 
   </div>
@@ -1306,7 +1537,7 @@ docker compose up</pre>
 
     <div class="obs-box" style="margin-top:28px;">
       <p class="section-lede" style="margin-bottom:0">
-        <strong style="color:var(--ink)">Want to try it without an API key?</strong> Install <a href="https://ollama.com" style="color:var(--accent-ink);">Ollama</a>, pull a model (<code style="font-size:13px">ollama pull mistral</code>), and run <code style="font-size:13px">./setup-ollama.sh</code> — it tests all four frameworks end-to-end with no paid account needed.
+        <strong style="color:var(--ink)">Want to try it without an API key?</strong> Install <a href="https://ollama.com" style="color:var(--accent-ink);">Ollama</a>, pull a model (<code style="font-size:13px">ollama pull mistral</code>), and run <code style="font-size:13px">./scripts/setup-ollama.sh</code> — it tests all four frameworks end-to-end with no paid account needed.
       </p>
     </div>
 
@@ -1323,12 +1554,12 @@ docker compose up</pre>
     </div>
 
     <h2>
-      One harness definition.
-      <em>Runs on any engine.</em>
+      Draw your harness once.
+      <em>Run it on any engine.</em>
     </h2>
 
     <p class="section-lede">
-      Its Harness stores your flow in an open format called FlowSpec. The same spec compiles to LangGraph, CrewAI, Mastra, or MAF — no rewriting. As the harness phases land, FlowSpec gains new node types for world model management, control state, verification gates, and recovery — all backwards-compatible with existing flows.
+      Its Harness stores every harness in FlowSpec — an open JSON format you own. Draw on the canvas and the spec is written for you. The same file compiles to LangGraph, CrewAI, Mastra, or MAF. Add harness nodes like <code style="font-size:15px">verify_gate</code>, <code style="font-size:15px">world_model</code>, or <code style="font-size:15px">recovery</code> and they compile too — no rewriting, no lock-in.
     </p>
 
     <div class="flow-grid">
@@ -1368,30 +1599,30 @@ docker compose up</pre>
         <div class="feature-list">
 
           <div class="feature-item">
-            <strong>Multi-step AI flows</strong>
+            <strong>Composable harness graphs</strong>
             <p>
-              Routing, branching, conditional logic, and tool calling — all drawn visually.
+              A minimal harness is just <code style="font-size:12px">input → llm_call → output</code>. Add <code style="font-size:12px">verify_gate</code> and <code style="font-size:12px">recovery</code> when you want them. Every combination is valid FlowSpec.
             </p>
           </div>
 
           <div class="feature-item">
-            <strong>Safety &amp; reliability</strong>
+            <strong>Safe by construction</strong>
             <p>
-              Guardrails, retry logic, and human approval checkpoints built right in.
+              Guardrails, retry logic, and HITL approval checkpoints are first-class node types — not wrappers you bolt on afterwards.
             </p>
           </div>
 
           <div class="feature-item">
-            <strong>Team collaboration</strong>
+            <strong>Shareable and portable</strong>
             <p>
-              Edit workflows together, share with your team, and push to production.
+              Your harness is a JSON file. Check it in, share it, load it on any canvas, or import into your CI pipeline.
             </p>
           </div>
 
           <div class="feature-item">
-            <strong>Full observability</strong>
+            <strong>Observable by default</strong>
             <p>
-              Langfuse traces give you complete visibility into every run, cost, and failure.
+              Langfuse traces every step across all four frameworks — prompts, tool calls, harness transitions, failures, and costs — without any setup.
             </p>
           </div>
 
@@ -1415,18 +1646,21 @@ docker compose up</pre>
     </div>
 
     <div style="margin-top:16px;border:1px solid oklch(.85 .03 268);border-left:3px solid var(--accent);border-radius:4px;padding:16px 20px;background:oklch(.96 .008 268);">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--accent-ink);margin-bottom:8px;">Harness canvas layer — 10 harness node types</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--accent-ink);margin-bottom:8px;">Harness node palette — 13 node types</div>
       <div style="display:flex;flex-wrap:wrap;gap:5px;">
         <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid oklch(.82 .04 268);border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent-ink);background:oklch(.94 .015 268);"><span style="width:5px;height:5px;border-radius:50%;background:#8b5cf6;flex-shrink:0;display:inline-block;"></span>world_model</span>
         <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid oklch(.82 .04 268);border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent-ink);background:oklch(.94 .015 268);"><span style="width:5px;height:5px;border-radius:50%;background:#f59e0b;flex-shrink:0;display:inline-block;"></span>hypothesis_set</span>
         <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid oklch(.82 .04 268);border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent-ink);background:oklch(.94 .015 268);"><span style="width:5px;height:5px;border-radius:50%;background:#f0abfc;flex-shrink:0;display:inline-block;"></span>control_state</span>
         <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid oklch(.82 .04 268);border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent-ink);background:oklch(.94 .015 268);"><span style="width:5px;height:5px;border-radius:50%;background:#60a5fa;flex-shrink:0;display:inline-block;"></span>task_graph</span>
-        <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid oklch(.82 .04 268);border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent-ink);background:oklch(.94 .015 268);"><span style="width:5px;height:5px;border-radius:50%;background:#f87171;flex-shrink:0;display:inline-block;"></span>verification_gate</span>
-        <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid oklch(.82 .04 268);border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent-ink);background:oklch(.94 .015 268);"><span style="width:5px;height:5px;border-radius:50%;background:#f97316;flex-shrink:0;display:inline-block;"></span>recovery_node</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid oklch(.82 .04 268);border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent-ink);background:oklch(.94 .015 268);"><span style="width:5px;height:5px;border-radius:50%;background:#f87171;flex-shrink:0;display:inline-block;"></span>verify_gate</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid oklch(.82 .04 268);border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent-ink);background:oklch(.94 .015 268);"><span style="width:5px;height:5px;border-radius:50%;background:#f97316;flex-shrink:0;display:inline-block;"></span>recovery</span>
         <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid oklch(.82 .04 268);border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent-ink);background:oklch(.94 .015 268);"><span style="width:5px;height:5px;border-radius:50%;background:#4ade80;flex-shrink:0;display:inline-block;"></span>evidence_store</span>
-        <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid oklch(.82 .04 268);border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent-ink);background:oklch(.94 .015 268);"><span style="width:5px;height:5px;border-radius:50%;background:#94a3b8;flex-shrink:0;display:inline-block;"></span>experience_store</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid oklch(.82 .04 268);border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent-ink);background:oklch(.94 .015 268);"><span style="width:5px;height:5px;border-radius:50%;background:#94a3b8;flex-shrink:0;display:inline-block;"></span>exp_store</span>
         <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid oklch(.82 .04 268);border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent-ink);background:oklch(.94 .015 268);"><span style="width:5px;height:5px;border-radius:50%;background:#34d399;flex-shrink:0;display:inline-block;"></span>reviewer_pass</span>
         <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid oklch(.82 .04 268);border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent-ink);background:oklch(.94 .015 268);"><span style="width:5px;height:5px;border-radius:50%;background:#67e8f9;flex-shrink:0;display:inline-block;"></span>gather_evidence</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid oklch(.82 .04 268);border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent-ink);background:oklch(.94 .015 268);"><span style="width:5px;height:5px;border-radius:50%;background:#fb923c;flex-shrink:0;display:inline-block;"></span>apply_tool_rel</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid oklch(.82 .04 268);border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent-ink);background:oklch(.94 .015 268);"><span style="width:5px;height:5px;border-radius:50%;background:#a78bfa;flex-shrink:0;display:inline-block;"></span>update_wm</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border:1px solid oklch(.82 .04 268);border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent-ink);background:oklch(.94 .015 268);"><span style="width:5px;height:5px;border-radius:50%;background:#14b8a6;flex-shrink:0;display:inline-block;"></span>process_concept</span>
       </div>
     </div>
 
@@ -1534,16 +1768,16 @@ docker compose up</pre>
   <div class="wrap">
 
     <div class="section-eyebrow">
-      EXAMPLE FLOWS
+      EXAMPLE HARNESSES
     </div>
 
     <h2>
-      Five ready-made flows to
-      <em>learn from or build on.</em>
+      Five ready-made harnesses to
+      <em>fork and build on.</em>
     </h2>
 
     <p class="section-lede">
-      The repo ships with five real, working flows. Each one demonstrates a different set of features — open them in the canvas, run them, and modify them to fit your use case.
+      The repo ships with five real, working harnesses. Each demonstrates a different composition of node types — open them in the canvas, run them, and modify them for your use case.
     </p>
 
     <div style="border:1px solid var(--line); border-radius:6px; overflow:hidden;">
@@ -1625,7 +1859,7 @@ docker compose up</pre>
       </p>
 
       <p style="font-size:15px;color:var(--green);line-height:1.6;margin:0">
-        <strong style="color:var(--ink)">As the harness phases land:</strong> traces will extend to harness-specific spans — world model generation_id per step, control state transitions (NORMAL → CAUTIOUS → BLOCKED), diagnostic health vectors, recovery strategy changes, and reviewer-pass findings — giving you a complete audit trail of every reasoning decision the agent made.
+        <strong style="color:var(--ink)">With harness-aware tracing:</strong> spans extend to world model <code style="font-size:13px">generation_id</code> per step, control state transitions (NORMAL → CAUTIOUS → BLOCKED), diagnostic health vectors, recovery strategy changes, and reviewer-pass findings — a complete audit trail of every reasoning decision your agent made.
       </p>
 
     </div>
@@ -1643,12 +1877,12 @@ docker compose up</pre>
     </div>
 
     <h2>
-      One click to publish your flow as
+      One click to publish your harness as
       <em>an API, a Claude tool, or an agent.</em>
     </h2>
 
     <p class="section-lede">
-      Once your flow is ready, deploying it takes a single API call. It goes live simultaneously as three different things — so whatever system needs to use it can call it the way that makes sense.
+      One API call publishes your harness three ways at once — a REST endpoint, an MCP tool, and an A2A agent — so whatever system needs it can call it the way that makes sense.
     </p>
 
     <div class="cards">
@@ -1692,16 +1926,16 @@ docker compose up</pre>
   <div class="wrap">
 
     <div class="section-eyebrow">
-      PUBLIC ALPHA
+      PUBLIC ALPHA · v0.8.0
     </div>
 
     <h2>
       Its Harness is in <em>public alpha.</em><br>
-      The full harness is here.
+      Build with it.
     </h2>
 
     <p class="section-lede">
-      The canvas, adapters, observability layer, and the full reasoning and control architecture are all working and ready to use — world model, control state resolver, nine-layer verification, recovery, experience store, adversarial reviewer pass. Your real flows, bug reports, and contributions shape what gets fixed and what gets built next.
+      The canvas, framework adapters, observability layer, and the full harness node library are working and ready to use. Your real harnesses, bug reports, and contributions shape what gets fixed and what gets prioritised next.
     </p>
 
     <div style="display:flex;gap:16px;align-items:flex-start;border:1px solid oklch(.78 .090 60);border-left:3px solid oklch(.62 .14 60);border-radius:4px;padding:18px 20px;background:oklch(.96 .030 60);margin-bottom:36px;">
@@ -1736,7 +1970,6 @@ docker compose up</pre>
         <p style="margin:0;font-size:14.5px;line-height:1.55;color:var(--ink-2);">FlowSpec v0.2.0 is stable for third-party node packs (<code style="font-size:12px;">@itsharness/nodes/…</code>). The full harness implementation is public and open for community contribution. The spec, adapter interface, and canvas package are all stable enough to build on today.</p>
         <div style="display:flex;gap:12px;margin-top:auto;flex-wrap:wrap;">
           <a href="https://github.com/3IVIS/itsharness/tree/main/spec" target="_blank" rel="noopener" style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--accent-ink);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px;">Read the spec →</a>
-          <a href="harness_implementation_plan.html" style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--accent-ink);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px;">View the plan →</a>
         </div>
       </div>
 
@@ -1753,13 +1986,13 @@ docker compose up</pre>
 
     <div class="footer-links">
       <a href="https://github.com/3IVIS/itsharness">GitHub</a>
-      <a href="#">Documentation</a>
-      <a href="#">Discussions</a>
-      <a href="#">Apache 2.0</a>
+      <a href="https://github.com/3IVIS/itsharness/tree/main/docs">Documentation</a>
+      <a href="https://github.com/3IVIS/itsharness/discussions">Discussions</a>
+      <a href="https://github.com/3IVIS/itsharness/blob/main/LICENSE">Apache 2.0</a>
     </div>
 
     <div class="footer-tag">
-      Canvas and full harness. Together.
+      Build your harness. Ship it anywhere.
     </div>
 
   </div>
