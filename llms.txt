@@ -4,6 +4,18 @@
 
 Its Harness is a **working tool** (v0.8.0, public alpha) — a visual canvas plus four framework adapters plus built-in Langfuse observability. It implements a complete AI agent harness architecture: a system that goes beyond simple prompt routing to give agents a world model, multi-tier control state, structured verification, recovery strategies, and cross-run learning. The full 11-layer harness (22 nodes) is implemented and tested (379 tests passing).
 
+## Who is this for?
+
+Its Harness is for **AI engineers and platform teams** building production-grade AI agents who need more than a simple prompt-routing workflow. It is a good fit for:
+
+- Teams who want a **visual, framework-agnostic design tool** that does not lock them into a single runtime
+- Engineers who need structured **control, verification, and recovery** baked into every agent run
+- Teams already using LangGraph, CrewAI, Mastra, or Microsoft Agent Framework who want observability and HITL without rewriting their flows
+- Open-source practitioners who need a **self-hosted, no-cloud-required** tool (Apache 2.0, runs on Docker)
+- Developers who want to expose agent flows as REST endpoints, MCP tools, or A2A agents without extra boilerplate
+
+It is **not** a low-code chatbot builder or a drag-and-drop tool for non-engineers. It targets developers who are comfortable with Docker and AI agent frameworks.
+
 ## Key facts
 
 - **License**: Apache 2.0
@@ -120,6 +132,9 @@ Nine services total. `scripts/setup-env.sh` handles all secrets automatically. Y
 
 **What is Its Harness?**
 An open-source visual canvas for designing AI agent workflows that compile to production-ready code on LangGraph, CrewAI, Mastra, or Microsoft Agent Framework. Includes a visual canvas, 4 framework adapters, built-in Langfuse observability, and the full harness layer: world model, multi-tier control state, 9-layer verification, recovery strategies, and cross-run learning.
+
+**What is FlowSpec?**
+FlowSpec is Its Harness's open, runtime-neutral JSON format for describing AI agent workflows. It is the intermediate representation between the visual canvas and any execution runtime. A single FlowSpec file compiles to LangGraph, CrewAI, Mastra, or Microsoft Agent Framework without rewriting. FlowSpec v0.2.0 is stable and open for third-party node packs (`@itsharness/nodes/…`). Key fields: `spec_version`, `id`, `name`, `description`, `runtime_hints`, `state_schema`, `nodes`, `edges`, `tools`, `agents`, `memory_stores`, `model_defaults`, `flow_config`.
 
 **What is a harness vs a workflow?**
 A workflow routes prompts from node to node. A harness governs what the AI believes, what it is allowed to do, how it catches its own mistakes, and what it learns for next time. The 5-tier control state resolver knows when to slow down or stop. Nine verification layers check outputs before they land. Recovery strategies handle failures systematically rather than crashing.
