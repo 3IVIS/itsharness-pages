@@ -1,4 +1,4 @@
-# Its Harness — https://itsharness.com
+# Its Harness — https://buildaharness.com
 # All crawlers, including AI/LLM agents, are welcome.
 
 User-agent: *
@@ -41,4 +41,4 @@ Allow: /
 User-agent: Bytespider
 Allow: /
 
-Sitemap: https://itsharness.com/sitemap.xml
+Sitemap: https://buildaharness.com/sitemap.xml

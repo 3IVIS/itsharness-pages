@@ -2,8 +2,8 @@
 
 Open-source visual canvas for production AI agent harnesses. Draw workflows on a canvas, compile to any major AI framework, trace every decision. Apache 2.0.
 
-**Live site:** https://itsharness.com  
-**Repository:** https://github.com/3IVIS/itsharness
+**Live site:** https://buildaharness.com  
+**Repository:** https://github.com/3IVIS/buildaharness
 
 ## What ships today (v0.8.0)
 
@@ -39,4 +39,4 @@ npx serve .
 
 ## Contributing
 
-See the **Get Involved** section on the site, or open a GitHub Discussion at https://github.com/3IVIS/itsharness/discussions.
+See the **Get Involved** section on the site, or open a GitHub Discussion at https://github.com/3IVIS/buildaharness/discussions.

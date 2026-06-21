@@ -67,7 +67,7 @@
     <circle cx="-8" cy="-6" r="3" fill="#5B4FC7"></circle>
     <circle cx="6" cy="-6" r="3" fill="#5B4FC7"></circle>
     <circle cx="-1" cy="8" r="3" fill="#1E1A3D"></circle>
-    <text x="20" y="6" font-family="IBM Plex Mono" font-size="20" font-weight="500" fill="#1E1A3D">itsharness</text>
+    <text x="20" y="6" font-family="IBM Plex Mono" font-size="20" font-weight="500" fill="#1E1A3D">buildaharness</text>
   </g>
 
   
