@@ -1,0 +1,861 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RN24M53NV1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RN24M53NV1');
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harness Engineering — Building Production AI Agents | Its Harness</title>
+
+<meta name="description" content="Harness engineering is the discipline of building the infrastructure that makes AI agents reliable in production. Learn the layers, the patterns, and the open-source tool built for it.">
+
+<link rel="canonical" href="https://itsharness.com/harness-engineering">
+
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://itsharness.com/harness-engineering">
+<meta property="og:site_name" content="Its Harness">
+<meta property="og:title" content="Harness Engineering — Building Production AI Agents | Its Harness">
+<meta property="og:description" content="Harness engineering is the discipline of building the infrastructure that makes AI agents reliable in production. Learn the layers, the patterns, and the open-source tool built for it.">
+<meta property="og:image" content="https://itsharness.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Its Harness — visual canvas for harness engineering and AI agent harnesses.">
+<meta property="og:locale" content="en_US">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Harness Engineering — Building Production AI Agents | Its Harness">
+<meta name="twitter:description" content="Harness engineering is the discipline of building the infrastructure that makes AI agents reliable in production. Learn the layers, the patterns, and the open-source tool built for it.">
+<meta name="twitter:image" content="https://itsharness.com/og-image.png">
+<meta name="twitter:image:alt" content="Its Harness — visual canvas for harness engineering and AI agent harnesses.">
+
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="3IVIS">
+<meta name="keywords" content="harness engineering, harness engineering tool, harness engineering software, AI agent harness, production AI agents, visual canvas, LangGraph, CrewAI, Mastra, FlowSpec, open source, apache 2.0">
+
+<link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt — structured summary for LLMs">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#4F46E5">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://itsharness.com/harness-engineering#article",
+      "headline": "Harness Engineering — Building Production AI Agents",
+      "description": "Harness engineering is the discipline of designing, building, and operating the infrastructure that wraps around an AI model to make it reliable in production.",
+      "datePublished": "2026-06-21",
+      "dateModified": "2026-06-21",
+      "author": { "@id": "https://itsharness.com/#org" },
+      "publisher": { "@id": "https://itsharness.com/#org" },
+      "image": "https://itsharness.com/og-image.png",
+      "url": "https://itsharness.com/harness-engineering",
+      "mainEntityOfPage": "https://itsharness.com/harness-engineering",
+      "keywords": "harness engineering, AI agent harness, production AI agents, agent orchestration, FlowSpec, harness engineering tool"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Its Harness", "item": "https://itsharness.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Harness Engineering", "item": "https://itsharness.com/harness-engineering" }
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://itsharness.com/#org",
+      "name": "3IVIS",
+      "url": "https://github.com/3IVIS",
+      "sameAs": ["https://github.com/3IVIS/itsharness"]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is harness engineering?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Harness engineering is the discipline of designing, building, and operating the infrastructure that wraps around an AI model to make it reliable in production. A harness supplies everything the model does not do on its own: tool execution, memory, state management, control flow, verification, recovery, and observability. The model decides; the harness governs how that decision gets executed and what happens when it fails." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between harness engineering and prompt engineering?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Prompt engineering asks 'how should I phrase this?' and optimizes a single model call. Harness engineering asks 'what system should the model operate within?' and designs the full execution loop across every call the agent makes — including state, tools, verification, recovery, and observability. In production, harness-level changes improve reliability significantly; prompt refinement beyond a reasonable baseline accounts for a small fraction of agent reliability." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between a harness and a workflow?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A workflow routes prompts from node to node — input, LLM call, tool call, output. It gets data where it needs to go. A harness governs the agent's full lifecycle: what it believes (world model), what it is allowed to do (control state), how it verifies outputs before acting, how it recovers from failures, and what it learns for next time. Workflows suit deterministic linear tasks. Harnesses suit agents operating in environments where state, failure, and uncertainty are real." }
+        },
+        {
+          "@type": "Question",
+          "name": "What tools are available for harness engineering?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Its Harness is the only open-source visual tool built specifically for harness engineering. It provides a visual canvas with 27 node types (14 execution + 13 harness), compiles to LangGraph, CrewAI, Mastra, or Microsoft Agent Framework via the runtime-neutral FlowSpec format, and includes built-in Langfuse observability, HITL controls, and REST/MCP/A2A deployment. It is Apache 2.0 and runs locally via Docker." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is harness engineering the same as MLOps?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. MLOps is concerned with model performance over time — training pipelines, model versioning, drift detection, and deployment infrastructure. Harness engineering is concerned with agent behaviour in real-time execution — the control flow, verification, recovery, and observability that governs what the agent does with each request. There is overlap in observability, but the disciplines address different layers of the stack." }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I get started with harness engineering?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The fastest path is Its Harness: run ./scripts/setup-env.sh && docker compose up to start all nine services (canvas on localhost:3000, API on localhost:8000, Langfuse on localhost:3001). Five ready-made harnesses are included to fork: RAG Agent, Content Moderation + Human Review, Parallel Risk Assessment, Research Crew, and Debate Agent. Draw your architecture on the canvas, compile to FlowSpec, and run on any supported framework. No cloud account required. Apache 2.0." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is FlowSpec?",
+          "acceptedAnswer": { "@type": "Answer", "text": "FlowSpec is the runtime-neutral JSON format at the centre of Its Harness. You design a harness once on the visual canvas and it compiles to a FlowSpec file. That single file then runs on LangGraph, CrewAI, Mastra, or Microsoft Agent Framework without rewriting. FlowSpec v0.2.0 is stable and open for third-party node packs." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+:root{
+  --bg:oklch(.972 .008 270);
+  --bg-2:oklch(.948 .012 270);
+  --paper:oklch(.985 .008 270);
+  --ink:oklch(.19 .024 270);
+  --ink-2:oklch(.37 .02 270);
+  --ink-3:oklch(.55 .018 270);
+  --line:oklch(.84 .014 270);
+  --accent:oklch(.46 .16 268);
+  --accent-ink:oklch(.36 .16 270);
+  --green:oklch(.38 .12 148);
+  --green-tint:oklch(.93 .04 148);
+}
+
+*{box-sizing:border-box}
+
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);}
+
+body{
+  font-family:"IBM Plex Sans",sans-serif;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 40px;}
+.prose{max-width:740px;}
+
+/* header */
+header{border-bottom:1px solid var(--line);background:var(--paper);}
+.site-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 0;}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);}
+.brand .name{font-family:"IBM Plex Mono",monospace;font-size:15px;white-space:nowrap;}
+.nav{display:flex;gap:22px;font-family:"IBM Plex Mono",monospace;font-size:12px;}
+.nav a{text-decoration:none;color:var(--ink-2);}
+.nav a:hover{color:var(--ink);}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 16px;border-radius:6px;text-decoration:none;
+  background:var(--ink);color:white;
+  font-family:"IBM Plex Mono",monospace;font-size:12px;
+  border:1px solid var(--ink);
+}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line);}
+.btn-ghost:hover{border-color:var(--ink);}
+
+/* breadcrumb */
+.breadcrumb{
+  font-family:"IBM Plex Mono",monospace;font-size:12px;
+  color:var(--ink-3);margin-bottom:32px;
+}
+.breadcrumb a{color:var(--ink-3);text-decoration:none;}
+.breadcrumb a:hover{color:var(--ink-2);}
+.breadcrumb span{margin:0 6px;}
+
+/* eyebrow */
+.eyebrow{
+  font-family:"IBM Plex Mono",monospace;text-transform:uppercase;
+  font-size:11px;letter-spacing:.16em;color:var(--accent-ink);
+  margin-bottom:22px;
+}
+
+/* hero */
+.page-hero{padding:64px 0 72px;background:var(--paper);border-bottom:1px solid var(--line);}
+
+h1{
+  font-size:58px;line-height:1.04;letter-spacing:-.04em;
+  font-weight:300;margin:0 0 24px;max-width:820px;
+}
+h1 em{
+  font-family:"Instrument Serif",serif;font-style:italic;
+  color:var(--accent-ink);font-weight:400;
+}
+
+.hero-lede{
+  font-size:19px;font-weight:300;color:var(--ink-2);
+  max-width:660px;margin:0 0 40px;line-height:1.5;
+}
+
+/* stats */
+.stat-row{
+  display:flex;gap:0;border:1px solid var(--line);border-radius:6px;
+  overflow:hidden;margin-bottom:36px;max-width:820px;
+}
+.stat{
+  flex:1;padding:22px 24px;background:var(--bg);
+  border-right:1px solid var(--line);
+}
+.stat:last-child{border-right:none;}
+.stat-n{
+  display:block;font-size:32px;font-weight:300;letter-spacing:-.03em;
+  color:var(--accent-ink);font-family:"IBM Plex Mono",monospace;
+  margin-bottom:6px;
+}
+.stat-l{display:block;font-size:13px;color:var(--ink-3);line-height:1.4;}
+
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;}
+
+/* content sections */
+.section{padding:64px 0;background:var(--paper);}
+.section.alt{background:var(--bg);}
+
+h2{
+  font-size:36px;font-weight:300;letter-spacing:-.03em;
+  margin:0 0 20px;line-height:1.15;
+}
+h2 em{
+  font-family:"Instrument Serif",serif;font-style:italic;
+  color:var(--accent-ink);font-weight:400;
+}
+
+.section-label{
+  font-family:"IBM Plex Mono",monospace;text-transform:uppercase;
+  font-size:10.5px;letter-spacing:.18em;color:var(--ink-3);
+  margin-bottom:16px;
+}
+
+p{font-size:16px;color:var(--ink-2);line-height:1.7;margin:0 0 18px;}
+p:last-child{margin-bottom:0;}
+strong{color:var(--ink);font-weight:600;}
+
+/* comparison block */
+.compare-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;
+  margin-top:28px;max-width:820px;
+}
+.compare-card{
+  border:1px solid var(--line);border-radius:6px;
+  background:var(--bg);padding:24px 26px;
+}
+.compare-card.highlight{
+  border-color:oklch(.78 .06 268);
+  background:oklch(.95 .018 268);
+}
+.compare-card h3{
+  font-size:14px;font-weight:600;font-family:"IBM Plex Mono",monospace;
+  text-transform:uppercase;letter-spacing:.1em;margin:0 0 14px;
+  color:var(--ink-3);
+}
+.compare-card.highlight h3{color:var(--accent-ink);}
+.compare-card ul{
+  margin:0;padding:0 0 0 16px;
+  display:flex;flex-direction:column;gap:8px;
+}
+.compare-card li{font-size:14.5px;color:var(--ink-2);line-height:1.5;}
+.compare-card.highlight li{color:var(--ink);}
+
+/* layers */
+.layers-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
+  margin-top:28px;
+}
+.layer-card{
+  border:1px solid var(--line);border-radius:6px;
+  background:var(--paper);padding:20px 22px;
+  border-left:3px solid var(--accent);
+  display:flex;flex-direction:column;gap:6px;
+}
+.layer-num{
+  font-family:"IBM Plex Mono",monospace;font-size:10px;
+  color:var(--ink-3);text-transform:uppercase;letter-spacing:.14em;
+}
+.layer-name{font-size:16px;font-weight:600;color:var(--ink);letter-spacing:-.01em;}
+.layer-desc{font-size:14px;color:var(--ink-2);line-height:1.5;}
+.layer-without{
+  font-size:12.5px;color:var(--ink-3);
+  font-family:"IBM Plex Mono",monospace;
+  margin-top:4px;
+}
+
+/* process steps */
+.process-steps{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;border:1px solid var(--line);border-radius:6px;
+  overflow:hidden;margin-top:28px;
+}
+.process-step{
+  padding:24px 22px;background:var(--paper);
+  border-right:1px solid var(--line);
+  display:flex;flex-direction:column;gap:10px;
+}
+.process-step:last-child{border-right:none;}
+.process-step-n{
+  font-family:"IBM Plex Mono",monospace;font-size:10px;
+  color:var(--accent-ink);text-transform:uppercase;letter-spacing:.16em;
+}
+.process-step-title{font-size:17px;font-weight:600;color:var(--ink);letter-spacing:-.01em;}
+.process-step-sub{font-size:13.5px;color:var(--ink-2);line-height:1.5;}
+.process-step-detail{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;
+  color:var(--ink-3);line-height:1.6;
+}
+
+/* quickstart */
+.quickstart-box{
+  border:1px solid var(--line);border-radius:6px;
+  overflow:hidden;max-width:640px;
+  margin-top:28px;
+}
+.quickstart-bar{
+  padding:11px 18px;background:var(--bg-2);border-bottom:1px solid var(--line);
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;
+  text-transform:uppercase;letter-spacing:.14em;color:var(--ink-3);
+}
+pre{
+  margin:0;padding:20px 18px;
+  font-family:"IBM Plex Mono",monospace;font-size:13px;
+  line-height:1.7;color:var(--ink);background:var(--paper);
+}
+
+/* services list */
+.services{
+  display:flex;flex-direction:column;gap:6px;margin-top:20px;
+}
+.service-row{
+  display:flex;align-items:center;gap:14px;
+  padding:10px 14px;border:1px solid var(--line);
+  border-radius:4px;background:var(--paper);
+}
+.service-dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;}
+.service-name{font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:500;color:var(--ink);}
+.service-url{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ink-3);}
+
+/* faq */
+.faq-list{
+  border:1px solid var(--line);border-radius:6px;overflow:hidden;
+  margin-top:24px;
+}
+.faq-item{
+  padding:22px 26px;border-bottom:1px solid var(--line);
+  background:var(--paper);
+}
+.faq-item:last-child{border-bottom:none;}
+.faq-item h3{
+  font-size:17px;font-weight:500;letter-spacing:-.01em;
+  color:var(--ink);margin:0 0 8px;
+}
+.faq-item p{font-size:14.5px;}
+
+/* cta section */
+.cta-section{
+  padding:64px 0;border-top:1px solid var(--line);
+  background:var(--paper);
+}
+.cta-inner{
+  display:flex;align-items:flex-start;justify-content:space-between;
+  gap:40px;flex-wrap:wrap;
+}
+.cta-text h2{margin-bottom:12px;}
+.cta-text p{max-width:540px;}
+.cta-actions{display:flex;flex-direction:column;gap:12px;flex-shrink:0;padding-top:8px;}
+
+/* footer */
+footer{padding:32px 0;border-top:1px solid var(--line);}
+.footer-inner{
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:20px;
+}
+.footer-links{display:flex;gap:18px;}
+.footer-links a{
+  text-decoration:none;color:var(--ink-2);
+  font-family:"IBM Plex Mono",monospace;font-size:12px;
+}
+.footer-tag{
+  font-family:"Instrument Serif",serif;color:var(--ink-3);font-style:italic;
+}
+
+@media(max-width:760px){
+  .wrap{padding:0 22px;}
+  h1{font-size:38px;}
+  h2{font-size:28px;}
+  .stat-row{flex-direction:column;}
+  .stat{border-right:none;border-bottom:1px solid var(--line);}
+  .stat:last-child{border-bottom:none;}
+  .compare-grid{grid-template-columns:1fr;}
+  .layers-grid{grid-template-columns:1fr;}
+  .process-steps{grid-template-columns:1fr 1fr;}
+  .cta-inner{flex-direction:column;}
+  .nav{display:none;}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="wrap site-inner">
+    <a class="brand" href="/" aria-label="Its Harness home">
+      <span class="name">Its Harness</span>
+    </a>
+    <nav class="nav">
+      <a href="/#why">Harness</a>
+      <a href="/#roadmap">Node library</a>
+      <a href="/#quickstart">Get started</a>
+      <a href="/#flowspec">How it works</a>
+      <a href="/#runtimes">Frameworks</a>
+      <a href="/#examples">Examples</a>
+      <a href="/harness-engineering" style="color:var(--accent-ink);">Harness engineering</a>
+      <a href="/#faq">FAQ</a>
+    </nav>
+    <a class="btn" href="https://github.com/3IVIS/itsharness">GitHub</a>
+  </div>
+</header>
+
+
+<section class="page-hero">
+  <div class="wrap">
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Its Harness</a><span aria-hidden="true">/</span><span>Harness engineering</span>
+    </nav>
+
+    <div class="eyebrow">HARNESS ENGINEERING</div>
+
+    <h1>
+      The discipline of building<br>
+      <em>AI agents that work in production.</em>
+    </h1>
+
+    <p class="hero-lede">
+      Harness engineering is everything around the model: the state it tracks, the tools it can call, the controls that govern its behaviour, the verification that catches mistakes before they land, and the recovery that handles failures without crashing. The model decides. The harness governs.
+    </p>
+
+    <div class="stat-row" role="list">
+      <div class="stat" role="listitem">
+        <span class="stat-n">88%</span>
+        <span class="stat-l">of AI agent projects never reach production — the bottleneck is the harness, not the model</span>
+      </div>
+      <div class="stat" role="listitem">
+        <span class="stat-n">11</span>
+        <span class="stat-l">layers in a complete production harness — world model through output reviewer pass</span>
+      </div>
+      <div class="stat" role="listitem">
+        <span class="stat-n">~1.6%</span>
+        <span class="stat-l">of a production agent is AI decision logic — the other 98.4% is harness infrastructure</span>
+      </div>
+    </div>
+
+    <div class="cta-row">
+      <a class="btn" href="https://github.com/3IVIS/itsharness">Star on GitHub</a>
+      <a class="btn btn-ghost" href="/">See Its Harness →</a>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="section" id="definition">
+  <div class="wrap prose">
+
+    <div class="section-label">DEFINITION</div>
+    <h2>What is harness engineering?</h2>
+
+    <p>
+      Harness engineering is the discipline of designing, building, and operating the infrastructure that wraps around an AI model to make it reliable in production. A <strong>harness</strong> is everything the model does not do on its own: the tools it can invoke, the memory it reads from, the state it updates, the controls that govern whether an action is allowed, the verification that checks the output, and the recovery logic that runs when something goes wrong.
+    </p>
+
+    <p>
+      The term draws from motorsport: a harness holds everything together under load, constrains what can move freely, and keeps the system in bounds when conditions get unpredictable. An AI agent harness does the same. Without it, the model is unrestrained — capable in demos, unreliable in production.
+    </p>
+
+    <p>
+      Harness engineering is the practice of designing that constraint layer deliberately. Not as an afterthought — not as glue code written after the model works — but as the primary engineering surface that determines whether the agent works at all.
+    </p>
+
+  </div>
+</section>
+
+
+<section class="section alt" id="vs-prompt-engineering">
+  <div class="wrap">
+
+    <div class="section-label">COMPARISON</div>
+    <h2>Harness engineering vs <em>prompt engineering</em></h2>
+
+    <p class="prose" style="margin-bottom:0;">
+      Both matter. But they operate at different layers and solve different problems. In production, the returns on each are not equal.
+    </p>
+
+    <div class="compare-grid">
+
+      <div class="compare-card">
+        <h3>Prompt engineering</h3>
+        <ul>
+          <li>Optimises the input to a single model call</li>
+          <li>Asks: <em>"How should I phrase this?"</em></li>
+          <li>Scope: one call, one response</li>
+          <li>Reliability gain beyond a baseline: &lt;3%</li>
+          <li>Breaks when state, tools, or multi-step execution enters the picture</li>
+        </ul>
+      </div>
+
+      <div class="compare-card highlight">
+        <h3>Harness engineering</h3>
+        <ul>
+          <li>Designs the full execution loop the model operates within</li>
+          <li>Asks: <em>"What system should govern what the model does?"</em></li>
+          <li>Scope: every call, every tool, every failure, every run</li>
+          <li>Reliability gain from harness-level changes: 28–47%</li>
+          <li>The layer that determines whether production agents ship at all</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section class="section" id="vs-workflow">
+  <div class="wrap prose">
+
+    <div class="section-label">COMPARISON</div>
+    <h2>Harness engineering vs <em>workflow building</em></h2>
+
+    <p>
+      A <strong>workflow</strong> routes prompts from node to node: input → LLM call → tool call → output. It gets data where it needs to go. Workflows are the right tool for deterministic, linear tasks where the inputs are clean and the failure modes are known.
+    </p>
+
+    <p>
+      A <strong>harness</strong> governs the agent's full lifecycle. Where a workflow routes, a harness governs:
+    </p>
+
+    <ul style="margin:0 0 18px;padding-left:20px;display:flex;flex-direction:column;gap:10px;">
+      <li style="font-size:16px;color:var(--ink-2);line-height:1.6;"><strong>What the agent believes</strong> — a world model that tracks typed beliefs, detects contradictions, and tags each belief with a generation ID</li>
+      <li style="font-size:16px;color:var(--ink-2);line-height:1.6;"><strong>What it is allowed to do</strong> — a multi-tier control state resolver (NORMAL → CAUTIOUS → BLOCKED) that governs every action</li>
+      <li style="font-size:16px;color:var(--ink-2);line-height:1.6;"><strong>How it verifies its own output</strong> — nine verification layers run before results land</li>
+      <li style="font-size:16px;color:var(--ink-2);line-height:1.6;"><strong>How it recovers when something fails</strong> — six named recovery strategies with typed failure libraries</li>
+      <li style="font-size:16px;color:var(--ink-2);line-height:1.6;"><strong>What it learns for next time</strong> — an experience store for cross-run structural reuse</li>
+    </ul>
+
+    <p>
+      Harnesses are the right tool for any agent operating in an environment where state, ambiguity, failure, and uncertainty are real. Most production use cases qualify.
+    </p>
+
+  </div>
+</section>
+
+
+<section class="section alt" id="layers">
+  <div class="wrap">
+
+    <div class="section-label">ARCHITECTURE</div>
+    <h2>The eleven layers of a production harness</h2>
+
+    <p class="prose" style="margin-bottom:0;">
+      You do not need all eleven layers for every use case. But each one addresses a specific failure mode that will surface in production if left unhandled. Start with the layers your agent needs today; add the rest as the failure modes appear.
+    </p>
+
+    <div class="layers-grid">
+
+      <div class="layer-card" style="border-left-color:oklch(.46 .12 205)">
+        <span class="layer-num">Layer 1</span>
+        <span class="layer-name">Caller State</span>
+        <span class="layer-desc">Constraints, clarification requests, and escalation propagation from the calling context into the agent's execution scope.</span>
+        <span class="layer-without">Without it: the agent has no awareness of caller-level constraints or escalation signals.</span>
+      </div>
+
+      <div class="layer-card" style="border-left-color:oklch(.46 .18 290)">
+        <span class="layer-num">Layer 2</span>
+        <span class="layer-name">World Model</span>
+        <span class="layer-desc">Typed beliefs about the environment, contradiction detection, and generation_id tracking so the agent knows what it knows — and when that knowledge was formed.</span>
+        <span class="layer-without">Without it: the agent acts on stale or contradictory beliefs without knowing it.</span>
+      </div>
+
+      <div class="layer-card" style="border-left-color:oklch(.46 .14 148)">
+        <span class="layer-num">Layer 3</span>
+        <span class="layer-name">Reasoning</span>
+        <span class="layer-desc">An evidence store, hypotheses from four generation sources, and a value-of-information gate that fires before every action — ensuring the agent gathers enough evidence before committing.</span>
+        <span class="layer-without">Without it: the agent acts on the first plausible hypothesis rather than the best-supported one.</span>
+      </div>
+
+      <div class="layer-card" style="border-left-color:oklch(.46 .18 310)">
+        <span class="layer-num">Layer 4</span>
+        <span class="layer-name">Control State</span>
+        <span class="layer-desc">A five-tier state resolver (NORMAL → CAUTIOUS → RESTRICTED → BLOCKED → HALT), diagnostic health vectors that drive it, and deadlock detection that stops escalation loops.</span>
+        <span class="layer-without">Without it: no brakes — the agent escalates indefinitely when conditions degrade.</span>
+      </div>
+
+      <div class="layer-card" style="border-left-color:oklch(.46 .16 240)">
+        <span class="layer-num">Layer 5</span>
+        <span class="layer-name">Planning</span>
+        <span class="layer-desc">A task graph with six task states, parallel concurrency management, and dependency tracking so the agent coordinates work across multiple steps without collisions.</span>
+        <span class="layer-without">Without it: multi-step tasks race, block, or duplicate work silently.</span>
+      </div>
+
+      <div class="layer-card" style="border-left-color:oklch(.52 .14 60)">
+        <span class="layer-num">Layer 6</span>
+        <span class="layer-name">Execution</span>
+        <span class="layer-desc">VOI-gated actions, a pre-execution review gate across five dimensions (safety, relevance, reversibility, resource, and alignment), and reversibility classification before any action fires.</span>
+        <span class="layer-without">Without it: the agent takes irreversible actions without assessing the cost first.</span>
+      </div>
+
+      <div class="layer-card" style="border-left-color:oklch(.46 .18 20)">
+        <span class="layer-num">Layer 7</span>
+        <span class="layer-name">Verification</span>
+        <span class="layer-desc">Nine verification layers, an adequacy critic, and an adversarial reviewer pass that checks outputs before they land — catching errors the model itself would not flag.</span>
+        <span class="layer-without">Without it: bad outputs reach users or downstream systems unchecked.</span>
+      </div>
+
+      <div class="layer-card" style="border-left-color:oklch(.52 .14 40)">
+        <span class="layer-num">Layer 8</span>
+        <span class="layer-name">Recovery</span>
+        <span class="layer-desc">Six named recovery strategies, a typed failure library, and local vs. global replanning scope so failures are handled systematically rather than crashing the entire run.</span>
+        <span class="layer-without">Without it: one failed tool call ends the session instead of triggering a recovery path.</span>
+      </div>
+
+      <div class="layer-card" style="border-left-color:oklch(.46 .12 148)">
+        <span class="layer-num">Layer 9</span>
+        <span class="layer-name">Memory</span>
+        <span class="layer-desc">Context compression, an execution journal, and budget management so the agent fits within context limits without losing the thread of what it has done.</span>
+        <span class="layer-without">Without it: long-running agents truncate their own history or exhaust context silently.</span>
+      </div>
+
+      <div class="layer-card" style="border-left-color:oklch(.50 .06 240)">
+        <span class="layer-num">Layer 10 <span style="font-size:10px;opacity:.6">(optional)</span></span>
+        <span class="layer-name">Learning</span>
+        <span class="layer-desc">An experience store for cross-run structural reuse — the agent warm-starts from patterns that worked in previous runs rather than beginning from scratch each time.</span>
+        <span class="layer-without">Without it: every run starts cold regardless of what prior runs discovered.</span>
+      </div>
+
+      <div class="layer-card" style="border-left-color:oklch(.46 .14 148)">
+        <span class="layer-num">Layer 11</span>
+        <span class="layer-name">Output &amp; Reviewer Pass</span>
+        <span class="layer-desc">Output contract validation and a three-lens reviewer pass (correctness, completeness, safety) that signs off on the final response before it leaves the harness.</span>
+        <span class="layer-without">Without it: outputs that pass verification still reach users without a final quality gate.</span>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section class="section" id="stack">
+  <div class="wrap">
+
+    <div class="section-label">THE HARNESS ENGINEERING STACK</div>
+    <h2>Design once. <em>Compile to any framework.</em></h2>
+
+    <p class="prose" style="margin-bottom:0;">
+      Its Harness is the only open-source harness engineering software built specifically for this discipline. It covers the full loop — from drawing the architecture on a visual canvas to compiling and running it in production — without locking you into a single framework.
+    </p>
+
+    <div class="process-steps">
+
+      <div class="process-step">
+        <span class="process-step-n">Step 1 — Design</span>
+        <span class="process-step-title">Visual canvas</span>
+        <span class="process-step-sub">Draw your harness architecture using 27 node types — 14 execution nodes and 13 harness nodes that implement the full 11-layer control architecture.</span>
+        <span class="process-step-detail">
+          input · output · llm_call · tool_invoke<br>
+          agent_role · agent_debate · condition<br>
+          parallel_fork · parallel_join · hitl_breakpoint<br>
+          memory_read · memory_write · subgraph<br>
+          world_model · control_state · verify_gate<br>
+          recovery · exp_store · reviewer_pass · +8 more
+        </span>
+      </div>
+
+      <div class="process-step">
+        <span class="process-step-n">Step 2 — Compile</span>
+        <span class="process-step-title">FlowSpec</span>
+        <span class="process-step-sub">The canvas exports to FlowSpec — a runtime-neutral, portable JSON format. One FlowSpec file runs on any supported framework without rewriting.</span>
+        <span class="process-step-detail">
+          Open format · version-controlled<br>
+          Framework-agnostic<br>
+          Third-party node packs supported<br>
+          (@itsharness/nodes/…)
+        </span>
+      </div>
+
+      <div class="process-step">
+        <span class="process-step-n">Step 3 — Run</span>
+        <span class="process-step-title">Any framework</span>
+        <span class="process-step-sub">The same FlowSpec compiles to LangGraph, CrewAI, Mastra, or Microsoft Agent Framework. Switch runtimes without touching the canvas design.</span>
+        <span class="process-step-detail">
+          LangGraph (Python / JS)<br>
+          CrewAI (Python)<br>
+          Mastra (TypeScript)<br>
+          MS Agent Framework (C# / Python / Java)<br>
+          A2A protocol (any A2A runtime)
+        </span>
+      </div>
+
+      <div class="process-step">
+        <span class="process-step-n">Step 4 — Observe</span>
+        <span class="process-step-title">Langfuse</span>
+        <span class="process-step-sub">Every run is traced automatically. Spans extend to world model generation_id, control state transitions, recovery strategy changes, and reviewer-pass findings.</span>
+        <span class="process-step-detail">
+          Harness-aware tracing<br>
+          Compare runs across frameworks<br>
+          HITL pause and resume<br>
+          REST · MCP · A2A deployment
+        </span>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section class="section alt" id="quickstart">
+  <div class="wrap prose">
+
+    <div class="section-label">QUICK START</div>
+    <h2>Up and running <em>in two commands.</em></h2>
+
+    <p>
+      Everything runs locally via Docker. No cloud account, no API key required to start — use Ollama to run a free local model if you prefer.
+    </p>
+
+    <div class="quickstart-box">
+      <div class="quickstart-bar">shell</div>
+      <pre><span style="color:var(--ink-3)"># 1. Generate secrets and configure environment</span>
+./scripts/setup-env.sh
+
+<span style="color:var(--ink-3)"># 2. Start all nine services</span>
+docker compose up</pre>
+    </div>
+
+    <div class="services">
+      <div class="service-row">
+        <div class="service-dot"></div>
+        <span class="service-name">Canvas</span>
+        <span class="service-url">localhost:3000</span>
+        <span style="font-size:13px;color:var(--ink-3);">Visual harness editor</span>
+      </div>
+      <div class="service-row">
+        <div class="service-dot"></div>
+        <span class="service-name">API</span>
+        <span class="service-url">localhost:8000</span>
+        <span style="font-size:13px;color:var(--ink-3);">Compiles and runs FlowSpec</span>
+      </div>
+      <div class="service-row">
+        <div class="service-dot"></div>
+        <span class="service-name">Langfuse</span>
+        <span class="service-url">localhost:3001</span>
+        <span style="font-size:13px;color:var(--ink-3);">Observability dashboard</span>
+      </div>
+    </div>
+
+    <p style="margin-top:20px;">
+      Apache 2.0. <a href="https://github.com/3IVIS/itsharness" style="color:var(--accent-ink);">Source on GitHub →</a>
+    </p>
+
+  </div>
+</section>
+
+
+<section class="section" id="faq">
+  <div class="wrap prose">
+
+    <div class="section-label">FAQ</div>
+    <h2>Questions, <em>answered.</em></h2>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <h3>What is harness engineering?</h3>
+        <p>The discipline of designing, building, and operating the infrastructure that wraps around an AI model to make it reliable in production. The harness supplies everything the model does not do on its own — tool execution, memory, state management, control flow, verification, recovery, and observability. The model decides; the harness governs how that decision gets executed and what happens when it fails.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>What is the difference between harness engineering and prompt engineering?</h3>
+        <p>Prompt engineering optimises a single model call. Harness engineering designs the full execution loop across every call the agent makes — state, tools, verification, recovery, observability. In production, harness-level changes account for the large majority of agent reliability gains. Prompt refinement beyond a reasonable baseline accounts for a small fraction.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>What is the difference between a harness and a workflow?</h3>
+        <p>A workflow routes prompts from node to node. A harness governs the agent's full lifecycle — what it believes, what it is allowed to do, how it verifies its own outputs, how it recovers from failures, and what it learns for next time. Workflows suit deterministic linear tasks. Harnesses suit agents operating in environments where state, failure, and uncertainty are real.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>What tools are available for harness engineering?</h3>
+        <p>Its Harness is the only open-source visual tool built specifically for harness engineering. It provides a visual canvas with 27 node types, compiles to LangGraph, CrewAI, Mastra, or Microsoft Agent Framework via FlowSpec, and includes built-in Langfuse observability, HITL controls, and REST/MCP/A2A deployment. Apache 2.0, runs locally via Docker.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>What is FlowSpec?</h3>
+        <p>FlowSpec is the runtime-neutral JSON format at the centre of Its Harness. You design a harness once on the visual canvas and it compiles to a FlowSpec file. That single file then runs on LangGraph, CrewAI, Mastra, or Microsoft Agent Framework without rewriting. FlowSpec v0.2.0 is stable and open for third-party node packs (<code style="font-size:13px">@itsharness/nodes/…</code>).</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Is harness engineering the same as MLOps?</h3>
+        <p>No. MLOps is concerned with model performance over time — training pipelines, versioning, drift detection. Harness engineering is concerned with agent behaviour in real-time execution — the control flow, verification, recovery, and observability that governs what the agent does with each request. There is overlap in observability, but the disciplines address different layers of the stack.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>How do I get started with harness engineering?</h3>
+        <p>Clone <a href="https://github.com/3IVIS/itsharness" style="color:var(--accent-ink);">github.com/3IVIS/itsharness</a>, run <code style="font-size:13px">./scripts/setup-env.sh &amp;&amp; docker compose up</code>, and open the canvas on <code style="font-size:13px">localhost:3000</code>. Five ready-made harnesses are included to fork and build on: <strong>RAG Agent</strong> (memory read + semantic search), <strong>Content Moderation + Human Review</strong> (HITL pause on high-risk items), <strong>Parallel Risk Assessment</strong> (three specialist agents, fan-out/merge), <strong>Research Crew</strong> (multi-agent with tool approval), and <strong>Debate Agent</strong> (multi-agent debate exposed as an A2A agent). No cloud account required.</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section class="cta-section">
+  <div class="wrap">
+    <div class="cta-inner">
+      <div class="cta-text">
+        <div class="section-label">ITS HARNESS · v0.8.0 · PUBLIC ALPHA</div>
+        <h2>The open-source tool<br>for <em>harness engineering.</em></h2>
+        <p>Visual canvas, 27 node types, 4 framework adapters, built-in Langfuse observability, HITL controls, REST/MCP/A2A deployment, and the full 11-layer harness architecture — implemented and tested (379 tests). Apache 2.0. Runs locally via Docker.</p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn" href="https://github.com/3IVIS/itsharness">Star on GitHub</a>
+        <a class="btn btn-ghost" href="/">Explore Its Harness →</a>
+        <a class="btn btn-ghost" href="https://github.com/3IVIS/itsharness/issues/new?template=bug_report.md">Report a bug</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<footer>
+  <div class="wrap footer-inner">
+    <div class="footer-links">
+      <a href="https://github.com/3IVIS/itsharness">GitHub</a>
+      <a href="https://github.com/3IVIS/itsharness/tree/main/docs">Documentation</a>
+      <a href="https://github.com/3IVIS/itsharness/discussions">Discussions</a>
+      <a href="https://github.com/3IVIS/itsharness/blob/main/LICENSE">Apache 2.0</a>
+      <a href="/">Its Harness</a>
+    </div>
+    <div class="footer-tag">
+      Build your harness. Ship it anywhere.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
