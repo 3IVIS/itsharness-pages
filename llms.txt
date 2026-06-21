@@ -2,7 +2,7 @@
 
 > Open-source visual canvas for production AI agent harnesses. Draw workflows on a canvas, compile to any major AI framework, trace every decision. Apache 2.0.
 
-Its Harness is a **working tool** (v0.8.0) — a visual canvas plus four framework adapters plus built-in Langfuse observability. It is building toward a complete AI agent harness architecture: a system that goes beyond simple prompt routing to give agents a world model, multi-tier control state, structured verification, recovery strategies, and cross-run learning.
+Its Harness is a **working tool** (v0.8.0, public alpha) — a visual canvas plus four framework adapters plus built-in Langfuse observability. It implements a complete AI agent harness architecture: a system that goes beyond simple prompt routing to give agents a world model, multi-tier control state, structured verification, recovery strategies, and cross-run learning. The full 11-layer harness (22 nodes) is implemented and tested (379 tests passing).
 
 ## Key facts
 
@@ -11,11 +11,12 @@ Its Harness is a **working tool** (v0.8.0) — a visual canvas plus four framewo
 - **Repository**: https://github.com/3IVIS/itsharness
 - **Homepage**: https://itsharness.com
 - **Status**: Public alpha — canvas, 4 framework adapters, and Langfuse observability are working and ready to use
-- **Deployment**: fully local via Docker (`./setup-env.sh && docker compose up`); no cloud account required
+- **Deployment**: fully local via Docker (`./scripts/setup-env.sh && docker compose up`); no cloud account required
 
 ## What ships today (v0.8.0)
 
-- **Visual canvas** with 14 node types for designing AI agent workflows
+- **Visual canvas** with 27 node types (14 execution + 13 harness) for designing AI agent workflows
+- **Full harness layer** — world model, 5-tier control state, 9-layer verification, 6 recovery strategies, experience store, and adversarial reviewer pass, all implemented and tested (379 tests passing)
 - **FlowSpec v0.2.0** — open, portable JSON format; the runtime-neutral intermediate representation
 - **4 framework adapters**: a single FlowSpec compiles to LangGraph, CrewAI, Mastra, or Microsoft Agent Framework without rewriting
 - **Langfuse observability** built in — every run is traced automatically across all 4 runtimes
@@ -35,7 +36,7 @@ Its Harness is a **working tool** (v0.8.0) — a visual canvas plus four framewo
 
 The runtime-neutral intermediate representation. A single FlowSpec compiles to any supported adapter. Key fields: `spec_version`, `id`, `name`, `description`, `runtime_hints`, `state_schema`, `nodes`, `edges`, `tools`, `agents`, `memory_stores`, `model_defaults`, `flow_config`.
 
-### Node types (14)
+### Node types (27)
 
 - **i/o**: `input`, `output`
 - **llm**: `llm_call`
@@ -45,6 +46,15 @@ The runtime-neutral intermediate representation. A single FlowSpec compiles to a
 - **human**: `hitl_breakpoint`
 - **memory**: `memory_read`, `memory_write`
 - **composition**: `subgraph`, `transform`
+
+### Harness nodes (13)
+
+Implement the 11-layer control architecture; every node compiles to all four runtimes.
+
+- **world model**: `world_model`, `update_wm`, `hypothesis_set`, `gather_evidence`, `evidence_store`
+- **control & planning**: `control_state`, `task_graph`, `apply_tool_rel`
+- **verification & recovery**: `verify_gate`, `recovery`, `reviewer_pass`
+- **learning & process**: `exp_store`, `process_concept`
 
 ## What a harness is (and why it matters)
 
@@ -64,28 +74,30 @@ The full harness target has 11 layers across 22 nodes:
 10. **Learning** — experience store for cross-run structural reuse (optional)
 11. **Output & Reviewer Pass** — output contract validation, 3-lens review
 
-## Roadmap (11 phases)
+## Architecture phases (all shipped)
 
-- **P0** (active) — Foundation & State Architecture
-- **P1** — Evidence & Reasoning
-- **P2** — World Model & Contradiction Detection
-- **P3** — Diagnostics & Control State
-- **P4** — Planning & Task Graph
-- **P5** — Execution & Verification
-- **P6** — Recovery & Memory
-- **P7** — Caller State & Escalation
-- **P8** — Experience Store
-- **P9** — Reviewer Pass & Output Contract
-- **P10** — Canvas Integration (10 new harness node types, diagnostic health dashboard)
-- **P11** — E2E Integration & Testing (all architectural invariants across all 4 frameworks)
+All 12 build phases are complete; the full harness is implemented and tested (379 tests passing).
 
-Each phase is independently deployable. All flows drawn today are forward-compatible with new harness node types.
+- **Foundation & State Architecture** — shipped
+- **Evidence & Reasoning** — shipped
+- **World Model & Contradiction Detection** — shipped
+- **Diagnostics & Control State** — shipped
+- **Planning & Task Graph** — shipped
+- **Execution & Verification** — shipped
+- **Recovery & Memory** — shipped
+- **Caller State & Escalation** — shipped
+- **Experience Store** — shipped
+- **Reviewer Pass & Output Contract** — shipped
+- **Canvas Integration** — shipped (13 harness node types, diagnostic health dashboard)
+- **E2E Integration & Testing** — shipped (all architectural invariants across all 4 frameworks)
+
+Each phase is independently deployable. All flows drawn today are forward-compatible.
 
 ## Quick start
 
 ```sh
 # 1. Generate secrets and configure environment
-./setup-env.sh
+./scripts/setup-env.sh
 
 # 2. Start all services
 docker compose up
@@ -96,7 +108,7 @@ Services that start:
 - **API** — `localhost:8000` (compiles and runs flows)
 - **Langfuse** — `localhost:3001` (observability dashboard)
 
-Nine services total. `setup-env.sh` handles all secrets automatically. You only need to provide an LLM API key (or skip it and use a local model).
+Nine services total. `scripts/setup-env.sh` handles all secrets automatically. You only need to provide an LLM API key (or skip it and use a local model).
 
 ## How to contribute
 
@@ -107,7 +119,7 @@ Nine services total. `setup-env.sh` handles all secrets automatically. You only 
 ## Frequently asked questions
 
 **What is Its Harness?**
-An open-source visual canvas for designing AI agent workflows that compile to production-ready code on LangGraph, CrewAI, Mastra, or Microsoft Agent Framework. Today: canvas + 4 adapters + Langfuse observability. Building toward: a complete harness with world model, multi-tier control state, 9-layer verification, recovery strategies, and cross-run learning.
+An open-source visual canvas for designing AI agent workflows that compile to production-ready code on LangGraph, CrewAI, Mastra, or Microsoft Agent Framework. Includes a visual canvas, 4 framework adapters, built-in Langfuse observability, and the full harness layer: world model, multi-tier control state, 9-layer verification, recovery strategies, and cross-run learning.
 
 **What is a harness vs a workflow?**
 A workflow routes prompts from node to node. A harness governs what the AI believes, what it is allowed to do, how it catches its own mistakes, and what it learns for next time. The 5-tier control state resolver knows when to slow down or stop. Nine verification layers check outputs before they land. Recovery strategies handle failures systematically rather than crashing.

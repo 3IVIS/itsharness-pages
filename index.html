@@ -29,6 +29,18 @@
 <meta name="twitter:title" content="Its Harness — Visual Canvas for AI Agent Harnesses">
 <meta name="twitter:description" content="Open-source visual canvas for production AI agent harnesses. Design workflows once, run on LangGraph, CrewAI, Mastra, or Microsoft Agent Framework with built-in Langfuse observability, HITL controls, and REST/MCP/A2A deployment. Apache 2.0.">
 <meta name="twitter:image" content="https://itsharness.com/og-image.png">
+<meta name="twitter:image:alt" content="Its Harness — visual canvas comparing a simple agent loop with a full 11-layer AI agent harness.">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Its Harness — visual canvas for AI agent harnesses.">
+<meta property="og:locale" content="en_US">
+
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="3IVIS">
+<meta name="keywords" content="AI agent harness, agent orchestration, visual canvas, LangGraph, CrewAI, Mastra, Microsoft Agent Framework, Langfuse, MCP, A2A, FlowSpec, open source">
+
+<link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt — structured summary for LLMs">
 
 <meta name="theme-color" content="#4F46E5">
 
@@ -36,6 +48,57 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://itsharness.com/#software",
+      "name": "Its Harness",
+      "applicationCategory": "DeveloperApplication",
+      "applicationSubCategory": "AI agent orchestration",
+      "operatingSystem": "Docker (Linux, macOS, Windows)",
+      "softwareVersion": "0.8.0",
+      "releaseNotes": "Public alpha: visual canvas, 4 framework adapters, and Langfuse observability.",
+      "url": "https://itsharness.com/",
+      "downloadUrl": "https://github.com/3IVIS/itsharness",
+      "softwareRequirements": "Docker",
+      "programmingLanguage": ["Python", "TypeScript"],
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "description": "Open-source visual canvas for production AI agent harnesses. Draw a workflow once and compile the same FlowSpec to LangGraph, CrewAI, Mastra, or Microsoft Agent Framework, with built-in Langfuse observability, HITL controls, and REST/MCP/A2A deployment.",
+      "keywords": "AI agent harness, agent orchestration, visual canvas, LangGraph, CrewAI, Mastra, Microsoft Agent Framework, Langfuse, MCP, A2A, FlowSpec",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "author": { "@id": "https://itsharness.com/#org" },
+      "isAccessibleForFree": true
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "Its Harness",
+      "codeRepository": "https://github.com/3IVIS/itsharness",
+      "programmingLanguage": ["Python", "TypeScript"],
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "url": "https://itsharness.com/"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://itsharness.com/#org",
+      "name": "3IVIS",
+      "url": "https://github.com/3IVIS",
+      "sameAs": ["https://github.com/3IVIS/itsharness"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://itsharness.com/#website",
+      "name": "Its Harness",
+      "url": "https://itsharness.com/",
+      "publisher": { "@id": "https://itsharness.com/#org" },
+      "description": "Open-source visual canvas for production AI agent harnesses."
+    }
+  ]
+}
+</script>
 
 <style>
 :root{
@@ -53,6 +116,8 @@
 }
 
 *{box-sizing:border-box}
+
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
 
 html,body{
   margin:0;
@@ -1025,7 +1090,7 @@ footer{
 <header>
   <div class="wrap site-inner">
 
-    <a class="brand" href="#">
+    <a class="brand" href="/" aria-label="Its Harness home">
       <span class="name">Its Harness</span>
     </a>
 
@@ -1037,6 +1102,7 @@ footer{
       <a href="#runtimes">Frameworks</a>
       <a href="#examples">Examples</a>
       <a href="#involved">Contribute</a>
+      <a href="#faq">FAQ</a>
     </nav>
 
     <a class="btn" href="https://github.com/3IVIS/itsharness">
@@ -1090,6 +1156,7 @@ footer{
     </div>
 
     <div class="blueprint">
+      <p class="sr-only">Diagram: a simple agent loop (input → LLM call → tool call → output) compared with a full Its Harness — an 11-layer architecture across 22 nodes that adds caller state, a world model, reasoning, a 5-tier control layer, planning, execution, 9-layer verification, recovery, memory, optional learning, and an output reviewer pass.</p>
       <div class="hd-root">
 
         <!-- LEFT: simple agent loop -->
@@ -1253,6 +1320,8 @@ footer{
 
     <!-- composability diagram: two valid harness graphs side by side -->
     <div class="compose-diagram">
+
+      <p class="sr-only">Diagram: the same node types compose into different harness graphs — a minimal harness (input → llm_call → verify_gate → recovery → output) and a full 11-layer harness — both valid FlowSpec that compile to LangGraph, CrewAI, Mastra, or Microsoft Agent Framework.</p>
 
       <div class="compose-top"><b>Same bricks. Different graphs.</b> · Compose exactly the harness your agent needs — minimal or full.</div>
 
@@ -1978,6 +2047,96 @@ docker compose up</pre>
   </div>
 
 </section>
+
+
+<section class="section alt" id="faq">
+
+  <div class="wrap">
+
+    <div class="section-eyebrow">
+      FAQ
+    </div>
+
+    <h2>
+      Questions, <em>answered.</em>
+    </h2>
+
+    <div style="border:1px solid var(--line);border-radius:6px;overflow:hidden;margin-top:8px;">
+
+      <div style="padding:24px 26px;border-bottom:1px solid var(--line);background:var(--paper);">
+        <h3 style="margin:0 0 8px;font-size:18px;font-weight:500;letter-spacing:-.01em;color:var(--ink);">What is Its Harness?</h3>
+        <p style="margin:0;font-size:15px;color:var(--ink-2);line-height:1.6;">An open-source visual canvas for designing AI agent workflows that compile to production-ready code on LangGraph, CrewAI, Mastra, or Microsoft Agent Framework. It includes the canvas, four framework adapters, built-in Langfuse observability, and the full harness layer — world model, multi-tier control state, 9-layer verification, recovery strategies, and cross-run learning.</p>
+      </div>
+
+      <div style="padding:24px 26px;border-bottom:1px solid var(--line);background:var(--paper);">
+        <h3 style="margin:0 0 8px;font-size:18px;font-weight:500;letter-spacing:-.01em;color:var(--ink);">What's the difference between a harness and a workflow?</h3>
+        <p style="margin:0;font-size:15px;color:var(--ink-2);line-height:1.6;">A workflow routes prompts from node to node. A harness governs what the agent believes, what it's allowed to do, how it catches its own mistakes, and what it learns for next time. The 5-tier control state knows when to slow down or stop; nine verification layers check outputs before they land; recovery strategies handle failures systematically instead of crashing.</p>
+      </div>
+
+      <div style="padding:24px 26px;border-bottom:1px solid var(--line);background:var(--paper);">
+        <h3 style="margin:0 0 8px;font-size:18px;font-weight:500;letter-spacing:-.01em;color:var(--ink);">Why a runtime-neutral FlowSpec?</h3>
+        <p style="margin:0;font-size:15px;color:var(--ink-2);line-height:1.6;">It decouples the canvas from any single runtime. Adding a new runtime is one adapter file, and canvas features — HITL, observability, versioning — stay independent of your runtime choice. One flow runs across all four supported runtimes without rewriting.</p>
+      </div>
+
+      <div style="padding:24px 26px;border-bottom:1px solid var(--line);background:var(--paper);">
+        <h3 style="margin:0 0 8px;font-size:18px;font-weight:500;letter-spacing:-.01em;color:var(--ink);">Why these four frameworks?</h3>
+        <p style="margin:0;font-size:15px;color:var(--ink-2);line-height:1.6;">LangGraph is the production standard for stateful agents. CrewAI has the largest audience for multi-agent team patterns. Mastra is the only TypeScript-native orchestrator with first-class support. Microsoft Agent Framework merged Semantic Kernel and AutoGen, covering enterprise .NET and Python users.</p>
+      </div>
+
+      <div style="padding:24px 26px;border-bottom:1px solid var(--line);background:var(--paper);">
+        <h3 style="margin:0 0 8px;font-size:18px;font-weight:500;letter-spacing:-.01em;color:var(--ink);">Is it open source?</h3>
+        <p style="margin:0;font-size:15px;color:var(--ink-2);line-height:1.6;">Yes — Apache 2.0. The canvas, adapters, FlowSpec, and the full harness implementation are all open.</p>
+      </div>
+
+      <div style="padding:24px 26px;background:var(--paper);">
+        <h3 style="margin:0 0 8px;font-size:18px;font-weight:500;letter-spacing:-.01em;color:var(--ink);">Does it require a cloud account?</h3>
+        <p style="margin:0;font-size:15px;color:var(--ink-2);line-height:1.6;">No. Everything runs locally via Docker — <code style="font-size:13px">./scripts/setup-env.sh &amp;&amp; docker compose up</code>. You only need an LLM API key, or skip it and run a free local model with Ollama.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Its Harness?",
+      "acceptedAnswer": { "@type": "Answer", "text": "An open-source visual canvas for designing AI agent workflows that compile to production-ready code on LangGraph, CrewAI, Mastra, or Microsoft Agent Framework. It includes the canvas, four framework adapters, built-in Langfuse observability, and the full harness layer — world model, multi-tier control state, 9-layer verification, recovery strategies, and cross-run learning." }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the difference between a harness and a workflow?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A workflow routes prompts from node to node. A harness governs what the agent believes, what it's allowed to do, how it catches its own mistakes, and what it learns for next time. The 5-tier control state knows when to slow down or stop; nine verification layers check outputs before they land; recovery strategies handle failures systematically instead of crashing." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why a runtime-neutral FlowSpec?",
+      "acceptedAnswer": { "@type": "Answer", "text": "It decouples the canvas from any single runtime. Adding a new runtime is one adapter file, and canvas features — HITL, observability, versioning — stay independent of your runtime choice. One flow runs across all four supported runtimes without rewriting." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why these four frameworks?",
+      "acceptedAnswer": { "@type": "Answer", "text": "LangGraph is the production standard for stateful agents. CrewAI has the largest audience for multi-agent team patterns. Mastra is the only TypeScript-native orchestrator with first-class support. Microsoft Agent Framework merged Semantic Kernel and AutoGen, covering enterprise .NET and Python users." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it open source?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes — Apache 2.0. The canvas, adapters, FlowSpec, and the full harness implementation are all open." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it require a cloud account?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Everything runs locally via Docker (./scripts/setup-env.sh && docker compose up). You only need an LLM API key, or skip it and run a free local model with Ollama." }
+    }
+  ]
+}
+</script>
 
 
 <footer>
