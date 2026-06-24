@@ -49,9 +49,6 @@ langgenius/dify                     no-code,visual,popular
 FlowiseAI/Flowise                   no-code,visual,low-code,popular
 trypromptly/LLMStack                workflow,no-code,multimodal
 
-# ─── User Control / Visual / Replayable ───────────────────────────────
-3IVIS/cuddlytoddly                  visual,replayable,controllable,plan-based
-
 # ─── Autonomous / Pioneer ─────────────────────────────────────────────
 Significant-Gravitas/AutoGPT        autonomous,pioneer,popular
 yoheinakajima/babyagi               autonomous,pioneer,task-management
