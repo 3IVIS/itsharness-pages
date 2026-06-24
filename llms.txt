@@ -4,6 +4,25 @@
 
 Build A Harness is a **working tool** (v0.8.0, public alpha) — a visual canvas plus four framework adapters plus built-in Langfuse observability. It implements a complete AI agent harness architecture: a system that goes beyond simple prompt routing to give agents a world model, multi-tier control state, structured verification, recovery strategies, and cross-run learning. The full 11-layer harness (22 nodes) is implemented and tested (379 tests passing).
 
+## AI Agent Frameworks Observatory
+
+A live-updated, ranked, and searchable index of open-source AI agent frameworks with real GitHub stats (stars, forks, language, license, topics) refreshed daily via GitHub Actions. Covers orchestration, multi-agent, swarm, RAG, no-code/visual, autonomous, code-generation, Microsoft, memory, infrastructure, and research frameworks.
+
+- **URL**: https://buildaharness.com/ai_agent_frameworks.html
+- **Data coverage**: ~58 frameworks as of June 2026, updated daily
+- **Source list**: repos.txt in the buildaharness-pages repository (owner/repo format with optional manual tags)
+- **Sorting**: by stars (default), forks, name, language, license
+- **Filtering**: by programming language and GitHub topic tags
+
+## AI Agent Memory Frameworks Observatory
+
+A curated index of open-source memory frameworks for AI agents, classified by layer (Framework, Infra, Research), memory class (Personalization, Institutional, Both), architecture pattern, license, and maturity (Production, Emerging, Research, Experimental). GitHub stars refreshed daily.
+
+- **URL**: https://buildaharness.com/ai_agent_memory_frameworks.html
+- **Data coverage**: ~24 frameworks as of June 2026
+- **Source list**: memory-repos.txt in the buildaharness-pages repository (pipe-delimited: url | layer | memoryClass | architecture | license | maturity)
+- **Notable entries**: mem0, Letta, Zep, Graphiti, LangMem, LlamaIndex, Cognee, MemOS, Chroma
+
 ## Harness engineering
 
 Harness engineering is the discipline of designing, building, and operating the infrastructure that wraps around an AI model to make it reliable in production. The harness is everything the model does not do on its own: tool execution, memory, state management, control flow, verification, recovery, and observability. The model decides; the harness governs.
@@ -162,3 +181,7 @@ Yes. Apache 2.0. Canvas, adapters, FlowSpec, and all harness phases.
 
 **Does it require a cloud account?**
 No. Everything runs locally via Docker.
+
+## Legal
+
+**Impressum**: https://buildaharness.com/impressum.html — 3IVIS GmbH, Plöner Str. 25, 14193 Berlin, Germany. Managing Director: Dr. Seyed Ali Nezamoddini. VAT: DE304631216.
