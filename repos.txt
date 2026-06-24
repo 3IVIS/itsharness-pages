@@ -1,0 +1,89 @@
+# AI Agent Frameworks — Repo List
+#
+# Format:  owner/repo  [optional-tag1,optional-tag2,…]
+
+# ─── Orchestration & General ──────────────────────────────────────────
+langchain-ai/langchain              orchestration,popular
+langchain-ai/langgraph              orchestration,stateful,graph,popular
+pydantic/pydantic-ai                type-safe,structured
+agno-agi/agno                       memory,multimodal
+stanfordnlp/dspy                    research,optimisation
+prefect-archive/ControlFlow         declarative,workflow
+flux0-ai/flux0                      orchestration,deployment,stateful
+Pipelex/pipelex                     declarative,workflow,orchestration
+
+# ─── Multi-Agent ──────────────────────────────────────────────────────
+microsoft/autogen                   multi-agent,microsoft,popular
+crewAIInc/crewAI                    multi-agent,role-playing,popular
+openai/swarm                        multi-agent,openai,experimental
+openai/openai-agents-python         multi-agent,openai,workflow
+VRSEN/agency-swarm                  multi-agent,orchestration
+camel-ai/camel                      multi-agent,research,simulation
+FoundationAgents/MetaGPT            multi-agent,code-gen,popular
+agentuniverse-ai/agentUniverse      multi-agent,enterprise
+langroid/langroid                   multi-agent,message-passing
+OpenAgentsInc/openagents            multi-agent,platform
+LazyAGI/LazyLLM                     multi-agent,lightweight
+InternLM/MindSearch                 multi-agent,search
+TauricResearch/TradingAgents        multi-agent,finance
+Kocoro-lab/Shannon                  multi-agent,production
+SolaceLabs/solace-agent-mesh        multi-agent,event-driven
+codefuse-ai/CodeFuse-muAgent        multi-agent,knowledge-graph
+samholt/L2MAC                       multi-agent,automation
+patched-codes/patchwork             multi-agent,enterprise
+
+# ─── Swarm / Collective Intelligence ──────────────────────────────────
+kyegomez/swarms                     multi-agent,swarm,popular
+FelipeDaza7/swarm-tools             multi-agent,learning
+ruvnet/ruflo                        multi-agent,platform
+The-Swarm-Corporation/swarms-rs     multi-agent,rust
+Spectral-Finance/lux                multi-agent,swarm
+kyegomez/AutoRT                     embodied,agents
+
+# ─── RAG & Data (Orchestration-Relevant) ──────────────────────────────
+run-llama/llama_index               rag,data,knowledge-base,popular
+deepset-ai/haystack                 rag,search,orchestration,production
+
+# ─── No-Code / Visual ─────────────────────────────────────────────────
+langgenius/dify                     no-code,visual,popular
+FlowiseAI/Flowise                   no-code,visual,low-code,popular
+trypromptly/LLMStack                workflow,no-code,multimodal
+
+# ─── User Control / Visual / Replayable ───────────────────────────────
+3IVIS/cuddlytoddly                  visual,replayable,controllable,plan-based
+
+# ─── Autonomous / Pioneer ─────────────────────────────────────────────
+Significant-Gravitas/AutoGPT        autonomous,pioneer,popular
+yoheinakajima/babyagi               autonomous,pioneer,task-management
+reworkd/AgentGPT                    autonomous,web,popular
+
+# ─── Code Generation / Execution ──────────────────────────────────────
+AntonOsika/gpt-engineer             code-gen,developer,popular
+OpenInterpreter/open-interpreter    code-execution,local,developer,popular
+
+# ─── Microsoft ────────────────────────────────────────────────────────
+microsoft/semantic-kernel           microsoft,enterprise,multi-language,popular
+microsoft/TaskWeaver                microsoft,data-analytics,code-gen
+microsoft/promptflow                microsoft,mlops,evaluation
+microsoft/agent-framework           microsoft,orchestration
+
+# ─── Memory & Stateful ────────────────────────────────────────────────
+letta-ai/letta                      memory,stateful,persistence
+
+# ─── Infrastructure & Tooling (Agent-Focused Only) ────────────────────
+TransformerOptimus/SuperAGI         infrastructure,autonomous,gui
+agno-agi/agno                       memory,knowledge,database
+ComposioHQ/composio                 tools,integrations,actions
+huggingface/smolagents              lightweight,huggingface,minimal
+BrainBlend-AI/atomic-agents         modular,predictable,minimal
+i-am-bee/beeai-framework            ibm,production
+
+# ─── Research / Experimental Frameworks ───────────────────────────────
+OpenBMB/ToolBench                   research,tools,benchmark
+xlang-ai/OpenAgents                 research,web,data-analysis
+HKUDS/AutoAgent                     research,zero-code,automated
+
+# ─── Platform / Cloud ─────────────────────────────────────────────────
+dataelement/bisheng                 enterprise,knowledge-base,chinese
+ogx-ai/ogx                          meta,inference,safety
+GoogleCloudPlatform/generative-ai   google,cloud,enterprise
