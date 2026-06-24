@@ -338,5 +338,6 @@ jobs:
             echo "No changes to memory-data.json — nothing to commit"
           else
             git commit -m "chore: refresh memory framework stats [$(date -u '+%Y-%m-%d %H:%M UTC')]"
+            git pull --rebase origin main
             git push
           fi
